@@ -1,32 +1,36 @@
-import './App.scss';
-import { Route, Link, Routes } from 'react-router-dom';
-import { Receipts, Appointment } from './component';
-
+import "./App.scss";
+import { Route, Link, Routes } from "react-router-dom";
+import { Receipts, Appointment } from "./component";
+import Header from "./component/header/header";
+import { Container } from "@material-ui/core";
+import Main from "./component/mainPage/main";
 
 function App() {
   return (
     <>
-      <div role="navigation">
-        <ul>
-          <li>
-            <Link to="/">Главная</Link>
-          </li>
-          <li>
-            <Link to="/appointment">Запись на прием</Link>
-          </li>
-          <li>
-            <Link to="/receipts">Мои записи</Link>
-          </li>
-        </ul>
-      </div>
+      <Container fixed>
+        <Header />
+        <div role="navigation">
+          <ul>
+            <li>
+              <Link to="/">Главная</Link>
+            </li>
+            <li>
+              <Link to="/appointment">Запись на прием</Link>
+            </li>
+            <li>
+              <Link to="/receipts">Мои записи</Link>
+            </li>
+          </ul>
+        </div>
 
-      <Routes>
-        <Route path="/" element={<h1 className='test'>Главная страница</h1>} />
-        <Route path="/appointment" element={<Appointment />} />
-        <Route path="/receipts" element={<Receipts />} />
-      </Routes>
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/appointment" element={<Appointment />} />
+          <Route path="/receipts" element={<Receipts />} />
+        </Routes>
+      </Container>
     </>
-
   );
 }
 
