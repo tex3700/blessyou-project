@@ -1,3 +1,4 @@
+import { Container } from "@material-ui/core";
 import React from "react";
 import HeaderContent from "./headerContent";
 import TopBar from "./topBar";
@@ -5,8 +6,10 @@ import TopBar from "./topBar";
 const Header = () => {
   return (
     <>
-      <TopBar />
-      <HeaderContent />
+      <Container fixed>
+        <TopBar />
+        <HeaderContent />
+      </Container>
     </>
   );
 };

@@ -3,7 +3,7 @@ import React from "react";
 
 const Main = () => {
   return (
-    <Box className="mainBox" marginTop={2}>
+    <Box className="mainBox" mt={10}>
       <Typography variant="h2">С нами</Typography>
       <Typography variant="h2">быть здоровыми легко!</Typography>
       <Typography variant="subtitle1">

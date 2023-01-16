@@ -10,7 +10,7 @@ function App() {
     <>
       <Container fixed>
         <Header />
-        <div role="navigation">
+        {/* <div role="navigation">
           <ul>
             <li>
               <Link to="/">Главная</Link>
@@ -22,7 +22,7 @@ function App() {
               <Link to="/receipts">Мои записи</Link>
             </li>
           </ul>
-        </div>
+        </div> */}
 
         <Routes>
           <Route path="/" element={<Main />} />
