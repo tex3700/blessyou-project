@@ -5,8 +5,10 @@ import {
   Typography,
   Box,
   Button,
+  IconButton,
 } from "@material-ui/core";
 import React from "react";
+import useStyles from "./styles";
 /////////////эта иконка поставлена как загдушка и для практики
 import AdbIcon from "@mui/icons-material/Adb";
 ////////////
@@ -14,19 +16,38 @@ import AdbIcon from "@mui/icons-material/Adb";
 const linksArray = ["О клинике", "Услуги", "Врачи", "Акции", "Контакты"];
 
 const HeaderContent = () => {
+  const classes = useStyles();
   return (
     // <AppBar>
     <Container fixed>
       <Toolbar>
-        <AdbIcon />
-        <Typography>Any text</Typography>
-        <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+        <IconButton color="inherit">
+          <AdbIcon />
+        </IconButton>
+
+        <Box
+          className={classes.headerBox}
+          sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}
+        >
           {linksArray.map((link) => (
-            <Button key={link}>{link}</Button>
+            <Button
+              className={classes.headerButtonLink}
+              color="inherit"
+              key={link}
+            >
+              {link}
+            </Button>
           ))}
         </Box>
         <Box>
-          <Button variant="contained">Запись на прием</Button>
+          <Button
+            className={classes.buttonWriteOn}
+            variant="contained"
+            size="large"
+            color="succeses"
+          >
+            Запись на прием
+          </Button>
         </Box>
       </Toolbar>
     </Container>
