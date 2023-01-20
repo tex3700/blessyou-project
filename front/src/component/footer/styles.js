@@ -14,7 +14,6 @@ const useStyles = makeStyles((theme) => ({
     flexFlow: 1,
     padding: theme.spacing(1),
     marginTop: "auto",
-    // backgroundColor: "green",
   },
 }));
 
