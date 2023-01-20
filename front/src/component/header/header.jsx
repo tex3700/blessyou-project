@@ -6,8 +6,8 @@ import TopBar from "./topBar";
 const Header = () => {
   return (
     <AppBar>
-      <Container fixed>
-        <TopBar />
+      <Container>
+        {/* <TopBar /> */}
         <HeaderContent />
       </Container>
     </AppBar>
