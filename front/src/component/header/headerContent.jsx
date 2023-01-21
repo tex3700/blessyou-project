@@ -27,7 +27,7 @@ const HeaderContent = () => {
     // <AppBar>
     <Container fixed>
       <Toolbar>
-        <IconButton color="inherit" href="/">
+        <IconButton color="inherit" component={Link} to="/">
           <AdbIcon />
         </IconButton>
 
@@ -37,10 +37,11 @@ const HeaderContent = () => {
         >
           {linksArray.map((link) => (
             <Button
+              component={Link}
               className={classes.headerButtonLink}
               color="inherit"
               key={link.name}
-              href={link.path}
+              to={link.path}
             >
               {link.name}
             </Button>

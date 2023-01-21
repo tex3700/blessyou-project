@@ -12,24 +12,12 @@ function App() {
       <Container fixed>
         <Header />
 
-        {/* <div role="navigation">
-          <ul>
-            <li>
-              <Link to="/">Главная</Link>
-            </li>
-            <li>
-              <Link to="/appointment">Запись на прием</Link>
-            </li>
-            <li>
-              <Link to="/receipts">Мои записи</Link>
-            </li>
-          </ul>
-        </div> */}
-
         <Routes>
           <Route path="/" element={<Main />} />
-          <Route path="/appointment" element={<Appointment />} />
-          <Route path="/receipts" element={<Receipts />} />
+          <Route path="/about" element={<Appointment />} />
+          <Route path="/services" element={<Appointment />} />
+          <Route path="/doctors" element={<Appointment />} />
+          <Route path="/contacts" element={<Receipts />} />
         </Routes>
 
         <Footer />
