@@ -9,11 +9,17 @@ import {
 } from "@material-ui/core";
 import React from "react";
 import useStyles from "./styles";
+import { Route, Link, Routes } from "react-router-dom";
 /////////////эта иконка поставлена как загдушка и для практики
 import AdbIcon from "@mui/icons-material/Adb";
 ////////////
 
-const linksArray = ["О клинике", "Услуги", "Врачи", "Акции", "Контакты"];
+const linksArray = [
+  { name: "О клинике", path: "/about" },
+  { name: "Услуги", path: "/services" },
+  { name: "Врачи", path: "/doctors" },
+  { name: "Контакты", path: "/contacts" },
+];
 
 const HeaderContent = () => {
   const classes = useStyles();
@@ -21,7 +27,7 @@ const HeaderContent = () => {
     // <AppBar>
     <Container fixed>
       <Toolbar>
-        <IconButton color="inherit">
+        <IconButton color="inherit" href="/">
           <AdbIcon />
         </IconButton>
 
@@ -33,9 +39,10 @@ const HeaderContent = () => {
             <Button
               className={classes.headerButtonLink}
               color="inherit"
-              key={link}
+              key={link.name}
+              href={link.path}
             >
-              {link}
+              {link.name}
             </Button>
           ))}
         </Box>
