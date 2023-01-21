@@ -19,6 +19,7 @@ const linksArray = [
   { name: "Услуги", path: "/services" },
   { name: "Врачи", path: "/doctors" },
   { name: "Контакты", path: "/contacts" },
+  { name: "Личный кабинет пациента", path: "/patientAccout" },
 ];
 
 const HeaderContent = () => {

@@ -18,6 +18,7 @@ function App() {
           <Route path="/services" element={<Appointment />} />
           <Route path="/doctors" element={<Appointment />} />
           <Route path="/contacts" element={<Receipts />} />
+          <Route path="/patientAccout" element={<Appointment />} />
         </Routes>
 
         <Footer />
