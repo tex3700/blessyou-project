@@ -8,7 +8,8 @@ import {
 } from "@material-ui/core";
 import React from "react";
 import useStyles from "./styles";
-import image from "./../../static/image/mainPageBunner.jpg";
+import { Link } from "react-router-dom";
+
 const Main = () => {
   const classes = useStyles();
   return (
@@ -34,7 +35,11 @@ const Main = () => {
               </Typography>
             </Grid>
             <Grid item>
-              <Button className={classes.mainRegistrationButton}>
+              <Button
+                className={classes.mainRegistrationButton}
+                component={Link}
+                to="/patientAccout"
+              >
                 Регистрируйтесь в личном кабинете
               </Button>
             </Grid>
