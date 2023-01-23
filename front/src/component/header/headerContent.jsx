@@ -1,25 +1,13 @@
-import {
-  AppBar,
-  Container,
-  Toolbar,
-  Typography,
-  Box,
-  Button,
-  IconButton,
-} from "@material-ui/core";
+import { Container, Toolbar, Box, Button, IconButton } from "@material-ui/core";
 import React from "react";
 import useStyles from "./styles";
-import { Route, Link, Routes } from "react-router-dom";
-/////////////эта иконка поставлена как загдушка и для практики
-import AdbIcon from "@mui/icons-material/Adb";
-////////////
+import { Link } from "react-router-dom";
 
 const linksArray = [
   { name: "О клинике", path: "/about" },
   { name: "Услуги", path: "/services" },
   { name: "Врачи", path: "/doctors" },
   { name: "Контакты", path: "/contacts" },
-  { name: "Личный кабинет пациента", path: "/patientAccout" },
 ];
 
 const HeaderContent = () => {
@@ -28,8 +16,13 @@ const HeaderContent = () => {
     // <AppBar>
     <Container fixed>
       <Toolbar>
-        <IconButton color="inherit" component={Link} to="/">
-          <AdbIcon />
+        <IconButton
+          className={classes.root}
+          // color="inherit"
+          component={Link}
+          to="/"
+        >
+          <Box className={classes.headerLogo}></Box>
         </IconButton>
 
         <Box
@@ -54,8 +47,10 @@ const HeaderContent = () => {
             variant="contained"
             size="large"
             color="succeses"
+            component={Link}
+            to="/patientAccout"
           >
-            Запись на прием
+            Личный кабинет
           </Button>
         </Box>
       </Toolbar>
