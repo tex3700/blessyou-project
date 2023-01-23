@@ -1,11 +1,21 @@
 import { makeStyles } from "@material-ui/core";
 // import themes from "../../themes";
+import mainLogo from "./../../static/icons/headerLogo.png";
 
 const useStyles = makeStyles((theme) => ({
   appbar: {
     height: "120px",
     justifyContent: "center",
     boxShadow: "none",
+  },
+
+  headerLogo: {
+    height: "85px",
+    width: "126px",
+    backgroundImage: `url(${mainLogo})`,
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
   },
 
   buttonWriteOn: {
@@ -20,12 +30,20 @@ const useStyles = makeStyles((theme) => ({
   },
   headerBox: {
     justifyContent: "flex-end",
-    marginRight: theme.spacing(6),
+    // marginRight: theme.spacing(6),
+  },
+  root: {
+    "&:hover": {
+      backgroundColor: "transparent",
+    },
   },
 
   headerButtonLink: {
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(5),
     color: "#4493B9",
+    fontSize: "16px",
+    lineHeight: "24px",
+    fontWeight: "600",
   },
 }));
 

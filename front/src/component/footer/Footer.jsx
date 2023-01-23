@@ -7,7 +7,6 @@ import PhoneIcon from "@mui/icons-material/Phone";
 // //////////
 
 const Footer = () => {
-  //заглушка, если нужно будет исп-ть доп.стили
   const classes = useStyles();
 
   return (

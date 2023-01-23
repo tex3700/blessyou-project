@@ -7,7 +7,7 @@ const Header = () => {
   const classes = useStyles();
   return (
     <AppBar className={classes.appbar} color="white">
-      <Container>
+      <Container fixed>
         <HeaderContent />
       </Container>
     </AppBar>
