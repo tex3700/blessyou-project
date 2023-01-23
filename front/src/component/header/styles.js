@@ -5,6 +5,7 @@ import enteranceDoctorsIcon from "./../../static/icons/enteranceDoctorsIcon.svg"
 
 const useStyles = makeStyles((theme) => ({
   appbar: {
+    position: "relative",
     height: "120px",
     justifyContent: "center",
     boxShadow: "none",
@@ -31,6 +32,9 @@ const useStyles = makeStyles((theme) => ({
     height: "60px",
     background: "linear-gradient(173.86deg, #80DB2E 13.23%, #68C1DA 110.72%)",
     color: "#FFFFFF",
+    fontSize: "16px",
+    lineHeight: "24px",
+    textAlign: "center",
     boxShadow: "0px 15px 10px rgba(125, 214, 246, 0.13)",
     borderRadius: "30px",
     "&:hover": {
@@ -53,6 +57,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "16px",
     lineHeight: "24px",
     fontWeight: "600",
+    textAlign: "center",
   },
 }));
 
