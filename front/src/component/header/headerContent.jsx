@@ -55,7 +55,7 @@ const HeaderContent = () => {
             size="large"
             color="succeses"
           >
-            Запись на прием
+            Личный кабинет
           </Button>
         </Box>
       </Toolbar>

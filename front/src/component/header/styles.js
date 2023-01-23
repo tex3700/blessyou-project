@@ -1,11 +1,21 @@
 import { makeStyles } from "@material-ui/core";
+// import themes from "../../themes";
 
 const useStyles = makeStyles((theme) => ({
+  appbar: {
+    height: "120px",
+    justifyContent: "center",
+    boxShadow: "none",
+  },
+
   buttonWriteOn: {
-    borderRadius: "20px",
+    height: "60px",
+    background: "linear-gradient(173.86deg, #80DB2E 13.23%, #68C1DA 110.72%)",
+    color: "#FFFFFF",
+    boxShadow: "0px 15px 10px rgba(125, 214, 246, 0.13)",
+    borderRadius: "30px",
     "&:hover": {
-      backgroundColor: "green",
-      color: "inherit",
+      boxShadow: "none",
     },
   },
   headerBox: {
@@ -15,9 +25,7 @@ const useStyles = makeStyles((theme) => ({
 
   headerButtonLink: {
     marginRight: theme.spacing(2),
-    "&:hover": {
-      color: "red",
-    },
+    color: "#4493B9",
   },
 }));
 

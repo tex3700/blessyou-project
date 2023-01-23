@@ -1,14 +1,13 @@
 import { AppBar, Container } from "@material-ui/core";
 import React from "react";
 import HeaderContent from "./headerContent";
-import TopBar from "./topBar";
+import useStyles from "./styles";
 
 const Header = () => {
+  const classes = useStyles();
   return (
-    <AppBar>
+    <AppBar className={classes.appbar} color="white">
       <Container>
-        {/* Закоментировал этот компонент и перенес его содержимое в футер, оставил здесь по появления макета */}
-        {/* <TopBar /> */}
         <HeaderContent />
       </Container>
     </AppBar>

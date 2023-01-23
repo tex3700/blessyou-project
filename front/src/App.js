@@ -5,9 +5,24 @@ import Header from "./component/header/header";
 import { Container } from "@material-ui/core";
 import Main from "./component/mainPage/main";
 import Footer from "./component/footer/Footer";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+// import themes from "./themes";
 
+// const theme = createTheme({
+//   palette: {
+//     primary: {
+//       main: "#76BF35",
+//     },
+//     secondary: {
+//       main: "#4493B9",
+//     },
+//   },
+
+//   spacing: 2, // 2 вместо 8 sm
+// });
 function App() {
   return (
+    // <ThemeProvider theme={theme}>
     <>
       <Container fixed>
         <Header />
@@ -24,6 +39,7 @@ function App() {
         <Footer />
       </Container>
     </>
+    // </ThemeProvider>
   );
 }
 
