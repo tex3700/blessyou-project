@@ -1,6 +1,7 @@
 import { makeStyles } from "@material-ui/core";
 // import themes from "../../themes";
 import mainLogo from "./../../static/icons/headerLogo.png";
+import enteranceDoctorsIcon from "./../../static/icons/enteranceDoctorsIcon.svg";
 
 const useStyles = makeStyles((theme) => ({
   appbar: {
@@ -13,6 +14,14 @@ const useStyles = makeStyles((theme) => ({
     height: "85px",
     width: "126px",
     backgroundImage: `url(${mainLogo})`,
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
+  },
+  headerDoctorsEnterance: {
+    height: "36px",
+    width: "36px",
+    backgroundImage: `url(${enteranceDoctorsIcon})`,
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
@@ -39,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   headerButtonLink: {
-    marginRight: theme.spacing(5),
+    marginRight: theme.spacing(2),
     color: "#4493B9",
     fontSize: "16px",
     lineHeight: "24px",

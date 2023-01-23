@@ -2,6 +2,7 @@ import { Container, Toolbar, Box, Button, IconButton } from "@material-ui/core";
 import React from "react";
 import useStyles from "./styles";
 import { Link } from "react-router-dom";
+import enteranceDoctorsIcon from "./../../static/icons/enteranceDoctorsIcon.svg";
 
 const linksArray = [
   { name: "О клинике", path: "/about" },
@@ -53,6 +54,14 @@ const HeaderContent = () => {
             Личный кабинет
           </Button>
         </Box>
+        <IconButton
+          className={classes.root}
+          // color="inherit"
+          component={Link}
+          to="/"
+        >
+          <Box className={classes.headerDoctorsEnterance}></Box>
+        </IconButton>
       </Toolbar>
     </Container>
     // </AppBar>
