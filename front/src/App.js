@@ -5,7 +5,7 @@ import Header from "./component/header/header";
 import { Container } from "@material-ui/core";
 import Main from "./component/mainPage/main";
 import Footer from "./component/footer/Footer";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
+//import { ThemeProvider, createTheme } from "@mui/material/styles";
 // import themes from "./themes";
 
 // const theme = createTheme({
@@ -20,12 +20,13 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 //   spacing: 2, // 2 вместо 8 sm
 // });
+ 
 function App() {
   return (
     // <ThemeProvider theme={theme}>
     <>
       <Header />
-
+     
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/about" element={<Appointment />} />
