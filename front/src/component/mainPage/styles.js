@@ -55,6 +55,20 @@ const useStyles = makeStyles((theme) => ({
 
   ////////////////////////////////
   ////styles for MainWelcome
+
+  mainAboutUsGrid: {
+    margin: "100px 0",
+    justifyContent: "space-between",
+    gap: "80px",
+  },
+  mainAboutUsGridContent: {
+    maxWidth: "570px",
+  },
+  mainAboutUsImage: {
+    backgroundImage: `url(${mainAboutUs})`,
+    width: "470px",
+    height: "570px",
+  },
 }));
 
 export default useStyles;
