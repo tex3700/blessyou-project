@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   footerGridContainer: {
+    marginTop: "93px",
     justifyContent: "space-between",
   },
 
