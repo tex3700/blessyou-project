@@ -6,7 +6,7 @@ import useStyles from "./styles";
 const Header = () => {
   const classes = useStyles();
   return (
-    <AppBar className={classes.appbar} color="white">
+    <AppBar className={classes.appbar} color="inherit">
       <Container fixed>
         <HeaderContent />
       </Container>

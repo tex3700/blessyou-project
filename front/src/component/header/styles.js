@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme) => ({
     height: "120px",
     justifyContent: "center",
     boxShadow: "none",
+    color: "white",
   },
 
   headerLogo: {
