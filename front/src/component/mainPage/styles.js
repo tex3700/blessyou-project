@@ -10,15 +10,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
-  },
-
-  mainContent: {
-    color: 'green',
-  },
-  cardMedia: {
-    paddingTop: "100%",
-  }
-
+  }, 
 }));
 
 export default useStyles;

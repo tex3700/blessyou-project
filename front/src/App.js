@@ -5,7 +5,8 @@ import Header from "./component/header/header";
 import { Container } from "@material-ui/core";
 import Main from "./component/mainPage/main";
 import Footer from "./component/footer/Footer";
-//import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import DoctorList from "./component/DoctorList/doctorlList";
 // import themes from "./themes";
 
 // const theme = createTheme({
@@ -31,7 +32,7 @@ function App() {
         <Route path="/" element={<Main />} />
         <Route path="/about" element={<Appointment />} />
         <Route path="/services" element={<Appointment />} />
-        <Route path="/doctors" element={<Appointment />} />
+        <Route path="/doctors" element={<DoctorList/>} />
         <Route path="/contacts" element={<Receipts />} />
         <Route path="/patientAccout" element={<Appointment />} />
       </Routes>
