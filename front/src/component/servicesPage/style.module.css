@@ -52,7 +52,6 @@
 .servicesTableMain .servicesCardImg1 {
   width: 370px;
   height: 200px;
-  background: url(../../static/image/cardPhysical.png);
 }
 .servicesTableMain .servicesCardName {
   margin: 18px 0 12px;
