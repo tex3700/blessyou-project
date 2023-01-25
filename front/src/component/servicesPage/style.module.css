@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .servicesContainer {
   max-width: 1180px;
   padding: 0 1.0714285714rem;
@@ -20,12 +21,12 @@
   align-items: center;
 }
 
-.doctorTable {
+.servicesTable {
   display: flex;
   flex-direction: column;
   margin: 7.6428571429rem 0;
 }
-.doctorTable h1 {
+.servicesTable h1 {
   margin: 0 auto;
   font-family: "Poppins";
   font-weight: 700;
@@ -33,49 +34,269 @@
   line-height: 3.4285714286rem;
   color: #76BF35;
 }
-.doctorTableMain {
+.servicesTableMain {
   margin-top: 2.8571428571rem;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(2, fr);
-  row-gap: 6.0714285714rem;
-  -moz-column-gap: 1.5714285714rem;
-       column-gap: 1.5714285714rem;
+  row-gap: 2.8571428571rem;
+  -moz-column-gap: 1.3571428571rem;
+       column-gap: 1.3571428571rem;
 }
-.doctorTableMain .doctorCard {
-  width: 270px;
-  min-height: 370px;
+.servicesTableMain .servicesCard {
+  min-height: 380px;
   display: flex;
   flex-direction: column;
-  text-align: center;
   text-decoration: none;
 }
-.doctorTableMain .doctorCardImg1 {
-  width: 270px;
-  height: 270px;
-  background: url(../../static/image/physiotherapist.png);
+.servicesTableMain .servicesCardImg1 {
+  width: 370px;
+  height: 200px;
+  background: url(../../static/image/cardPhysical.png);
 }
-.doctorTableMain .doctorCardSurname {
-  margin-top: 22px;
+.servicesTableMain .servicesCardName {
+  margin: 18px 0 12px;
   font-family: "Poppins";
   font-weight: 700;
   font-size: 1.2857142857rem;
   line-height: 2.1428571429rem;
   color: #4493B9;
+  padding-left: 39px;
 }
-.doctorTableMain .doctorCardProfession {
+.servicesTableMain .servicesCardDescription {
+  max-width: 330px;
   font-family: "Poppins";
   font-weight: 400;
-  font-size: 1.0714285714rem;
-  line-height: 2.1428571429rem;
+  font-size: 1rem;
+  line-height: 1.4285714286rem;
   color: #676767;
+  padding-left: 39px;
 }
-.doctorTableMain .doctorCard:hover {
+.servicesTableMain .servicesCardButton {
+  margin: 15px 0 24px 39px;
+  max-width: 126px;
+  color: #4493B9;
+  background: #fff;
+  border: transparent;
+  border: transparent;
+}
+.servicesTableMain .servicesCard:hover {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
 }
+.servicesTableMain .servicesCard .popupImg {
+  width: 300px;
+  height: 200px;
+  background: url(../../static/image/cardPhysical.png);
+  float: left;
+  margin-right: 20px;
+}
+.servicesTableMain .servicesCard .popupDescription {
+  font-family: "Poppins";
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.4285714286rem;
+  color: #676767;
+}
 
-.servicesMessage {
+.sendMessage {
   margin-bottom: 200px;
-  min-height: 38.7857142857rem;
+  min-height: 543px;
   background: linear-gradient(173.86deg, #80DB2E 13.23%, #68C1DA 110.72%);
+}
+.sendMessageContainer {
+  max-width: 1180px;
+  padding: 0 1.0714285714rem;
+  margin: 0 auto;
+}
+.sendMessageBox {
+  max-width: 976px;
+  margin: 0 auto;
+  padding-top: 64px;
+  display: flex;
+  flex-direction: column;
+}
+.sendMessageBox h1 {
+  font-family: "Poppins";
+  font-weight: 700;
+  font-size: 3.2857142857rem;
+  line-height: 2.1428571429rem;
+  color: #FFFFFF;
+  margin-bottom: 49px;
+  text-align: center;
+}
+.sendMessageBoxInput {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  gap: 30px;
+  margin-bottom: 24px;
+}
+.sendMessageBoxInput input {
+  width: 300px;
+  height: 60px;
+  font-family: "Poppins";
+  font-weight: 400;
+  font-size: 1.4285714286rem;
+  line-height: 2.1428571429rem;
+  padding-left: 24px;
+}
+.sendMessageBoxInput input::-moz-placeholder {
+  font-family: "Poppins";
+  font-weight: 400;
+  font-size: 1.1428571429rem;
+  line-height: 2.1428571429rem;
+  color: #999999;
+}
+.sendMessageBoxInput input:-ms-input-placeholder {
+  font-family: "Poppins";
+  font-weight: 400;
+  font-size: 1.1428571429rem;
+  line-height: 2.1428571429rem;
+  color: #999999;
+}
+.sendMessageBoxInput input::placeholder {
+  font-family: "Poppins";
+  font-weight: 400;
+  font-size: 1.1428571429rem;
+  line-height: 2.1428571429rem;
+  color: #999999;
+}
+.sendMessageBox textarea {
+  width: 100%;
+  max-height: 150px;
+  padding: 11px 0 0 24px;
+  font-family: "Poppins";
+  font-weight: 400;
+  font-size: 1.4285714286rem;
+  line-height: 2.1428571429rem;
+  margin-bottom: 34px;
+}
+.sendMessageBox textarea::-moz-placeholder {
+  font-family: "Poppins";
+  font-weight: 400;
+  font-size: 1.1428571429rem;
+  line-height: 2.1428571429rem;
+  color: #999999;
+}
+.sendMessageBox textarea:-ms-input-placeholder {
+  font-family: "Poppins";
+  font-weight: 400;
+  font-size: 1.1428571429rem;
+  line-height: 2.1428571429rem;
+  color: #999999;
+}
+.sendMessageBox textarea::placeholder {
+  font-family: "Poppins";
+  font-weight: 400;
+  font-size: 1.1428571429rem;
+  line-height: 2.1428571429rem;
+  color: #999999;
+}
+.sendMessageBox .sendMessageButton {
+  width: 290px;
+  height: 60px;
+  align-self: center;
+  background: linear-gradient(270deg, #37A12F -4.12%, #80DB2E 102.94%);
+  box-shadow: 0px 15px 10px rgba(125, 214, 246, 0.13);
+  border-radius: 0px 30px;
+  font-family: "Poppins";
+  font-weight: 600;
+  font-size: 1.1428571429rem;
+  line-height: 1.7142857143rem;
+  color: #FFFFFF;
+  border: transparent;
+  position: relative;
+}
+.sendMessageBox .sendMessageButton:hover {
+  top: -10px;
+  box-shadow: 0 5px 0 #0c5b52;
+  color: #fff;
+}
+.sendMessageBox .sendMessageButton:active {
+  top: -5px;
+  box-shadow: 0 2px 0 #0c5b52;
+  transition: all 0.1s ease 0s;
+}
+
+/*
+!                   модальное окно 
+ */
+.overlay {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  display: none;
+  /* фон затемнения */
+  background-color: rgba(0, 0, 0, 0.6509803922);
+  position: fixed;
+  cursor: default;
+  /* активируем слой затемнения */
+  /* активируем модальный блок */
+}
+.overlay:target {
+  display: block;
+}
+.overlay:target + .popup {
+  transform: translate(-50%, 0);
+  top: 20%;
+}
+
+/* стили модального окна */
+.popup {
+  top: -100%;
+  right: 0;
+  left: 50%;
+  z-index: 2;
+  font-size: 1rem;
+  margin: 0;
+  width: 85%;
+  min-width: 22.8571428571rem;
+  max-width: 35.7142857143rem;
+  /* фиксированное позиционирование */
+  position: fixed;
+  padding: 1.0714285714rem;
+  background: #fefefe;
+  /* скругление углов */
+  border-radius: 0.7142857143rem;
+  /* внешняя тень */
+  box-shadow: 0 1.0714285714rem 1.4285714286rem rgba(0, 0, 0, 0.2196078431), 0 1.3571428571rem 4.2857142857rem rgba(0, 0, 0, 0.3019607843);
+  transform: translate(-50%, -500%);
+  transition: transform 0.6s ease-out;
+}
+.popup iframe {
+  width: 100%;
+  height: 400px;
+}
+
+/* формируем кнопку закрытия */
+.closePopup {
+  top: -10px;
+  right: -10px;
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  padding: 0;
+  border: 2px solid #ccc;
+  border-radius: 15px;
+  background-color: rgba(61, 61, 61, 0.8);
+  box-shadow: 0px 0px 10px #000;
+  text-align: center;
+  text-decoration: none;
+  font-family: "Poppins";
+  font-weight: 500;
+  font-size: 1.2142857143rem;
+  line-height: 1.4285714286rem;
+  transition: all ease 0.8s;
+  display: block;
+}
+.closePopup:before {
+  content: "X";
+  color: rgba(255, 255, 255, 0.9019607843);
+  font-size: 0.8571428571rem;
+}
+.closePopup:hover {
+  background-color: rgba(252, 20, 0, 0.8);
+  transform: rotate(360deg);
 }
