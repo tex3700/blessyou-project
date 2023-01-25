@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   ////////////////////////////////
-  ////styles for MainWelcome
+  ////styles for MainAboutUs
 
   mainAboutUsGrid: {
     margin: "100px 0",
