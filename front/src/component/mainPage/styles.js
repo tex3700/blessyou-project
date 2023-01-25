@@ -64,10 +64,46 @@ const useStyles = makeStyles((theme) => ({
   mainAboutUsGridContent: {
     maxWidth: "570px",
   },
+  mainAboutUsGridContentBest: {
+    marginTop: "20px",
+    gap: "25px",
+  },
+  mainAboutUsGridContentBestItem: {
+    display: "flex",
+    alignItems: "center",
+    width: "45%",
+  },
   mainAboutUsImage: {
     backgroundImage: `url(${mainAboutUs})`,
     width: "470px",
     height: "570px",
+  },
+  mainAboutUsButton: {
+    marginTop: "60px",
+    width: "156px",
+    height: "60px",
+  },
+
+  mainAboutUsTitle: {
+    fontSize: "36px",
+    lineHeight: "55px",
+    color: "#76BF35",
+  },
+
+  mainAboutUsText: {
+    fontSize: "16px",
+    lineHeight: "24px",
+    color: "#676767",
+  },
+  mainAboutUsTextBest: {
+    fontSize: "16px",
+    lineHeight: "30px",
+    color: "#4493B9",
+  },
+
+  colorPrimary: {
+    color: "#76BF35",
+    marginRight: theme.spacing(2),
   },
 }));
 

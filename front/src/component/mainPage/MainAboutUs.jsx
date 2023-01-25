@@ -11,6 +11,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import { Link } from "react-router-dom";
 /////
 const aboutBestList = [
   "Лучшие специалисты",
@@ -30,28 +31,54 @@ const MainAboutUs = () => {
         </Grid>
 
         <Grid item className={classes.mainAboutUsGridContent}>
-          <Typography variant="h4">
+          <Typography
+            variant="h4"
+            className={classes.mainAboutUsTitle}
+            gutterBottom
+          >
             Добро пожаловать в клинику “Будьте Здоровы!”
           </Typography>
-          <Typography variant="subtitle1">
+          <Typography variant="body2" className={classes.mainAboutUsText}>
             Рады приветствовать вас на сайте нашей клиники! Работая в области
             медицины уже более десяти лет, мы не понаслышке знаем о трудностях,
             с которыми сталкивается каждый пациент. И мы понимаем, насколько
             важно найти «своего» врача, пройти качественное обследование и
-            получить результат от лечения. Наша клиника оснащена современным
-            медицинским оборудованием, позволяющим проводить детальную
-            диагностику организма. Каждый пациент может рассчитывать на
-            внимательный прием и высокий уровень услуг, ведь принцип нашей
-            работе строится на постулате «Внимательно к каждому».
+            получить результат от лечения.
+          </Typography>
+          <Typography variant="body2" className={classes.mainAboutUsText}>
+            Наша клиника оснащена современным медицинским оборудованием,
+            позволяющим проводить детальную диагностику организма. Каждый
+            пациент может рассчитывать на внимательный прием и высокий уровень
+            услуг, ведь принцип нашей работе строится на постулате «Внимательно
+            к каждому».
           </Typography>
 
-          <Grid container wrap="wrap">
+          <Grid
+            container
+            wrap="wrap"
+            className={classes.mainAboutUsGridContentBest}
+          >
             {aboutBestList.map((item) => (
-              <Grid item direction="row">
-                <CheckCircleIcon />
-                <Typography>{item}</Typography>
+              <Grid
+                key={item}
+                item
+                className={classes.mainAboutUsGridContentBestItem}
+              >
+                <CheckCircleIcon className={classes.colorPrimary} />
+                <Typography className={classes.mainAboutUsTextBest}>
+                  {item}
+                </Typography>
               </Grid>
             ))}
+          </Grid>
+          <Grid item>
+            <Button
+              className={`${classes.mainRegistrationButton} ${classes.mainAboutUsButton} `}
+              component={Link}
+              to="/about"
+            >
+              ПОДРОБНЕЕ
+            </Button>
           </Grid>
         </Grid>
       </Grid>
