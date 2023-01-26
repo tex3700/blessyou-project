@@ -1,25 +1,35 @@
 import { Box, CardMedia, Container, Paper, Typography, Grid, Card, CardContent } from "@material-ui/core";
 import React from "react";
 import useStyles from "./styles";
-import image from "../../static/images/Bunner.jpg"; 
+import image from "../../static/images/Bunnerback.jpg"; 
 import { gridclasses } from "@mui/system";
 import { cardclasses } from "@mui/material";
 
-const cards = [1,2,3,4,5,6,7,8,9];   
+const cards = [1,1,1,1];   
+
+const doctorCardList = [
+  { name: "Иванов И.И. Гастроинтеролог", path: "/DoctorList" },
+  { name: "Педиатр", path: "/doctors" },
+  { name: "Окулист", path: "/contacts" },
+  { name: "Оторингология", path: "/contacts" },
+  { name: "Терапевт", path: "/contacts" },
+  { name: "Физиотерапия", path: "/contacts" },
+];
+
 
 const DoctorList = () => {
   const classes = useStyles();
   return (
     <>
-    <Paper className={classes.mainPaper}>
+    <Paper className={classes.mainPaperh2}>
       <Container fixed>
-        <Box className="mainBox" mt={20}>
+        <Box className="mainBoxh2" mt={20}>
           <Typography variant="h2">Наши врачи</Typography>
         </Box>
       </Container>
     </Paper>
-    <div className={classes.mainContent}>
-    <Typography variant="h3" align="center" color="TextPrimary" gutterBottom>Команда высококлассных специалистов</Typography>
+    <div className={classes.mainContenth3}>
+    <Typography variant="h3" align="center" gutterBottom>Команда высококлассных специалистов</Typography>
     </div>
     <Container className={classes.cardGrid} maxWidth="md">
       <Grid container spacing={2}>
