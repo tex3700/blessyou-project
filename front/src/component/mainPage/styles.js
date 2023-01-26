@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundPosition: "center",
     height: "750px",
     borderRadius: "0",
+    boxShadow: "none",
   },
 
   mainBox: {
