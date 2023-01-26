@@ -1,47 +1,41 @@
 import React from "react";
 import styles from "./style.module.css";
 import { Box, Container, Typography } from "@material-ui/core";
-import { cardPhysical, cardLor, cardPediatr } from "../../static/image";
 
 const servicesTable = [
   {
     id: 1,
-    img: `{cardPhysical}`,
+    img: "../../static/image/cardPhysical.png",
     service: "Физиотерапия",
     description:
       "Все виды физиотерапевтических услуг, мануальный массаж и натуротерапия. Лучшие специалисты города ждут Вас...",
   },
   {
     id: 2,
-    img: `${cardPediatr}`,
     service: "Педиатрия",
     description:
       "Педиатр – детский терапевт, который наблюдает Вашего ребенка с самого рождения и до совершеннолетия.",
   },
   {
     id: 3,
-    img: `${cardLor}`,
     service: "Оториноларингология",
     description:
       "Лор-врач, или оториноларинголог, занимается диагностикой и лечением различной патологии уха, горла и носа. ",
   },
   {
     id: 4,
-    img: `${cardPhysical}`,
     service: "Физиотерапия",
     description:
       "Все виды физиотерапевтических услуг, мануальный массаж и натуротерапия. Лучшие специалисты города ждут Вас...",
   },
   {
     id: 5,
-    img: `${cardPediatr}`,
     service: "Педиатрия",
     description:
       "Педиатр – детский терапевт, который наблюдает Вашего ребенка с самого рождения и до совершеннолетия.",
   },
   {
     id: 6,
-    img: `${cardLor}`,
     service: "Оториноларингология",
     description:
       "Лор-врач, или оториноларинголог, занимается диагностикой и лечением различной патологии уха, горла и носа. ",
@@ -68,7 +62,7 @@ export const Services = () => {
             <div className={styles.servicesTableMain}>
               {servicesTable.map((card) => (
                 <a href="#win1" className={styles.servicesCard}>
-                  <div className={styles.servicesCardImg1}>{card.img}</div>
+                  <div className={styles.servicesCardImg1}></div>
                   <div className={styles.servicesCardName}>{card.service}</div>
                   <div className={styles.servicesCardDescription}>
                     {card.description}
