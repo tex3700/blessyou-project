@@ -1,8 +1,10 @@
 import React from "react";
 import styles from "./style.module.css";
 import { Box, Container, Typography } from "@material-ui/core";
+import { useStyles } from "./servicesStyle";
+import Grid from "@material-ui/core/Grid";
 
-const servicesTable = [
+export const servicesTable = [
   {
     id: 1,
     img: "../../static/image/cardPhysical.png",
@@ -43,21 +45,32 @@ const servicesTable = [
 ];
 
 export const Services = () => {
+  const classes = useStyles();
+
   return (
     <>
-      <div className={styles.servicesHead}>
-        <div className={styles.servicesContainer}>
-          <h1>Услуги</h1>
-        </div>
-      </div>
-      <Box component="div" m={15}>
-        <Container maxWidth="lg">
-          <Typography variant="h1">h1. Заголовок</Typography>
+      <Box className={classes.servicesHead}>
+        <Container fixed>
+          <Typography variant="h3">Услуги</Typography>
         </Container>
       </Box>
+      {/* <Box component="div">
+        <Container fixed>
+          <Box component="div" className={classes.servicesTable}>
+            <h3>Полный спектр медицинских услуг</h3>
+            <Grid
+              container
+              spacing={2}
+              className={classes.servicesTableMain}
+            ></Grid>
+          </Box>
+        </Container>
+      </Box> */}
+      {/* 
       <div>
         <div className={styles.servicesContainer}>
           <div className={styles.servicesTable}>
+!          <div className={styles.servicesTable}>
             <h1>Полный спектр медицинских услуг</h1>
             <div className={styles.servicesTableMain}>
               {servicesTable.map((card) => (
@@ -90,21 +103,10 @@ export const Services = () => {
                   </div>
                 </a>
               ))}
-
-              {/* <a href="#" className={styles.doctorCard}>
-                <img
-                  src="../../static/image/physiotherapist.png"
-                  alt="pho1to"
-                  className={styles.doctorCardImg}
-                />
-                <div className={styles.doctorCardImg}></div>
-                <div className={styles.doctorCardSurname}>Иванов И.И.</div>
-                <div className={styles.doctorCardProfession}>Физиотерапевт</div>
-              </a> */}
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       <SendMessage />
       <OurDoctors />
     </>

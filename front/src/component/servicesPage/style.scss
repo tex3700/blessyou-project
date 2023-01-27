@@ -4,7 +4,7 @@
 	@return math.div($px, 14) + rem;
   };
 
-@mixin family ($fw, $fz, $lh){
+@mixin family ($fw, $fz, $lh ) {
   font-family: 'Poppins';
   font-weight: $fw;
   font-size: $fz;
