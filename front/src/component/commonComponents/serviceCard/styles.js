@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 370,
+    boxShadow: "none",
   },
   media: {
     height: 200,
@@ -20,7 +21,9 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     color: "#676767",
   },
-
+  cardButton: {
+    color: "#4493B9",
+  },
   cardButtonIcon: {
     color: "#76BF35",
   },

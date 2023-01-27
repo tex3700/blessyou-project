@@ -10,6 +10,10 @@ const useStyles = makeStyles((theme) => ({
   },
   ourServicesGrid: {
     paddingTop: "70px",
+    justifyContent: "center",
+  },
+  ourServicesGridTitle: {
+    alignItems: "center",
     justifyContent: "space-between",
   },
   ourServicesCarouseleGrid: {
@@ -33,6 +37,29 @@ const useStyles = makeStyles((theme) => ({
   },
   ourServicesArrowRight: {
     backgroundImage: `url(${arrowRight})`,
+  },
+
+  //////копия общих стилей для кнопки, которая повторяется в элементах
+  mainRegistrationButton: {
+    width: "236px",
+    height: "84px",
+    color: " #FFFFFF",
+    background: "linear-gradient(270deg, #37A12F -4.12%, #80DB2E 102.94%)",
+    boxShadow: "0px 15px 10px rgba(125, 214, 246, 0.13)",
+    borderRadius: "0px 30px",
+    "&:hover": {
+      boxShadow: "none",
+    },
+    fontSize: "16px",
+    lineHeight: "24px",
+    textAlign: "center",
+    textTransform: "uppercase",
+  },
+
+  mainAboutUsButton: {
+    marginTop: "60px",
+    width: "156px",
+    height: "60px",
   },
 
   /////

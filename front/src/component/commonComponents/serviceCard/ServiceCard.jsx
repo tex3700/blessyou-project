@@ -36,6 +36,7 @@ const ServiceCard = ({ props }) => {
         <Button
           size="small"
           color="primary"
+          className={classes.cardButton}
           startIcon={<ArrowForwardIcon className={classes.cardButtonIcon} />}
         >
           Подробнее
