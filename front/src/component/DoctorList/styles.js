@@ -3,44 +3,50 @@ import image from "../../static/images/Bunnerback.jpg";
 
 const useStyles = makeStyles((theme) => ({
 
- mainBoxh2: {
+ mainPaper: {
     position: "relative",
     color: theme.palette.common.white,
-    // marginBottom: theme.spacing(3),
+    //marginBottom: theme.spacing(3),
     backgroundImage: `url(${image})`,
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
-   
+    top: "-157px",
+    height: "200px",
     borderRadius: "0",
  },
  
-  mainContenth3: {
-    width: "986px",
-    height: "47px",
-    fontfamily: "Poppins",
-    fontstyle: "normal",
-    fontweight: "700",
-    fontsize: "46px",
-    lineheight: "48px",
-    color: "green",
-  }, 
- 
-  mainPaperh2: {
-  
+  docTextH2: {
+    position: "absolute",
     width: "330px",
     height: "74px",
-    fontfamily: "Poppins",
-    fontstyle: "normal",
-    fontweight: "700",
-    fontsize: "50px",
-    lineheight: "80px",
-    /* or 160% */
-     color: "black",
-  }, 
+    top: "52px",
+    left: "440px",
+    fontFamily: 'Poppins',
+    fontStyle: "normal",
+    fontWeight: "700",
+    fontSize: "50px",
+    lineHeight: "80px",
+    color: "white",
+  },
 
-  cardMedia: {
+  docTextH3: {
+    position: "relative",
+    textAlign: "center",
+    width: "986px",
+    height: "47px",
+    top: "-42px",
+    left: "520px",
+    fontFamily: "Poppins",
+    fontStyle: "normal",
+    fontWeight: "700",
+    fontSize: "46px",
+    lineHeight: "48px",
+    color: "#76BF35",
+  }, 
  
+  cardMedia: {
+    position: "relative",
     width: "270px",
     height: "270px",
     paddingTop: "24px",
