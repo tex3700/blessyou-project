@@ -1,6 +1,16 @@
 import React from "react";
 import styles from "./style.module.css";
-import { Box, Container, Typography } from "@material-ui/core";
+import {
+  Box,
+  Container,
+  Typography,
+  Card,
+  CardMedia,
+  CardContent,
+  CardActions,
+  Button,
+  CardActionArea,
+} from "@material-ui/core";
 import { useStyles } from "./servicesStyle";
 import Grid from "@material-ui/core/Grid";
 
@@ -8,37 +18,37 @@ export const servicesTable = [
   {
     id: 1,
     img: "../../static/image/cardPhysical.png",
-    service: "Физиотерапия",
+    title: "Физиотерапия",
     description:
       "Все виды физиотерапевтических услуг, мануальный массаж и натуротерапия. Лучшие специалисты города ждут Вас...",
   },
   {
     id: 2,
-    service: "Педиатрия",
+    title: "Педиатрия",
     description:
       "Педиатр – детский терапевт, который наблюдает Вашего ребенка с самого рождения и до совершеннолетия.",
   },
   {
     id: 3,
-    service: "Оториноларингология",
+    title: "Оториноларингология",
     description:
       "Лор-врач, или оториноларинголог, занимается диагностикой и лечением различной патологии уха, горла и носа. ",
   },
   {
     id: 4,
-    service: "Физиотерапия",
+    title: "Физиотерапия",
     description:
       "Все виды физиотерапевтических услуг, мануальный массаж и натуротерапия. Лучшие специалисты города ждут Вас...",
   },
   {
     id: 5,
-    service: "Педиатрия",
+    title: "Педиатрия",
     description:
       "Педиатр – детский терапевт, который наблюдает Вашего ребенка с самого рождения и до совершеннолетия.",
   },
   {
     id: 6,
-    service: "Оториноларингология",
+    title: "Оториноларингология",
     description:
       "Лор-врач, или оториноларинголог, занимается диагностикой и лечением различной патологии уха, горла и носа. ",
   },
@@ -54,18 +64,49 @@ export const Services = () => {
           <Typography variant="h3">Услуги</Typography>
         </Container>
       </Box>
-      {/* <Box component="div">
+      <Box>
         <Container fixed>
-          <Box component="div" className={classes.servicesTable}>
-            <h3>Полный спектр медицинских услуг</h3>
-            <Grid
-              container
-              spacing={2}
-              className={classes.servicesTableMain}
-            ></Grid>
-          </Box>
+          <Typography
+            variant="h3"
+            align="center"
+            className={classes.servicesGridTitle}
+          >
+            Полный спектр медицинских услуг
+          </Typography>
+
+          <Container className={classes.servicesCardContainer}>
+            <Grid container spacing={2}>
+              {servicesTable.map((card) => (
+                <Grid item key={card.id} xs={12} sm={6} md={4}>
+                  <Card className={classes.servicesCard}>
+                    <CardActionArea>
+                      <CardMedia
+                        className={classes.servicesCardMedia}
+                        image={card.img}
+                        title="Img title"
+                      ></CardMedia>
+                      <CardContent className={classes.servicesCardContent}>
+                        <Typography variant="h5" gutterBottom>
+                          {card.title}
+                        </Typography>
+                        <Typography>{card.description}</Typography>
+                      </CardContent>
+                    </CardActionArea>
+                    <CardActions>
+                      <Button
+                        size="small"
+                        className={classes.servicesCardButton}
+                      >
+                        Подробнее
+                      </Button>
+                    </CardActions>
+                  </Card>
+                </Grid>
+              ))}
+            </Grid>
+          </Container>
         </Container>
-      </Box> */}
+      </Box>
       {/* 
       <div>
         <div className={styles.servicesContainer}>

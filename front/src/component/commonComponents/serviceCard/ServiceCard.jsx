@@ -15,34 +15,36 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 const ServiceCard = ({ props }) => {
   const classes = useStyles();
 
-  return (
-    <Card className={classes.root}>
-      <CardActionArea>
-        <CardMedia
-          className={classes.media}
-          image={props.image}
-          title={props.title}
-        />
-        <CardContent>
-          <Typography className={classes.cardTitle} gutterBottom variant="h5">
-            {`${props.title}`}
-          </Typography>
-          <Typography variant="body2" className={classes.cardText}>
-            {`${props.text}`}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Button
-          size="small"
-          color="primary"
-          className={classes.cardButton}
-          startIcon={<ArrowForwardIcon className={classes.cardButtonIcon} />}
-        >
-          Подробнее
-        </Button>
-      </CardActions>
-    </Card>
-  );
+  if (props.id <= 3) {
+    return (
+      <Card className={classes.root}>
+        <CardActionArea>
+          <CardMedia
+            className={classes.media}
+            image={props.image}
+            title={props.title}
+          />
+          <CardContent>
+            <Typography className={classes.cardTitle} gutterBottom variant="h5">
+              {`${props.title}`}
+            </Typography>
+            <Typography variant="body2" className={classes.cardText}>
+              {`${props.text}`}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+        <CardActions>
+          <Button
+            size="small"
+            color="primary"
+            className={classes.cardButton}
+            startIcon={<ArrowForwardIcon className={classes.cardButtonIcon} />}
+          >
+            Подробнее
+          </Button>
+        </CardActions>
+      </Card>
+    );
+  }
 };
 export default ServiceCard;

@@ -18,32 +18,40 @@ import ServiceCard from "../serviceCard/ServiceCard";
 //////////
 const servicesList = [
   {
+    id: "1",
     title: "Физиотерапия",
     text: "Все виды физиотерапевтических услуг, мануальный массаж и натуротерапия. Лучшие специалисты города ждут Вас...",
     image: `${physiotheraphy}`,
   },
+
   {
-    title: "Физиотерапия11",
-    text: "Все виды физиотерапевтических услуг, мануальный массаж и натуротерапия. Лучшие специалисты города ждут Вас...",
-    image: `${physiotheraphy}`,
-  },
-  {
+    id: "2",
     title: "Педиатрия",
     text: "Педиатр –  детский терапевт, который наблюдает Вашего ребенка с самого рождения и до совершеннолетия. ",
     image: `${pediatr}`,
   },
   {
-    title: "Педиатрия111",
-    text: "Педиатр –  детский терапевт, который наблюдает Вашего ребенка с самого рождения и до совершеннолетия. ",
-    image: `${pediatr}`,
-  },
-  {
+    id: "3",
     title: "Оториноларингология",
     text: "Лор-врач, или оториноларинголог, занимается диагностикой и лечением различной патологии уха, горла и носа.",
     image: `${lorImage}`,
   },
   {
-    title: "Оториноларингология111s",
+    id: "4",
+    title: "Физиотерапия",
+    text: "Все виды физиотерапевтических услуг, мануальный массаж и натуротерапия. Лучшие специалисты города ждут Вас...",
+    image: `${physiotheraphy}`,
+  },
+
+  {
+    id: "5",
+    title: "Педиатрия",
+    text: "Педиатр –  детский терапевт, который наблюдает Вашего ребенка с самого рождения и до совершеннолетия. ",
+    image: `${pediatr}`,
+  },
+  {
+    id: "6",
+    title: "Оториноларингология",
     text: "Лор-врач, или оториноларинголог, занимается диагностикой и лечением различной патологии уха, горла и носа.",
     image: `${lorImage}`,
   },
@@ -53,11 +61,11 @@ const OurSevicesComp = () => {
   const classes = useStyles();
   const [count, setCount] = useState(0);
 
-  const [currentArray, setCurrentArray] = useState([
-    servicesList[0],
-    servicesList[1],
-    servicesList[2],
-  ]);
+  // const [currentArray, setCurrentArray] = useState([
+  //   servicesList[0],
+  //   servicesList[1],
+  //   servicesList[2],
+  // ]);
 
   if (count < 0) {
     setCount(servicesList.length - 1);
@@ -132,7 +140,7 @@ const OurSevicesComp = () => {
             </Grid>
           </Grid>
           <Grid container className={classes.ourServicesCarouseleGrid}>
-            {currentArray.map((item) => (
+            {servicesList.map((item) => (
               <ServiceCard key={item.title} props={item} />
             ))}
           </Grid>
