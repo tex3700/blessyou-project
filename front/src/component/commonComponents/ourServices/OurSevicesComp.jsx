@@ -55,17 +55,23 @@ const servicesList = [
     text: "Лор-врач, или оториноларинголог, занимается диагностикой и лечением различной патологии уха, горла и носа.",
     image: `${lorImage}`,
   },
+  {
+    id: "7",
+    title: "Физиотерапия",
+    text: "Все виды физиотерапевтических услуг, мануальный массаж и натуротерапия. Лучшие специалисты города ждут Вас...",
+    image: `${physiotheraphy}`,
+  },
 ];
 
 const OurSevicesComp = () => {
   const classes = useStyles();
   const [count, setCount] = useState(0);
 
-  // const [currentArray, setCurrentArray] = useState([
-  //   servicesList[0],
-  //   servicesList[1],
-  //   servicesList[2],
-  // ]);
+  const [currentArray, setCurrentArray] = useState([
+    servicesList[0],
+    servicesList[1],
+    servicesList[2],
+  ]);
 
   if (count < 0) {
     setCount(servicesList.length - 1);
@@ -140,7 +146,7 @@ const OurSevicesComp = () => {
             </Grid>
           </Grid>
           <Grid container className={classes.ourServicesCarouseleGrid}>
-            {servicesList.map((item) => (
+            {currentArray.map((item) => (
               <ServiceCard key={item.title} props={item} />
             ))}
           </Grid>

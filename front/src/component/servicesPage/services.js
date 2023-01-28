@@ -13,44 +13,47 @@ import {
 } from "@material-ui/core";
 import { useStyles } from "./servicesStyle";
 import Grid from "@material-ui/core/Grid";
+import physiotheraphy from "../../static/image/services/Physiotheraphy.jpg";
+import lorImage from "../../static/image/services/LOR.jpg";
+import pediatr from "../../static/image/services/Pediatr.jpg";
+import ServiceCard from "../commonComponents/serviceCard/ServiceCard";
 
 export const servicesTable = [
   {
     id: 1,
-    img: "../../static/image/cardPhysical.png",
+    image: `${physiotheraphy}`,
     title: "Физиотерапия",
-    description:
-      "Все виды физиотерапевтических услуг, мануальный массаж и натуротерапия. Лучшие специалисты города ждут Вас...",
+    text: "Все виды физиотерапевтических услуг, мануальный массаж и натуротерапия. Лучшие специалисты города ждут Вас...",
   },
   {
     id: 2,
+    image: `${pediatr}`,
     title: "Педиатрия",
-    description:
-      "Педиатр – детский терапевт, который наблюдает Вашего ребенка с самого рождения и до совершеннолетия.",
+    text: "Педиатр – детский терапевт, который наблюдает Вашего ребенка с самого рождения и до совершеннолетия.",
   },
   {
     id: 3,
+    image: `${lorImage}`,
     title: "Оториноларингология",
-    description:
-      "Лор-врач, или оториноларинголог, занимается диагностикой и лечением различной патологии уха, горла и носа. ",
+    text: "Лор-врач, или оториноларинголог, занимается диагностикой и лечением различной патологии уха, горла и носа. ",
   },
   {
     id: 4,
+    image: `${physiotheraphy}`,
     title: "Физиотерапия",
-    description:
-      "Все виды физиотерапевтических услуг, мануальный массаж и натуротерапия. Лучшие специалисты города ждут Вас...",
+    text: "Все виды физиотерапевтических услуг, мануальный массаж и натуротерапия. Лучшие специалисты города ждут Вас...",
   },
   {
     id: 5,
+    image: `${pediatr}`,
     title: "Педиатрия",
-    description:
-      "Педиатр – детский терапевт, который наблюдает Вашего ребенка с самого рождения и до совершеннолетия.",
+    text: "Педиатр – детский терапевт, который наблюдает Вашего ребенка с самого рождения и до совершеннолетия.",
   },
   {
     id: 6,
+    image: `${lorImage}`,
     title: "Оториноларингология",
-    description:
-      "Лор-врач, или оториноларинголог, занимается диагностикой и лечением различной патологии уха, горла и носа. ",
+    text: "Лор-врач, или оториноларинголог, занимается диагностикой и лечением различной патологии уха, горла и носа. ",
   },
 ];
 
@@ -76,7 +79,11 @@ export const Services = () => {
 
           <Container className={classes.servicesCardContainer}>
             <Grid container spacing={2}>
-              {servicesTable.map((card) => (
+              {servicesTable.map((item) => (
+                <ServiceCard key={item.title} props={item} />
+              ))}
+
+              {/* {servicesTable.map((card) => (
                 <Grid item key={card.id} xs={12} sm={6} md={4}>
                   <Card className={classes.servicesCard}>
                     <CardActionArea>
@@ -102,7 +109,7 @@ export const Services = () => {
                     </CardActions>
                   </Card>
                 </Grid>
-              ))}
+              ))} */}
             </Grid>
           </Container>
         </Container>
