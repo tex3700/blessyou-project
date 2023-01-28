@@ -45,12 +45,9 @@ const useStyles = makeStyles((theme) => ({
     color: "#76BF35",
   }, 
  
-  cardMedia: {
-    position: "relative",
-    width: "270px",
-    height: "270px",
-    paddingTop: "24px",
-  }
+  Rectangle25: {
+
+  },
 
 }));
 
