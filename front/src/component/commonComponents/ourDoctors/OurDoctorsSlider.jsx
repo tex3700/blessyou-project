@@ -64,46 +64,46 @@ const OurDoctorsSlider = () => {
 
   if (count < 0) {
     setCount(doctorsList.length - 1);
-    console.log("test", count);
   }
 
   if (count === doctorsList.length) {
     setCount(0);
   }
 
-  console.log("count count", count);
+  function caoruseleHandler(number) {
+    let innnerNumber = number + 1;
 
-  function countPlus(number) {
-    let innnerNumber;
-    setCount((prev) => prev + 1);
-    if (number === doctorsList.length) {
+    if (innnerNumber === doctorsList.length) {
       innnerNumber = 0;
 
       return innnerNumber;
     }
-    innnerNumber = number + 1;
+    if (innnerNumber < 0) {
+      innnerNumber = doctorsList.length - 1;
+
+      return innnerNumber;
+    }
 
     return innnerNumber;
   }
 
-  useEffect(() => {}, []);
+  const changeCurrentArray = () => {
+    let indexOne = count;
+    let indexTwo = caoruseleHandler(indexOne);
+    let indexThree = caoruseleHandler(indexTwo);
+    let indexFour = caoruseleHandler(indexThree);
 
-  function countMinus() {
-    setCount((prev) => prev - 1);
-    if (count < 0) {
-      setCount(doctorsList.length);
-    }
-    let num = count;
-    console.log("num", num);
-    // if (num < 0) {
-    //   num = servicesList.length - 1;
-    //   setCount(servicesList.length - 1);
-    //   // console.log("num0", num);
-    // }
-    // setCurrentArray([...[], servicesList[count]]);
-    // console.log("countMinus", count);
-  }
-  // console.log("countMinus finish", count);
+    setCurrentArray([
+      doctorsList[indexOne],
+      doctorsList[indexTwo],
+      doctorsList[indexThree],
+      doctorsList[indexFour],
+    ]);
+  };
+
+  useEffect(() => {
+    changeCurrentArray();
+  }, [count]);
 
   return (
     <Paper className={classes.ourServicesPaper}>
@@ -118,7 +118,7 @@ const OurDoctorsSlider = () => {
             <Grid item>
               <IconButton
                 className={classes.iconBottonRoot}
-                onClick={countMinus}
+                onClick={() => setCount(count - 1)}
               >
                 <Box
                   className={`${classes.ourServicesArrow} ${classes.ourServicesArrowLeft}`}
@@ -126,7 +126,7 @@ const OurDoctorsSlider = () => {
               </IconButton>
               <IconButton
                 className={classes.iconBottonRoot}
-                onClick={countPlus}
+                onClick={() => setCount(count + 1)}
               >
                 <Box
                   className={`${classes.ourServicesArrow} ${classes.ourServicesArrowRight}`}
