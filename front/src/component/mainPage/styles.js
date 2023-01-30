@@ -1,24 +1,14 @@
 import { makeStyles } from "@material-ui/core";
-<<<<<<< HEAD
-import image from "../../static/images/Bunner.jpg";
-=======
-import mainPageBunner from "./../../static/image/mainPageBunner.jpg";
+import mainPageBunner from "./../../static/images/mainPageBunner.jpg";
 import mainAboutUs from "./../../static/image/mainAboutUs.jpg";
->>>>>>> 0a454904ee80c179d514ac819bfea9aa62a2f986
 
 const useStyles = makeStyles((theme) => ({
   ////////////////////////
   ////styles for MainPaper
   mainPaper: {
     position: "relative",
-<<<<<<< HEAD
-    color: theme.palette.common.white,
-    // marginBottom: theme.spacing(3),
-    backgroundImage: `url(${image})`,
-=======
     color: theme.palette.common.black,
     backgroundImage: `url(${mainPageBunner})`,
->>>>>>> 0a454904ee80c179d514ac819bfea9aa62a2f986
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",

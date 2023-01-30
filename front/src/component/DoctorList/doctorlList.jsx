@@ -1,8 +1,6 @@
 import { Box, Container, Paper, Typography, Grid, Card, CardMedia } from "@material-ui/core";
 import React from "react";
 import useStyles from "./styles";
-import { gridclasses } from "@mui/system";
-import { cardclasses } from "@mui/material";
 
 
 const doctorCardList = [
@@ -29,15 +27,19 @@ const DoctorList = () => {
     <Container className={classes.cardGrid} maxWidth="md">
       <Grid container spacing={2}>
           {doctorCardList.map((card) => (
-            <Grid item key={card} xs={12} sm={8} md={4}>
-                 <div className = {classes.card}>
+             <Grid item key={card} column  xs={12} sm={8} md={2}>
+                  <Card className={classes.card}>
+                   <CardMedia
+                    className={classes.cardMedia}
                     to={card.path}
                     primary={card.name}
-                    secondary={card.speciality}
-                    last={card.image}     
-                  </div>
-              </Grid>
-          ))}
+                    spec={card.speciality}
+                    image={card.image}
+                   />
+                    
+                 </Card>
+             </Grid>   
+          ))}           
       </Grid>   
     </Container>
    </>
