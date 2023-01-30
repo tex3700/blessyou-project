@@ -6,7 +6,6 @@ export const useStyles = makeStyles((theme) => ({
     background: "linear-gradient(270deg, #37A12F -4.12%, #80DB2E 102.94%)",
     minHeight: "200px",
     "& h3": {
-      // fontFamily: "Poppins, Helvetica, Arial, sans-serif",
       fontWeight: 700,
       fontSize: "50px",
       lineHeight: "80px",
@@ -17,17 +16,17 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
 
-  servicesGridTitle: {
+  servicesMainTitle: {
     fontWeight: 700,
     fontSize: "46px",
     ineHeight: "48px",
-    margin: "107px 0",
+    margin: "107px 0 60px",
     color: "#76BF35",
   },
 
-  servicesCardContainer: {},
-  servicesCard: {},
-  servicesCardMedia: {},
-  servicesCardContent: {},
-  servicesCardButton: {},
+  servicesCardContainer: {
+    columnGap: "19px",
+    rowGap: "40px",
+    margin: "0 0 107px 0",
+  },
 }));
