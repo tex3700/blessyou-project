@@ -54,53 +54,51 @@ export const OurSevicesComp = () => {
   const [count, setCount] = useState(0);
 
   const [currentArray, setCurrentArray] = useState([
-    servicesList[0],
+    servicesList[count],
     servicesList[1],
     servicesList[2],
   ]);
 
   if (count < 0) {
     setCount(servicesList.length - 1);
-    console.log("test", count);
   }
 
   if (count === servicesList.length) {
     setCount(0);
   }
 
-  console.log("count count", count);
+  function caoruseleHandler(number) {
+    let innnerNumber = number + 1;
 
-  function countPlus(number) {
-    let innnerNumber;
-    setCount((prev) => prev + 1);
-    if (number === servicesList.length) {
+    if (innnerNumber === servicesList.length) {
       innnerNumber = 0;
 
       return innnerNumber;
     }
-    innnerNumber = number + 1;
+    if (innnerNumber < 0) {
+      innnerNumber = servicesList.length - 1;
+
+      return innnerNumber;
+    }
 
     return innnerNumber;
   }
 
-  useEffect(() => {}, []);
+  const changeCurrentArray = () => {
+    let indexOne = count;
+    let indexTwo = caoruseleHandler(indexOne);
+    let indexThree = caoruseleHandler(indexTwo);
 
-  function countMinus() {
-    setCount((prev) => prev - 1);
-    if (count < 0) {
-      setCount(servicesList.length);
-    }
-    let num = count;
-    console.log("num", num);
-    // if (num < 0) {
-    //   num = servicesList.length - 1;
-    //   setCount(servicesList.length - 1);
-    //   // console.log("num0", num);
-    // }
-    // setCurrentArray([...[], servicesList[count]]);
-    // console.log("countMinus", count);
-  }
-  // console.log("countMinus finish", count);
+    setCurrentArray([
+      servicesList[indexOne],
+      servicesList[indexTwo],
+      servicesList[indexThree],
+    ]);
+  };
+
+  useEffect(() => {
+    changeCurrentArray();
+  }, [count]);
 
   return (
     <Paper className={classes.ourServicesPaper}>
@@ -115,7 +113,7 @@ export const OurSevicesComp = () => {
             <Grid item>
               <IconButton
                 className={classes.iconBottonRoot}
-                onClick={countMinus}
+                onClick={() => setCount(count - 1)}
               >
                 <Box
                   className={`${classes.ourServicesArrow} ${classes.ourServicesArrowLeft}`}
@@ -123,7 +121,7 @@ export const OurSevicesComp = () => {
               </IconButton>
               <IconButton
                 className={classes.iconBottonRoot}
-                onClick={countPlus}
+                onClick={() => setCount(count + 1)}
               >
                 <Box
                   className={`${classes.ourServicesArrow} ${classes.ourServicesArrowRight}`}
