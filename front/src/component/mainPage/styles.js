@@ -1,20 +1,30 @@
 import { makeStyles } from "@material-ui/core";
+<<<<<<< HEAD
 import image from "../../static/images/Bunner.jpg";
+=======
+import mainPageBunner from "./../../static/image/mainPageBunner.jpg";
+import mainAboutUs from "./../../static/image/mainAboutUs.jpg";
+>>>>>>> 0a454904ee80c179d514ac819bfea9aa62a2f986
 
 const useStyles = makeStyles((theme) => ({
+  ////////////////////////
+  ////styles for MainPaper
   mainPaper: {
     position: "relative",
+<<<<<<< HEAD
     color: theme.palette.common.white,
     // marginBottom: theme.spacing(3),
     backgroundImage: `url(${image})`,
+=======
+    color: theme.palette.common.black,
+    backgroundImage: `url(${mainPageBunner})`,
+>>>>>>> 0a454904ee80c179d514ac819bfea9aa62a2f986
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
     height: "750px",
     borderRadius: "0",
-
-    // borderColor:
-    //   " linear-gradient(90.48deg, rgba(22, 47, 98, 0.8) -1.21%, rgba(125, 214, 246, 0) 75.47%)",
+    boxShadow: "none",
   },
 
   mainBox: {
@@ -29,7 +39,6 @@ const useStyles = makeStyles((theme) => ({
 
   mainTextParagraf: {
     width: "597px",
-    // fontWeight: "500",
     fontSize: "32px",
     lineHeight: "40px",
   },
@@ -53,6 +62,59 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: "24px",
     textAlign: "center",
     textTransform: "uppercase",
+  },
+
+  ////////////////////////////////
+  ////styles for MainAboutUs
+
+  mainAboutUsGrid: {
+    margin: "100px 0",
+    justifyContent: "space-between",
+    gap: "80px",
+  },
+  mainAboutUsGridContent: {
+    maxWidth: "570px",
+  },
+  mainAboutUsGridContentBest: {
+    marginTop: "20px",
+    gap: "25px",
+  },
+  mainAboutUsGridContentBestItem: {
+    display: "flex",
+    alignItems: "center",
+    width: "45%",
+  },
+  mainAboutUsImage: {
+    backgroundImage: `url(${mainAboutUs})`,
+    width: "470px",
+    height: "570px",
+  },
+  mainAboutUsButton: {
+    marginTop: "60px",
+    width: "156px",
+    height: "60px",
+  },
+
+  mainAboutUsTitle: {
+    fontSize: "36px",
+    lineHeight: "55px",
+    color: "#76BF35",
+  },
+
+  mainAboutUsText: {
+    fontSize: "16px",
+    lineHeight: "24px",
+    color: "#676767",
+  },
+  mainAboutUsTextBest: {
+    fontSize: "16px",
+    lineHeight: "30px",
+    color: "#4493B9",
+  },
+
+  colorPrimary: {
+    color: "#76BF35",
+    marginRight: theme.spacing(2),
   },
 }));
 
