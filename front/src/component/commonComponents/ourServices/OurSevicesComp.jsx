@@ -16,6 +16,7 @@ import physiotheraphy from "./../../../static/image/services/Physiotheraphy.jpg"
 import ServiceCard from "../serviceCard/ServiceCard";
 
 //////////
+
 const servicesList = [
   {
     title: "Физиотерапия",
@@ -48,8 +49,7 @@ const servicesList = [
     image: `${lorImage}`,
   },
 ];
-
-const OurSevicesComp = () => {
+export const OurSevicesComp = () => {
   const classes = useStyles();
   const [count, setCount] = useState(0);
 
