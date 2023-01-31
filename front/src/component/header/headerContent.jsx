@@ -47,7 +47,7 @@ const HeaderContent = () => {
             className={classes.buttonWriteOn}
             variant="contained"
             size="large"
-            color="succeses"
+            color="success"
             component={Link}
             to="/patientAccount"
           >
