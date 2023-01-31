@@ -3,7 +3,7 @@ import image from "../../static/images/Bunnerback.jpg";
 
 const useStyles = makeStyles((theme) => ({
 
- mainPaper: {
+  docPaper: {
     position: "relative",
     color: theme.palette.common.white,
     //marginBottom: theme.spacing(3),
