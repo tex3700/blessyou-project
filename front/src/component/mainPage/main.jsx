@@ -38,7 +38,7 @@ const Main = () => {
               <Button
                 className={classes.mainRegistrationButton}
                 component={Link}
-                to="/patientAccout"
+                to="/patientAccount"
               >
                 Регистрируйтесь в личном кабинете
               </Button>

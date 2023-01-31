@@ -49,7 +49,7 @@ const HeaderContent = () => {
             size="large"
             color="succeses"
             component={Link}
-            to="/patientAccout"
+            to="/patientAccount"
           >
             Личный кабинет
           </Button>

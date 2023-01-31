@@ -1,6 +1,6 @@
 import "./App.scss";
 import { Route, Link, Routes } from "react-router-dom";
-import { Receipts, Appointment } from "./component";
+import { Receipts, Appointment, PatientAccountPage } from "./component";
 import Header from "./component/header/header";
 import { Container } from "@material-ui/core";
 import Main from "./component/mainPage/main";
@@ -32,9 +32,8 @@ function App() {
         <Route path="/services" element={<Appointment />} />
         <Route path="/doctors" element={<Appointment />} />
         <Route path="/contacts" element={<Receipts />} />
-        <Route path="/patientAccout" element={<Appointment />} />
+        <Route path="/patientAccount/*" element={<PatientAccountPage />} />
       </Routes>
-
       <Footer />
     </>
     // </ThemeProvider>
