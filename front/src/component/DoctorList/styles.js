@@ -17,11 +17,11 @@ const useStyles = makeStyles((theme) => ({
  },
  
   docTextH2: {
-    position: "absolute",
-    width: "330px",
+    width: "100%",
+    position: "relative",
     height: "74px",
-    top: "52px",
-    left: "440px",
+    top: "50px",
+    left: "60px",
     fontFamily: 'Poppins',
     fontStyle: "normal",
     fontWeight: "700",
@@ -31,12 +31,12 @@ const useStyles = makeStyles((theme) => ({
   },
 
   docTextH3: {
+    width: "100%",
     position: "relative",
     textAlign: "center",
-    width: "986px",
     height: "47px",
     top: "-42px",
-    left: "520px",
+    left: "10px",
     fontFamily: "Poppins",
     fontStyle: "normal",
     fontWeight: "700",
