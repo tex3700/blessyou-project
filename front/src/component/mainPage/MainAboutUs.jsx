@@ -12,6 +12,7 @@ import {
 } from "@material-ui/core";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { Link } from "react-router-dom";
+import { doctorListAPI } from "../../api/API";
 /////
 const aboutBestList = [
   "Лучшие специалисты",
@@ -23,6 +24,18 @@ const aboutBestList = [
 const MainAboutUs = () => {
   const classes = useStyles();
 
+  async function showData() {
+    await fetch("https://blessyou-clinic.ru/api/api/doctors/")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("daa", data);
+      })
+      .catch((err) => {
+        console.log("err", err);
+      });
+  }
+
+  showData();
   return (
     <Container fixed>
       <Grid container className={classes.mainAboutUsGrid}>
