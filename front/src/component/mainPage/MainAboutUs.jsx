@@ -38,9 +38,9 @@ const MainAboutUs = () => {
 
   // showData();
 
-  useEffect(() => {
-    apiRequest("doctors", "GET").then((data) => console.log(data));
-  }, []);
+  // useEffect(() => {
+  //   apiRequest("doctors", "GET").then((data) => console.log(data));
+  // }, []);
 
   return (
     <Container fixed>
