@@ -45,10 +45,6 @@ const useStyles = makeStyles((theme) => ({
     color: "#76BF35",
   }, 
  
-  Rectangle25: {
-
-  },
-
 }));
 
 export default useStyles;
