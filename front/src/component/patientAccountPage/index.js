@@ -1,5 +1,5 @@
 import { Container, Box, Link as MuiLink, Typography } from '@material-ui/core';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -8,6 +8,7 @@ import { Appointment } from '../appointment';
 import { Receipts } from '../receipts';
 import { PatientProfile } from '../patientProfile';
 import { MedicalHistory } from '../medicalHistory';
+//import { DialogSelectPatient } from '../dialogSelectPatient';
 
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import { apiRequest } from '../../api';
@@ -111,6 +112,8 @@ const menu = [
 
 export const PatientAccountPage = () => {
 
+    //const [openDialog, setOpenDialog] = useState(false);
+
     const refAppointment = useRef(null);
     const location = useLocation();
 
@@ -129,6 +132,10 @@ export const PatientAccountPage = () => {
     const onExit = () => {
         apiRequest('doctors', 'GET').then((data) => console.log(data));
     }
+
+    const onSelectPatientClick = () => {
+        //setOpenDialog(true);
+    };
 
     return (
         <Box className={classes.accountPage}>
@@ -157,7 +164,7 @@ export const PatientAccountPage = () => {
                     <Typography variant='body1' className={classes.patientName}>
                         Здравствуйте, дорогой пациент
                     </Typography>
-                    <AutorenewIcon className={classes.patientChange} />
+                    <AutorenewIcon className={classes.patientChange} onClick={onSelectPatientClick()} />
                     <Box className={classes.empty}></Box>
                     <Typography variant='body1' className={classes.patientExit}
                         onClick={() => onExit()}>

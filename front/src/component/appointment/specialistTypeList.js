@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, ListItem, ListItemText, Typography, Avatar, Divider } from '@material-ui/core';
+import { List, ListItem, ListItemText, Typography, Avatar, Box } from '@material-ui/core';
 import { CaptionList } from './captionList';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -8,7 +8,10 @@ import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
 const testColor = '#00EE00';
 
 const useStyles = makeStyles((theme) => ({
-
+    listStyle: {
+        paddingLeft: theme.spacing(3),
+        paddingRight: theme.spacing(3)
+    },
     /*
     specialistList: {
         width: '100%'
@@ -36,7 +39,7 @@ export const SpecialistTypeList = ({ specialistTypeList, onSelectSpecialistType 
     const classes = useStyles();
 
     return (
-        <>
+        <Box className={classes.listStyle}>
             <CaptionList caption={'Специализации'}></CaptionList>
             <List>
                 {specialistTypeList.map((specialistTypeItem) => (
@@ -64,6 +67,6 @@ export const SpecialistTypeList = ({ specialistTypeList, onSelectSpecialistType 
                     </ListItem>
                 ))}
             </List>
-        </>
+        </Box>
     )
 };

@@ -4,6 +4,10 @@ import { List, ListItem, ListItemText, Typography, Avatar, Box } from '@material
 import { CaptionList } from './captionList';
 
 const useStyles = makeStyles((theme) => ({
+    listStyle: {
+        paddingLeft: theme.spacing(3),
+        paddingRight: theme.spacing(3)
+    },
     avatarStyle: {
         //backgroundColor: testColor,
         marginRight: theme.spacing(1),
@@ -25,7 +29,7 @@ export const DoctorList = ({ specialistTypeName, doctorList, onSelectDoctor }) =
     console.log(doctorList);
 
     return (
-        <>
+        <Box className={classes.listStyle}>
             <CaptionList caption={specialistTypeName}></CaptionList>
             <List>
                 {doctorList.map((doctorItem) => (
@@ -65,7 +69,7 @@ export const DoctorList = ({ specialistTypeName, doctorList, onSelectDoctor }) =
             </List>
 
 
-        </>
+        </Box>
     )
 }
 

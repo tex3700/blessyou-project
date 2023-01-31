@@ -9,8 +9,6 @@ const useStyles = makeStyles((theme) => ({
         fontSize: '20px',
         lineHeight: '30px',
         color: '#676767',
-        marginLeft: theme.spacing(3),
-        marginRight: theme.spacing(3),
         borderBottom: '1px solid #4493B9',
         paddingTop: theme.spacing(2),
         paddingBottom: theme.spacing(2)
