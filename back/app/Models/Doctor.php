@@ -10,5 +10,12 @@ class Doctor extends Model
         'id',
         'name',
         'surname',
+        'patronymic',
+        'speciality_id',
+        'avatar_path',
     ];
+        public function speciality()
+    {
+        return $this->belongsToMany(Speciality::class,'doctors_specialities','doctor_id','speciality_id');
+    }
 }
