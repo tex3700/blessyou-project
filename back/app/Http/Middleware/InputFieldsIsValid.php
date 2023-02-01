@@ -24,7 +24,6 @@ class InputFieldsIsValid
         foreach ($diffFields as $fields){
                 $request->request->remove($fields);
         }
-        $request->request->remove("text");
         return $next($request);
     }
 
