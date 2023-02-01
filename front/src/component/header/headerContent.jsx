@@ -58,7 +58,7 @@ const HeaderContent = () => {
           className={classes.root}
           // color="inherit"
           component={Link}
-          to="/"
+          to="/entryInLC"
         >
           <Box className={classes.headerDoctorsEnterance}></Box>
         </IconButton>
