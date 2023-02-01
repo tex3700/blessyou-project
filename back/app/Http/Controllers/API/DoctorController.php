@@ -32,5 +32,12 @@ class DoctorController extends Controller {
         }
         return response()->json(Doctor::where('id',$input['id'])->first());
     }
+     public function getDoctorSpecialities(Request $request): JsonResponse {
+        if ($request->has('id')) {
+            $specialities = Doctor::find($request->id)->speciality;
+            return response()->json($specialities);
+        }
+        return "not found";
+    }
 
 }

@@ -19,6 +19,7 @@ Route::controller(DoctorController::class)->group(function () {
     Route::get('/doctors', 'index');
     Route::post('/doctors/update/name', 'changeName');
     Route::post('/doctors/add', 'add');
+    Route::post('/doctors/get/specialities', 'getDoctorSpecialities');
 });
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
