@@ -1,8 +1,10 @@
 import "./App.scss";
+
 import { Route, Link, Routes } from "react-router-dom";
-import { Receipts, Appointment } from "./component";
+import { Receipts, Appointment, PatientAccountPage, Services } from "./component";
+
 import Header from "./component/header/header";
-import { Container } from "@material-ui/core";
+// import { Container } from "@material-ui/core";
 import Main from "./component/mainPage/main";
 import Footer from "./component/footer/Footer";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
@@ -34,9 +36,8 @@ function App() {
         <Route path="/services" element={<Appointment />} />
         <Route path="/doctors" element={<DoctorList/>} />
         <Route path="/contacts" element={<Receipts />} />
-        <Route path="/patientAccout" element={<Appointment />} />
+        <Route path="/patientAccount/*" element={<PatientAccountPage />} />
       </Routes>
-
       <Footer />
     </>
     // </ThemeProvider>

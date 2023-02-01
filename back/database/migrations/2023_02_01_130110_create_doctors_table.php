@@ -14,8 +14,13 @@ return new class extends Migration
     public function up() {
         Schema::create('doctors', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('surname');
+            $table->string('name')->nullable();
+            $table->string('patronymic')->nullable();
+            $table->string('avatar_path')->nullable();
+            $table->string('info')->nullable();
+            $table->string('surname')->nullable();
+            $table->timestamp('created_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
         });
     }
 

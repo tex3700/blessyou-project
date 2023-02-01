@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useStyles from "./styles";
 import {
   Box,
@@ -12,6 +12,8 @@ import {
 } from "@material-ui/core";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { Link } from "react-router-dom";
+import { doctorListAPI } from "../../api/API";
+import { apiRequest } from "./../../api";
 /////
 const aboutBestList = [
   "Лучшие специалисты",
@@ -22,6 +24,23 @@ const aboutBestList = [
 
 const MainAboutUs = () => {
   const classes = useStyles();
+
+  // async function showData() {
+  //   await fetch("https://blessyou-clinic.ru/api/api/doctors/")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       console.log("daa", data);
+  //     })
+  //     .catch((err) => {
+  //       console.log("err", err);
+  //     });
+  // }
+
+  // showData();
+
+  // useEffect(() => {
+  //   apiRequest("doctors", "GET").then((data) => console.log(data));
+  // }, []);
 
   return (
     <Container fixed>
