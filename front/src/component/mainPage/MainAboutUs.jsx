@@ -25,19 +25,6 @@ const aboutBestList = [
 const MainAboutUs = () => {
   const classes = useStyles();
 
-  // async function showData() {
-  //   await fetch("https://blessyou-clinic.ru/api/api/doctors/")
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log("daa", data);
-  //     })
-  //     .catch((err) => {
-  //       console.log("err", err);
-  //     });
-  // }
-
-  // showData();
-
   useEffect(() => {
     apiRequest("doctors", "GET").then((data) => console.log(data));
   }, []);
