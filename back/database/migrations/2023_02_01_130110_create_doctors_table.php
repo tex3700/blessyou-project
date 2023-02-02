@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('patronymic')->nullable();
             $table->string('avatar_path')->nullable();
+            $table->string('photo_path')->nullable();
             $table->string('info')->nullable();
             $table->string('surname')->nullable();
             $table->timestamp('created_at')->nullable();
