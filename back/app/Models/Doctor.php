@@ -13,6 +13,7 @@ class Doctor extends Model
         'patronymic',
         'speciality_id',
         'avatar_path',
+        'photo_path'
     ];
         public function speciality()
     {
