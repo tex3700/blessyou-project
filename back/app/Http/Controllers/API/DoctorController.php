@@ -43,6 +43,15 @@ class DoctorController extends Controller {
         }
         return "id not found";
     }
+
+    public function getDoctorDepartments(Request $request): JsonResponse {
+        if ($request->has('id')) {
+            $department = Doctor::find($request->id)->department;
+            return response()->json($department);
+        }
+        return "id not found";
+    }
+
     public function addDoctorToSpecialities(Request $request) {
         if($request->has('doctor_id') && $request->has('speciality_id')){
              $doctor = Doctor::find($request->doctor_id);
@@ -57,7 +66,7 @@ class DoctorController extends Controller {
         if($request->has('doctor_id') && $request->has('speciality_id')){
              $doctor = Doctor::find($request->doctor_id);
              $speciality = Speciality::find($request->speciality_id);
-             $doctor->speciality()->attach($speciality->id);
+             $doctor->speciality()->detach($speciality->id);
              return true;
         }
         return false;
