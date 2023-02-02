@@ -19,6 +19,12 @@ const useStyles = makeStyles((theme) => ({
         //color: theme.palette.common.white
     },*/
     specialistName: {
+        fontStyle: 'normal',
+        fontWeight: '600',
+        fontSize: '16px',
+        lineHeight: '24px'
+    },
+    specialistName2: {
         display: 'inline',
         color: testColor
     },
@@ -48,13 +54,16 @@ export const SpecialistTypeList = ({ specialistTypeList, onSelectSpecialistType 
                         <Avatar className={classes.avatarStyle}>
                             <LocalHospitalIcon />
                         </Avatar>
+                        <Typography className={classes.specialistName}>
+                            {specialistTypeItem.name}
+                        </Typography>
                         <ListItemText
-                            primary={specialistTypeItem.name}
+
                             secondary={
                                 <React.Fragment>
                                     {'Доступно для записи врачей: '}
                                     <Typography
-                                        className={classes.specialistName}
+                                        className={classes.specialistName2}
                                         component="span"
                                         variant="body2"
                                         color="primary"
