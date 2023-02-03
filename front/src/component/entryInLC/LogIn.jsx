@@ -79,6 +79,7 @@ const LogIn = () => {
                   }}
                 />
                 <TextField
+                  required
                   className={classes.logInInput}
                   variant="outlined"
                   id="pass"
