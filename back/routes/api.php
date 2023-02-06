@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\DoctorController;
 use App\Http\Controllers\API\SpecialityController;
 use App\Http\Controllers\API\DepartmentController;
+use App\Http\Controllers\API\MailController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//Route::middleware("auth:api")->get('/test', function (){
+//    return "some";
+//});
+//Route::get('/user', function (Request $request){
+//    return "123";
+//})->middleware("auth:sanctum");
+//Route::post('/put', function (Request $request) {
+//    $fileContents = $request->avatar;
+//    Storage::put('avatars/1', $fileContents);
+//    return csrf_token(); 
+//
+//});
+Route::controller(MailController::class)->group(function(){
+    Route::post('/mail/send', 'send');
+});
 Route::controller(DoctorController::class)->group(function () {
     Route::get('/doctors', 'index');
     Route::post('/doctors/add', 'add')->middleware('validated:Doctor');
