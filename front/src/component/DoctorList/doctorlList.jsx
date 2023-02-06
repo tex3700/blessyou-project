@@ -2,6 +2,7 @@ import { Box, Container, Paper, Typography, Grid } from "@material-ui/core";
 import React from "react";
 import useStyles from "./styles";
 import DoctorCard from "../../component/commonComponents/doctorCard/DoctorCard";
+import  { SendMessage }  from "../../component/commonComponents/sendMessage/sendMessage"; 
 
 
 const doctorCardList = [
@@ -19,6 +20,7 @@ const DoctorList = () => {
   const classes = useStyles();
 
   return (
+    
     <>
     <Paper className={classes.docPaper}>
       <Container fixed>
@@ -36,13 +38,14 @@ const DoctorList = () => {
       <Grid container spacing={2}> 
           {doctorCardList.map((card) => (
             <Grid item key={card}>  
-                 <DoctorCard key={card.image} props={card}/>  
-                 
+                 <DoctorCard key={card.image} props={card}/>               
             </Grid>
           ))}
       </Grid>   
     </Container>
+   <SendMessage /> 
    </>
+    
   );
 };
 
