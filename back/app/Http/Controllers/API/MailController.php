@@ -11,9 +11,18 @@ class MailController extends Controller
 {
     //
     public function send(Request $request) {
-    Mail::send('mail',['name'=>"Virat Gandhi"],function($message){
-    $message->to('info@blessyou-clinic.ru')->subject("Email Testing with Laravel");
-    $message->from('info@blessyou-clinic.ru','Creative Losser Hopeless Genius');
-});
-    }
+
+        if ($request->has('email')) {
+        Mail::send('mail', [
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'text' => $request->text,
+             'email' => $request->email,
+                ], function($message){
+                $message->to('info@blessyou-clinic.ru')->subject("Клиент хочет записаться на приём");
+
+                }
+        );
+    }}
+
 }
