@@ -1,4 +1,4 @@
-<php? 
+<php
 $message->from($email, $name); 
     ?>
 About Me: {{ $name }}
