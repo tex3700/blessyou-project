@@ -97,7 +97,6 @@ const SingIn = () => {
                   type="email"
                   value={email}
                   onChange={(e) => handleValidationEmail(e)}
-                  error={!valid}
                   InputProps={{
                     classes: { notchedOutline: classes.noBorder },
                   }}

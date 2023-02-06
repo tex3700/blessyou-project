@@ -72,7 +72,6 @@ const LogIn = () => {
                   type="email"
                   value={email}
                   onChange={(e) => handleValidation(e)}
-                  error={!valid}
                   // helperText={!valid ? "Incorrect entry." : ""}
                   InputProps={{
                     classes: { notchedOutline: classes.noBorder },
