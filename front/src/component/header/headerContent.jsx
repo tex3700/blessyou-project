@@ -11,7 +11,7 @@ const linksArray = [
   { name: "Контакты", path: "/contacts" },
 ];
 
-const HeaderContent = () => {
+const HeaderContent = ({ isAuth }) => {
   const classes = useStyles();
   return (
     // <AppBar>
@@ -48,7 +48,7 @@ const HeaderContent = () => {
             variant="contained"
             size="large"
             component={Link}
-            to="/patientAccount"
+            to={isAuth ? "/patientAccount" : "/entryInLC"}
           >
             Личный кабинет
           </Button>

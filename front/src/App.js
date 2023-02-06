@@ -6,6 +6,8 @@ import {
   Appointment,
   PatientAccountPage,
   Services,
+  PrivateRoute,
+  PublicRoute,
 } from "./component";
 
 import Header from "./component/header/header";
@@ -31,16 +33,16 @@ import EntryPage from "./component/entryInLC/EntryPage";
 
 const usersArray = [
   { id: 1, name: "Dima", email: "test@mail.ru", password: "12345" },
-  { id: 2, name: "Vova", email: "mail@mail.ru", password: "12345" },
+  { id: 2, name: "Vova", email: "mail@mail.ru", password: "56789" },
 ];
 
-const isAuth = false;
+const isAuth = true;
 
 function App() {
   return (
     // <ThemeProvider theme={theme}>
     <>
-      <Header />
+      <Header isAuth={isAuth} />
 
       <Routes>
         <Route path="/" element={<Main />} />
@@ -48,8 +50,25 @@ function App() {
         <Route path="/services" element={<Services />} />
         <Route path="/doctors" element={<Appointment />} />
         <Route path="/contacts" element={<Receipts />} />
-        <Route path="/entryInLC" element={<EntryPage />} />
-        <Route path="/patientAccount/*" element={<PatientAccountPage />} />
+
+        {/* <Route path="/entryInLC" element={<EntryPage />} /> */}
+        <Route
+          path="/entryInLC"
+          element={
+            <PublicRoute isAuth={isAuth}>
+              <EntryPage />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/patientAccount/*"
+          element={
+            <PrivateRoute isAuth={isAuth}>
+              <PatientAccountPage />
+            </PrivateRoute>
+          }
+        />
+        {/* <Route path="/patientAccount/*" element={<PatientAccountPage />} /> */}
       </Routes>
       <Footer />
     </>

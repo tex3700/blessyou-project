@@ -7,3 +7,4 @@ export * from "./patientProfile";
 export * from "./medicalHistory";
 export * from "./servicesPage";
 export * from "./entryInLC";
+export * from "./route";
