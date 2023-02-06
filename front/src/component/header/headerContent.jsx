@@ -47,19 +47,13 @@ const HeaderContent = () => {
             className={classes.buttonWriteOn}
             variant="contained"
             size="large"
-            color="success"
             component={Link}
             to="/patientAccount"
           >
             Личный кабинет
           </Button>
         </Box>
-        <IconButton
-          className={classes.root}
-          // color="inherit"
-          component={Link}
-          to="/entryInLC"
-        >
+        <IconButton className={classes.root} component={Link} to="/entryInLC">
           <Box className={classes.headerDoctorsEnterance}></Box>
         </IconButton>
       </Toolbar>

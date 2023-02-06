@@ -28,6 +28,14 @@ import EntryPage from "./component/entryInLC/EntryPage";
 
 //   spacing: 2, // 2 вместо 8 sm
 // });
+
+const usersArray = [
+  { id: 1, name: "Dima", email: "test@mail.ru", password: "12345" },
+  { id: 2, name: "Vova", email: "mail@mail.ru", password: "12345" },
+];
+
+const isAuth = false;
+
 function App() {
   return (
     // <ThemeProvider theme={theme}>
