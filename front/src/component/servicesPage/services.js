@@ -112,7 +112,7 @@ export const Services = () => {
               className={classes.servicesCardContainer}
             >
               {servicesTable.map((item) => (
-                <ServiceCard key={item.title} props={item} />
+                <ServiceCard key={item.id} props={item} />
               ))}
             </Grid>
           </Container>
