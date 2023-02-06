@@ -3,7 +3,7 @@ import React from "react";
 import useStyles from "./styles";
 import DoctorCard from "../../component/commonComponents/doctorCard/DoctorCard";
 import  { SendMessage }  from "../../component/commonComponents/sendMessage/sendMessage"; 
-import  { OurServices  }  from "./ourServiceSlider"
+
 
 
 const doctorCardList = [
@@ -45,7 +45,6 @@ const DoctorList = () => {
       </Grid>   
     </Container>
    <SendMessage /> 
-   <OurServices />
    </>
     
   );
