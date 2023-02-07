@@ -4,6 +4,8 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Doctor;
+use App\Models\DoctorSpeciality;
+use App\Models\Speciality;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
@@ -17,27 +19,57 @@ class DoctorController extends Controller {
     }
 
     public function add(Request $request): JsonResponse {
-        if ($request->expectsJson()) {
-            $doctor = new Doctor;
-            $doctor->name = $request->name;
-            $doctor->surname = $request->surname;
-            $doctor->save();
-        }
+        $doctor = new Doctor($request->all());
+        $doctor->save();
+        return response()->json($doctor);
     }
-    public function changeName(Request $request): JsonResponse {
-        if ($request->expectsJson()) {
-            $input = $request->only('name','surname','id');
-            $array = array_values($input);
-            DB::update('update doctors set name = ? ,surname = ? where id = ?',$array);
+
+    public function update(Request $request) {
+
+        $doctor = Doctor::find($request->id);
+        $arrayToUpdate = $request->all();
+        unset($arrayToUpdate["id"]);
+        foreach ($arrayToUpdate as $key => $fields) {
+            $doctor->$key = $fields;
         }
-        return response()->json(Doctor::where('id',$input['id'])->first());
+        $doctor->save();
+        return response()->json($doctor);
     }
+
      public function getDoctorSpecialities(Request $request): JsonResponse {
         if ($request->has('id')) {
             $specialities = Doctor::find($request->id)->speciality;
             return response()->json($specialities);
         }
-        return "not found";
+        return "id not found";
+    }
+
+    public function getDoctorDepartments(Request $request): JsonResponse {
+        if ($request->has('id')) {
+            $department = Doctor::find($request->id)->department;
+            return response()->json($department);
+        }
+        return "id not found";
+    }
+
+    public function addDoctorToSpecialities(Request $request) {
+        if($request->has('doctor_id') && $request->has('speciality_id')){
+             $doctor = Doctor::find($request->doctor_id);
+             $speciality = Speciality::find($request->speciality_id);
+             $doctor->speciality()->attach($speciality->id);
+             return true;
+        }
+         return false;
+    }
+        public function deleteDoctorToSpecialities(Request $request) {
+            
+        if($request->has('doctor_id') && $request->has('speciality_id')){
+             $doctor = Doctor::find($request->doctor_id);
+             $speciality = Speciality::find($request->speciality_id);
+             $doctor->speciality()->detach($speciality->id);
+             return true;
+        }
+        return false;
     }
 
 }

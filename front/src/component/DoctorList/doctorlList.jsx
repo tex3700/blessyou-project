@@ -3,6 +3,8 @@ import React from "react";
 import useStyles from "./styles";
 import DoctorCard from "../../component/commonComponents/doctorCard/DoctorCard";
 import sendMessage from "../../../src/component/commonComponents/sendMessage/sendMessage"
+import  { SendMessage }  from "../../component/commonComponents/sendMessage/sendMessage"; 
+
 
 
 const doctorCardList = [
@@ -21,6 +23,7 @@ const DoctorList = () => {
 
 
   return (
+    
     <>
     <Paper className={classes.docPaper}>
       <Container fixed>
@@ -38,13 +41,14 @@ const DoctorList = () => {
       <Grid container spacing={2}> 
           {doctorCardList.map((card) => (
             <Grid item key={card}>  
-                 <DoctorCard key={card.image} props={card}/>  
-                 
+                 <DoctorCard key={card.image} props={card}/>               
             </Grid>
           ))}
       </Grid>   
     </Container>
+   <SendMessage /> 
    </>
+    
   );
 };
 
