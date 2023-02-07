@@ -1,9 +1,9 @@
-import { Box, Container, Paper, Typography, Grid, TextField, Button} from "@material-ui/core";
+import { Box, Container, Paper, Typography, Grid } from "@material-ui/core";
 import React from "react";
 import useStyles from "./styles";
 import DoctorCard from "../../component/commonComponents/doctorCard/DoctorCard";
-import sendMessage from "../../../src/component/commonComponents/sendMessage/sendMessage"
 import  { SendMessage }  from "../../component/commonComponents/sendMessage/sendMessage"; 
+import OurSevicesComp from "../commonComponents/ourServices/OurSevicesComp";
 
 
 
@@ -47,8 +47,8 @@ const DoctorList = () => {
       </Grid>   
     </Container>
    <SendMessage /> 
+ <OurSevicesComp />
    </>
-    
   );
 };
 
