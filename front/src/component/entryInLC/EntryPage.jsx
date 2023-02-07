@@ -12,8 +12,23 @@ import LogIn from "./LogIn";
 import SingIn from "./SingIn";
 
 /////////
-const EntryPage = () => {
+const usersArray = [
+  { id: 1, name: "Dima", email: "test@mail.ru", password: "12345" },
+  { id: 2, name: "Vova", email: "mail@mail.ru", password: "56789" },
+];
+
+/////////
+
+/////////
+const EntryPage = ({ setIsAuth }) => {
   const classes = useStyles();
+  const onSubmit = (email, password) => {
+    const user = usersArray.find((item) => item.email === email);
+    if (password === user.password) {
+      return setIsAuth(true);
+    }
+    return setIsAuth(false);
+  };
   return (
     <>
       <Box className={classes.componentHead}>
@@ -21,7 +36,7 @@ const EntryPage = () => {
           <Typography variant="h3">Вход в личный кабинет пациента</Typography>
         </Container>
       </Box>
-      <LogIn />
+      <LogIn onSubmit={onSubmit} />
       <SingIn />
     </>
   );

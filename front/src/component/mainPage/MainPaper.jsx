@@ -38,7 +38,7 @@ const MainPaper = () => {
               <Button
                 className={classes.mainRegistrationButton}
                 component={Link}
-                to="/patientAccout"
+                to="/entryInLC"
               >
                 Регистрируйтесь в личном кабинете
               </Button>

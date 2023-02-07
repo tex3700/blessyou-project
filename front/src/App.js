@@ -15,6 +15,7 @@ import Header from "./component/header/header";
 import Main from "./component/mainPage/main";
 import Footer from "./component/footer/Footer";
 import EntryPage from "./component/entryInLC/EntryPage";
+import { useState } from "react";
 // import { ThemeProvider, createTheme } from "@mui/material/styles";
 // import themes from "./themes";
 
@@ -31,14 +32,9 @@ import EntryPage from "./component/entryInLC/EntryPage";
 //   spacing: 2, // 2 вместо 8 sm
 // });
 
-const usersArray = [
-  { id: 1, name: "Dima", email: "test@mail.ru", password: "12345" },
-  { id: 2, name: "Vova", email: "mail@mail.ru", password: "56789" },
-];
-
-const isAuth = true;
-
 function App() {
+  const [isAuth, setIsAuth] = useState(false);
+
   return (
     // <ThemeProvider theme={theme}>
     <>
@@ -56,7 +52,7 @@ function App() {
           path="/entryInLC"
           element={
             <PublicRoute isAuth={isAuth}>
-              <EntryPage />
+              <EntryPage setIsAuth={setIsAuth} />
             </PublicRoute>
           }
         />

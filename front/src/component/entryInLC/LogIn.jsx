@@ -11,8 +11,9 @@ import {
 } from "@material-ui/core";
 import useStyles from "./styles";
 import { apiRequest } from "../../api";
+import { Navigate } from "react-router-dom";
 
-const LogIn = () => {
+const LogIn = ({ onSubmit, isAuth }) => {
   const classes = useStyles();
 
   const [email, setEmail] = useState("");
@@ -34,7 +35,7 @@ const LogIn = () => {
   }
 
   //отправка данных для проверки на сервере
-  function handleForm(event) {
+  async function handleForm(event) {
     event.preventDefault();
 
     if (valid) {
@@ -43,6 +44,15 @@ const LogIn = () => {
         password,
       };
       console.log("log in data ", logInData);
+
+      try {
+        isAuth = await onSubmit(email, password);
+        console.log("isAuth", isAuth);
+        return <Navigate to="/patientAccount/*" />;
+      } catch (error) {
+        alert("неправильный емейл или пароль");
+      }
+
       //отправка на проверку входных данных
       //когда появятся эндпоинты на сервере , тогда размоментирую
       // apiRequest("logIn", "POST", logInData);
