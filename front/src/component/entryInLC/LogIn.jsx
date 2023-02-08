@@ -47,8 +47,6 @@ const LogIn = ({ onSubmit, isAuth }) => {
 
       try {
         isAuth = await onSubmit(email, password);
-        console.log("isAuth", isAuth);
-        return <Navigate to="/patientAccount/*" />;
       } catch (error) {
         alert("неправильный емейл или пароль");
       }
@@ -73,7 +71,6 @@ const LogIn = ({ onSubmit, isAuth }) => {
             <Grid container className={classes.logInGridContainer}>
               <Grid item className={classes.logInGridItemInput}>
                 <TextField
-                  disableUnderline
                   required
                   id="outlined-error"
                   className={classes.logInInput}

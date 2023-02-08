@@ -1,6 +1,6 @@
 import "./App.scss";
 
-import { Route, Link, Routes } from "react-router-dom";
+import { Route, Link, Routes, Navigate, useNavigate } from "react-router-dom";
 import {
   Receipts,
   Appointment,
@@ -15,7 +15,7 @@ import Header from "./component/header/header";
 import Main from "./component/mainPage/main";
 import Footer from "./component/footer/Footer";
 import EntryPage from "./component/entryInLC/EntryPage";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import { ThemeProvider, createTheme } from "@mui/material/styles";
 // import themes from "./themes";
 
@@ -34,6 +34,18 @@ import { useState } from "react";
 
 function App() {
   const [isAuth, setIsAuth] = useState(false);
+  const navigate = useNavigate();
+
+  // const redirectFunc = () => {
+  //   if (isAuth) {
+  //     console.log("isAuth", isAuth);
+  //     return <Navigate to="/patientAccount/appointment" replace />;
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   redirectFunc();
+  // }, [isAuth]);
 
   return (
     // <ThemeProvider theme={theme}>

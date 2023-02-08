@@ -90,7 +90,6 @@ const SingIn = () => {
               <Grid item className={classes.logInGridItemInput}>
                 <TextField
                   required
-                  disableUnderline
                   className={classes.logInInput}
                   variant="outlined"
                   placeholder="Логин (email)*"
@@ -103,7 +102,6 @@ const SingIn = () => {
                 />
                 <TextField
                   required
-                  disableUnderline
                   className={classes.logInInput}
                   variant="outlined"
                   id="surname"
@@ -117,7 +115,6 @@ const SingIn = () => {
                 />
                 <TextField
                   required
-                  disableUnderline
                   className={classes.logInInput}
                   variant="outlined"
                   id="password"
@@ -131,7 +128,6 @@ const SingIn = () => {
                 />
                 <TextField
                   required
-                  disableUnderline
                   className={classes.logInInput}
                   variant="outlined"
                   id="name"
@@ -144,7 +140,6 @@ const SingIn = () => {
                   }}
                 />
                 <TextField
-                  disableUnderline
                   className={classes.logInInput}
                   variant="outlined"
                   id="repeat-password"
