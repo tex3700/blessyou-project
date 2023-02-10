@@ -6,15 +6,18 @@ import OurSevicesComp from "../commonComponents/ourServices/OurSevicesComp";
 import OurDoctorsSlider from "../commonComponents/ourDoctors/OurDoctorsSlider";
 import { SendMessage } from "../commonComponents/sendMessage/sendMessage";
 
-const Main = () => {
+////
+
+const Main = ({ doctorArray }) => {
   const classes = useStyles();
+
   return (
     <>
       <MainPaper />
       <OurSevicesComp />
       <MainAboutUs />
       <SendMessage />
-      <OurDoctorsSlider />
+      <OurDoctorsSlider doctorArray={doctorArray} />
     </>
   );
 };

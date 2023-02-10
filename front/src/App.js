@@ -16,6 +16,7 @@ import Main from "./component/mainPage/main";
 import Footer from "./component/footer/Footer";
 import EntryPage from "./component/entryInLC/EntryPage";
 import { useEffect, useState } from "react";
+import { apiRequest } from "./api";
 // import { ThemeProvider, createTheme } from "@mui/material/styles";
 // import themes from "./themes";
 
@@ -47,18 +48,38 @@ function App() {
   //   redirectFunc();
   // }, [isAuth]);
 
+  const [doctorArray, setDoctorArray] = useState([]);
+
+  useEffect(() => {
+    apiRequest("doctors", "GET").then((data) => {
+      setDoctorArray(data);
+      console.log(data);
+      console.log("doctorArray ", doctorArray);
+    });
+  }, []);
+
   return (
-    // <ThemeProvider theme={theme}>
     <>
       <Header isAuth={isAuth} />
 
       <Routes>
-        <Route path="/" element={<Main />} />
+        {/* <Route path="/" element={<Main doctorArray={doctorArray} />} /> */}
         <Route path="/about" element={<Appointment />} />
-        <Route path="/services" element={<Services />} />
+        {/* <Route
+          path="/services"
+          element={<Services doctorArray={doctorArray} />}
+        /> */}
         <Route path="/doctors" element={<Appointment />} />
         <Route path="/contacts" element={<Receipts />} />
-
+        {doctorArray.length > 0 && (
+          <Route path="/" element={<Main doctorArray={doctorArray} />} />
+        )}
+        {doctorArray.length > 0 && (
+          <Route
+            path="/services"
+            element={<Services doctorArray={doctorArray} />}
+          />
+        )}
         {/* <Route path="/entryInLC" element={<EntryPage />} /> */}
         <Route
           path="/entryInLC"
