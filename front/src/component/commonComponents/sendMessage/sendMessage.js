@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Box, Container, Typography, Button } from "@material-ui/core";
 import { useStyles } from "./style";
 
@@ -54,12 +54,12 @@ export const SendMessage = (ctx) => {
             <input
               type="Email"
               placeholder="Email"
-              pattern="\S+[a-z]@[0-9a-z_]+.[a-z]"
+              pattern="\S+@[0-9a-z_]+.[a-z]"
               onChange={(e) => setValueEmail(e.target.value)}
               value={valueEmail}
             />
             <input
-              type="number"
+              type="text"
               placeholder="Телефон"
               pattern="\S+[+\d]+"
               onChange={(e) => setValuePhone(e.target.value)}
