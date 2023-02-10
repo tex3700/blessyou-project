@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\DoctorController;
 use App\Http\Controllers\API\SpecialityController;
 use App\Http\Controllers\API\DepartmentController;
+use App\Http\Controllers\API\PatientController;
 use App\Http\Controllers\API\MailController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -30,9 +31,16 @@ use Illuminate\Support\Facades\Route;
 //    return csrf_token(); 
 //
 //});
-Route::controller(MailController::class)->group(function(){
-    Route::post('/mail/send', 'send');
-});
+//Route::controller(PhotoController::class)->group(function () {
+//    Route::post('/photo/add', 'add');
+//});
+//Route::controller(MailController::class)->group(function(){
+//    Route::post('/mail/send', 'send');
+//});
+Route::controller(PatientController::class)->group(function () {
+    Route::post('/patient/register', 'register');
+}
+);
 Route::controller(DoctorController::class)->group(function () {
     Route::get('/doctors', 'index');
     Route::post('/doctors/add', 'add')->middleware('validated:Doctor');
