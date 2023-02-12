@@ -18,7 +18,7 @@ return new class extends Migration
             $table->id();
             $table->string('email')->unique();
             $table->string('phone')->nullable();
-            $table->string('password')->default(Hash::make('12345678'));
+            $table->string('password')->default(Hash::make('12345'));
             $table->boolean('is_patient')->default('0');
             $table->boolean('is_employee')->default('0');
             $table->boolean('is_doctor')->default('0');

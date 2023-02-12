@@ -30,7 +30,12 @@ class EmployeeController extends Controller
 
     public function store(Request $request): JsonResponse
     {
-        $user = User::create($request->all());
+        $user = User::create([
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'is_employee' => '1',
+        ]);
+
         $employee = Employee::create($request->all());
 
         $user->employee()->save($employee);
