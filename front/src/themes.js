@@ -1,6 +1,6 @@
 import { createTheme } from "@mui/material/styles";
 
-const themes = createTheme({
+export const themes = createTheme({
   palette: {
     primary: {
       main: "#76BF35",
@@ -12,5 +12,3 @@ const themes = createTheme({
 
   spacing: 2, // 2 вместо 8 sm
 });
-
-export default themes;

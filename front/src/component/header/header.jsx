@@ -3,12 +3,12 @@ import React from "react";
 import HeaderContent from "./headerContent";
 import useStyles from "./styles";
 
-const Header = () => {
+const Header = ({ isAuth }) => {
   const classes = useStyles();
   return (
-    <AppBar className={classes.appbar} color="white">
+    <AppBar className={classes.appbar} color="inherit">
       <Container fixed>
-        <HeaderContent />
+        <HeaderContent isAuth={isAuth} />
       </Container>
     </AppBar>
   );

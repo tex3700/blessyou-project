@@ -33,3 +33,36 @@
    style.css
 
 6. Какие-либо библиотеки добавляем в проект только после обсуждения с коллегами.
+
+7. Переиспользуемы компоненты храняться в папке commomComponents
+
+#API для использования
+
+\*Основной API адрес запросов
+https://blessyou-clinic.ru/api
+
+- АПИ для получения списка врачей
+  "GET" /api/doctors/
+
+- Апи для получения полных фоторграфий докторов  
+   GET" /storage/doctor/${name_image.jpg}
+  на данный момент имя фото получаем в свойстве avatar_path
+
+- Апи для получения аватаров докторов для карточек в карусели
+  "GET" /storage/doctor_avatar/${name_image.png}
+
+на данный момент имя фото получаем в свойстве avatar_path
+
+- АПИ для получения картинок отделений
+  "GET" /storage/department/{name_image.jpg}
+
+- АПИ для регистрации пользователя
+  "POST" /register
+
+  струтура запроса на данный момент : {
+  'name': 'string',
+  'surname': 'string',
+  'patronimyc': 'string',
+  'email': 'string@mail.com',
+  'password': 'string',
+  }

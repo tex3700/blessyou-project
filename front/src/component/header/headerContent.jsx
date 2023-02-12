@@ -2,6 +2,7 @@ import { Container, Toolbar, Box, Button, IconButton } from "@material-ui/core";
 import React from "react";
 import useStyles from "./styles";
 import { Link } from "react-router-dom";
+import enteranceDoctorsIcon from "./../../static/icons/enteranceDoctorsIcon.svg";
 
 const linksArray = [
   { name: "О клинике", path: "/about" },
@@ -10,7 +11,7 @@ const linksArray = [
   { name: "Контакты", path: "/contacts" },
 ];
 
-const HeaderContent = () => {
+const HeaderContent = ({ isAuth }) => {
   const classes = useStyles();
   return (
     // <AppBar>
@@ -46,13 +47,15 @@ const HeaderContent = () => {
             className={classes.buttonWriteOn}
             variant="contained"
             size="large"
-            color="succeses"
             component={Link}
-            to="/patientAccout"
+            to={isAuth ? "/patientAccount" : "/entryInLC"}
           >
             Личный кабинет
           </Button>
         </Box>
+        <IconButton className={classes.root} component={Link} to="/entryInLC">
+          <Box className={classes.headerDoctorsEnterance}></Box>
+        </IconButton>
       </Toolbar>
     </Container>
     // </AppBar>

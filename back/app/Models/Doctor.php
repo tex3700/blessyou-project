@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Relations\{ BelongsTo, BelongsToMany };
 
 class Doctor extends Model
 {
-    use HasFactory;
 
     protected $fillable = [
         'id',

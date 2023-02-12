@@ -22,4 +22,5 @@ class Department extends Model
     {
         return $this->belongsToMany(Doctor::class,'doctor_department','department_id','doctor_id');
     }
+
 }
