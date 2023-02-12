@@ -35,7 +35,7 @@ class EmployeeController extends Controller
 
         $user->employee()->save($employee);
 
-        return response()->json( 'saved', 201 );
+        return response()->json( 'Успешно сохранено', 201 );
     }
 
     public function show($id): JsonResponse //Необходимо получить id user
@@ -57,7 +57,7 @@ class EmployeeController extends Controller
         $employee->update($request->all());
         $employee->user()->update($request->all());
 
-        return response()->json('updated');
+        return response()->json('Успешно обновлено');
     }
 
     public function destroy(Employee $employee): JsonResponse
@@ -65,6 +65,6 @@ class EmployeeController extends Controller
         $employee->delete();
         $employee->user()->delete();
 
-        return response()->json('deleted', 204);
+        return response()->json('Сотрудник удален', 204);
     }
 }
