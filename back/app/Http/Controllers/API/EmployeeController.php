@@ -38,7 +38,14 @@ class EmployeeController extends Controller
         return response()->json( 'saved', 201 );
     }
 
-    public function edit($id): JsonResponse
+    public function show($id): JsonResponse //Необходимо получить id user
+    {
+        $employee = $this->model->where('user_id', '=', $id)->first();
+
+        return response()->json($employee);
+    }
+
+    public function edit($id): JsonResponse // Необходимом получить id employee
     {
         $employee = $this->model->get()->find($id);
 
