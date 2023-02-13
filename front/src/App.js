@@ -1,14 +1,23 @@
 import "./App.scss";
 
-import { Route, Link, Routes } from "react-router-dom";
-import { Receipts, Appointment, PatientAccountPage, Services } from "./component";
+import { Route, Link, Routes, Navigate, useNavigate } from "react-router-dom";
+import {
+  Receipts,
+  Appointment,
+  PatientAccountPage,
+  Services,
+  PrivateRoute,
+  PublicRoute,
+} from "./component";
 
 import Header from "./component/header/header";
 // import { Container } from "@material-ui/core";
 import Main from "./component/mainPage/main";
 import Footer from "./component/footer/Footer";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import DoctorList from "./component/DoctorList/doctorlList";
+import EntryPage from "./component/entryInLC/EntryPage";
+import { useEffect, useState } from "react";
+import { apiRequest } from "./api";
+// import { ThemeProvider, createTheme } from "@mui/material/styles";
 // import themes from "./themes";
 
 // const theme = createTheme({
@@ -23,20 +32,69 @@ import DoctorList from "./component/DoctorList/doctorlList";
 
 //   spacing: 2, // 2 вместо 8 sm
 // });
- 
+
 function App() {
+  const [isAuth, setIsAuth] = useState(false);
+  const navigate = useNavigate();
+
+  // const redirectFunc = () => {
+  //   if (isAuth) {
+  //     console.log("isAuth", isAuth);
+  //     return <Navigate to="/patientAccount/appointment" replace />;
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   redirectFunc();
+  // }, [isAuth]);
+
+  const [doctorArray, setDoctorArray] = useState([]);
+
+  useEffect(() => {
+    apiRequest("doctors", "GET").then((data) => {
+      setDoctorArray(data);
+      console.log(data);
+      console.log("doctorArray ", doctorArray);
+    });
+  }, []);
+
   return (
-    // <ThemeProvider theme={theme}>
     <>
       <Header />
-     
+
       <Routes>
-        <Route path="/" element={<Main />} />
+        {/* <Route path="/" element={<Main doctorArray={doctorArray} />} /> */}
         <Route path="/about" element={<Appointment />} />
-        <Route path="/services" element={<Appointment />} />
-        <Route path="/doctors" element={<DoctorList/>} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/doctors" element={<Appointment />} />
         <Route path="/contacts" element={<Receipts />} />
-        <Route path="/patientAccount/*" element={<PatientAccountPage />} />
+        {doctorArray.length > 0 && (
+          <Route path="/" element={<Main doctorArray={doctorArray} />} />
+        )}
+        {doctorArray.length > 0 && (
+          <Route
+            path="/services"
+            element={<Services doctorArray={doctorArray} />}
+          />
+        )}
+        {/* <Route path="/entryInLC" element={<EntryPage />} /> */}
+        <Route
+          path="/entryInLC"
+          element={
+            <PublicRoute isAuth={isAuth}>
+              <EntryPage setIsAuth={setIsAuth} />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/patientAccount/*"
+          element={
+            <PrivateRoute isAuth={isAuth}>
+              <PatientAccountPage />
+            </PrivateRoute>
+          }
+        />
+        {/* <Route path="/patientAccount/*" element={<PatientAccountPage />} /> */}
       </Routes>
       <Footer />
     </>

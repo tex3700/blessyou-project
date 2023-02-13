@@ -19,12 +19,12 @@ function ListItemLink(props) {
   );
 
   return (
-    <li>
+    <>
       <ListItem button component={renderLink} disableGutters>
         {icon ? <ListItemIcon>{icon}</ListItemIcon> : null}
         <ListItemText primary={primary} />
       </ListItem>
-    </li>
+    </>
   );
 }
 
