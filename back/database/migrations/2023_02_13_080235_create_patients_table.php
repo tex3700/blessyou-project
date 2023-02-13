@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->nullable()
                 ->constrained('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('name')->default('Имя');
-            $table->string('surname')->default('Фамилия');
-            $table->string('patronymic')->default('Отчеество');
+            $table->string('name')->nullable();
+            $table->string('surname')->nullable();
+            $table->string('patronymic')->nullable();
             $table->timestamps();
         });
     }

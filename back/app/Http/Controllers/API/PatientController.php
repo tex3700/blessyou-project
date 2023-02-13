@@ -44,7 +44,7 @@ class PatientController extends Controller
         $patient = Patient::create($request->all());
         $user->patient()->save($patient);
 
-        return response()->json( 'Пациент успашно добавлен', 201 );
+        return response()->json( ['Пациент успашно добавлен', $user->id], 201 );
     }
 
     public function store(Request $request): JsonResponse
@@ -81,7 +81,7 @@ class PatientController extends Controller
         $patient->update($request->all());
         $patient->user()->update($request->all());
 
-        return response()->json('updated');
+        return response()->json('Успешно обновлено');
     }
 
     public function destroy(Patient $patient): JsonResponse
@@ -89,7 +89,7 @@ class PatientController extends Controller
         $patient->delete();
         $patient->user()->delete();
 
-        return response()->json('deleted', 204);
+        return response()->json('Пациент удален', 204);
     }
 
 }

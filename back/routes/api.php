@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\EmployeeController;
 use App\Http\Controllers\API\DoctorController;
+use App\Http\Controllers\API\PatientController;
 use App\Http\Controllers\API\SpecialityController;
 use App\Http\Controllers\API\DepartmentController;
 use App\Http\Controllers\Auth\LoginController;

@@ -20,11 +20,11 @@ return new class extends Migration
                 ->constrained('users')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->string('name')->default('Имя');
-            $table->string('patronymic')->default('Отчество');
-            $table->string('surname')->default('Фамилия');
-            $table->string('position')->default('должность');
-            $table->text('description')->default('описание');
+            $table->string('name')->nullable();
+            $table->string('patronymic')->nullable();
+            $table->string('surname')->nullable();
+            $table->string('position')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
