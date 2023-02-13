@@ -20,11 +20,11 @@ return new class extends Migration
                 ->constrained('users')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->string('name');
-            $table->string('patronymic');
-            $table->string('surname');
-            $table->string('position');
-            $table->text('description');
+            $table->string('name')->nullable();
+            $table->string('patronymic')->nullable();
+            $table->string('surname')->nullable();
+            $table->string('position')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
