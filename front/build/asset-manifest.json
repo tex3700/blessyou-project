@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.817b7d1b.css",
-    "main.js": "/static/js/main.b2dc939d.js",
+    "main.js": "/static/js/main.0451e4fb.js",
     "static/media/mainPageBunner.jpg": "/static/media/mainPageBunner.623f2b70b38b64650c3c.jpg",
     "static/media/mainAboutUs.jpg": "/static/media/mainAboutUs.903711a2d6e10b17aa15.jpg",
     "static/media/Pediatr.jpg": "/static/media/Pediatr.2973fd6ce98d8855cbd9.jpg",
@@ -14,10 +14,10 @@
     "static/media/enteranceDoctorsIcon.svg": "/static/media/enteranceDoctorsIcon.fe3fa341cf3f12dfe313439297ec45c3.svg",
     "index.html": "/index.html",
     "main.817b7d1b.css.map": "/static/css/main.817b7d1b.css.map",
-    "main.b2dc939d.js.map": "/static/js/main.b2dc939d.js.map"
+    "main.0451e4fb.js.map": "/static/js/main.0451e4fb.js.map"
   },
   "entrypoints": [
     "static/css/main.817b7d1b.css",
-    "static/js/main.b2dc939d.js"
+    "static/js/main.0451e4fb.js"
   ]
 }

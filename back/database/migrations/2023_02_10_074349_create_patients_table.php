@@ -11,8 +11,9 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up() {
-        Schema::create('doctors', function (Blueprint $table) {
+    public function up()
+    {
+        Schema::create('patients', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
             $table->string('patronymic')->nullable();
@@ -22,6 +23,7 @@ return new class extends Migration
             $table->string('surname')->nullable();
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
+            $table->foreignId('user_id')->nullable()->index();
         });
     }
 
@@ -32,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('doctors');
+        Schema::dropIfExists('patients');
     }
 };
