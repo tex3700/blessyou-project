@@ -1,16 +1,35 @@
-import React from "react";
-import {
-  Box,
-  Container,
-  Typography,
-  Grid,
-  TextField,
-  Button,
-} from "@material-ui/core";
+import React, { useState } from "react";
+import { Box, Container, Typography, Button } from "@material-ui/core";
 import { useStyles } from "./style";
 
-export const SendMessage = () => {
+export const SendMessage = (ctx) => {
   const classes = useStyles();
+  const [valueName, setValueName] = useState("");
+  const [valueEmail, setValueEmail] = useState("");
+  const [valuePhone, setValuePhone] = useState("");
+  const [valueText, setValueText] = useState("");
+
+  const [messageArrey, setMessageArrey] = useState([]);
+
+  const addMessageArrey = () => {
+    if (valueName !== "") {
+      setMessageArrey([
+        ...messageArrey,
+        {
+          name: valueName,
+          email: valueEmail,
+          phone: valuePhone,
+          text: valueText,
+        },
+      ]);
+    }
+    setValueName("");
+    setValueEmail("");
+    setValuePhone("");
+    setValueText("");
+  };
+
+  console.log(messageArrey);
 
   return (
     <Box className={classes.sendMessage}>
@@ -22,43 +41,52 @@ export const SendMessage = () => {
         >
           Отправить сообщение
         </Typography>
-        <Box className={classes.sendMessageInputBox}>
-          <TextField
-            className={classes.sendMessageInput}
-            id="Name"
-            label="ФИО"
-            type="text"
-            variant="outlined"
-          />
-          <TextField
-            className={classes.sendMessageInput}
-            id="Email"
-            label="Email"
-            type="email"
-            variant="outlined"
-          />
-          <TextField
-            className={classes.sendMessageInput}
-            id="Phone"
-            label="Телефон"
-            type="text"
-            variant="outlined"
-          />
-        </Box>
-        <TextField
-          id="textarea"
-          label="Ваше сообщение "
-          multiline
-          rows={5}
-          variant="outlined"
-          fullWidth
-          style={{ background: "#FFFFFF", borderRadius: "5px" }}
-        />
-        <Box m={4} align="center">
-          <Button type="submit" className={classes.sendMessageButton}>
-            ОТПРАВИТЬ СООБЩЕНИЕ
-          </Button>
-        </Box>
+        <form action="#">
+          <Box className={classes.sendMessageInputBox}>
+            <input
+              type="text"
+              placeholder="ФИО"
+              pattern="\S+[А-Яа-яA-Za-z\s]+"
+              onChange={(e) => setValueName(e.target.value)}
+              value={valueName}
+              required
+            />
+            <input
+              type="Email"
+              placeholder="Email"
+              pattern="\S+@[0-9a-z_]+.[a-z]"
+              onChange={(e) => setValueEmail(e.target.value)}
+              value={valueEmail}
+            />
+            <input
+              type="text"
+              placeholder="Телефон"
+              pattern="\S+[+\d]+"
+              onChange={(e) => setValuePhone(e.target.value)}
+              value={valuePhone}
+            />
+          </Box>
+
+          <textarea
+            className={classes.sendMessageTextarea}
+            name="text"
+            id="textarea"
+            cols="30"
+            rows="6"
+            placeholder="Ваше сообщение"
+            onChange={(e) => setValueText(e.target.value)}
+            value={valueText}
+          ></textarea>
+          <Box m={4} align="center">
+            <Button
+              type="submit"
+              className={classes.sendMessageButton}
+              onClick={addMessageArrey}
+            >
+              ОТПРАВИТЬ СООБЩЕНИЕ
+            </Button>
+          </Box>
+        </form>
       </Container>
     </Box>
   );

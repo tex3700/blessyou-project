@@ -10,76 +10,40 @@ import {
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useStyles from "./styles";
-import ivanovDoctor from "./../../../static/image/doctors/ivanovDoctor.jpg";
-import petrovaDoctor from "./../../../static/image/doctors/petrovaDoctor.jpg";
-import smirnovDoctor from "./../../../static/image/doctors/smirnovDoctor.jpg";
-import sidorovaDoctor from "./../../../static/image/doctors/sidorovaDoctor.jpg";
 
 import DoctorCard from "../doctorCard/DoctorCard";
 
 //////////
-const doctorsList = [
-  {
-    title: "Иванов И.И.",
-    text: "Физиотерапевт",
-    image: `${ivanovDoctor}`,
-  },
-  {
-    title: "Петрова А.А.",
-    text: "Педиатр",
-    image: `${petrovaDoctor}`,
-  },
-  // {
-  //   title: "Петрова А.D",
-  //   text: "Педиатр",
-  //   image: `${petrovaDoctor}`,
-  // },
-  {
-    title: "Смирнов А.Б.",
-    text: "Гатроэнтеролог",
-    image: `${smirnovDoctor}`,
-  },
-  // {
-  //   title: "Смирнов А.A.",
-  //   text: "Гатроэнтеролог",
-  //   image: `${smirnovDoctor}`,
-  // },
-  {
-    title: "Сидорова Н.В.",
-    text: "Отоларинголог",
-    image: `${sidorovaDoctor}`,
-  },
-];
 
-const OurDoctorsSlider = () => {
+const OurDoctorsSlider = ({ doctorArray }) => {
   const classes = useStyles();
   const [count, setCount] = useState(0);
 
   const [currentArray, setCurrentArray] = useState([
-    doctorsList[0],
-    doctorsList[1],
-    doctorsList[2],
-    doctorsList[3],
+    doctorArray[0],
+    doctorArray[1],
+    doctorArray[2],
+    doctorArray[3],
   ]);
 
   if (count < 0) {
-    setCount(doctorsList.length - 1);
+    setCount(doctorArray.length - 1);
   }
 
-  if (count === doctorsList.length) {
+  if (count === doctorArray.length) {
     setCount(0);
   }
 
   function caoruseleHandler(number) {
     let innnerNumber = number + 1;
 
-    if (innnerNumber === doctorsList.length) {
+    if (innnerNumber === doctorArray.length) {
       innnerNumber = 0;
 
       return innnerNumber;
     }
     if (innnerNumber < 0) {
-      innnerNumber = doctorsList.length - 1;
+      innnerNumber = doctorArray.length - 1;
 
       return innnerNumber;
     }
@@ -94,10 +58,10 @@ const OurDoctorsSlider = () => {
     let indexFour = caoruseleHandler(indexThree);
 
     setCurrentArray([
-      doctorsList[indexOne],
-      doctorsList[indexTwo],
-      doctorsList[indexThree],
-      doctorsList[indexFour],
+      doctorArray[indexOne],
+      doctorArray[indexTwo],
+      doctorArray[indexThree],
+      doctorArray[indexFour],
     ]);
   };
 
@@ -136,7 +100,7 @@ const OurDoctorsSlider = () => {
           </Grid>
           <Grid container className={classes.ourServicesCarouseleGrid}>
             {currentArray.map((item) => (
-              <DoctorCard key={item.title} props={item} />
+              <DoctorCard key={item.id} props={item} />
             ))}
           </Grid>
 

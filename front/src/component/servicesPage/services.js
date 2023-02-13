@@ -85,7 +85,7 @@ export const doctorsList = [
   },
 ];
 
-export const Services = () => {
+export const Services = ({ doctorArray }) => {
   const classes = useStyles();
 
   return (
@@ -112,43 +112,14 @@ export const Services = () => {
               className={classes.servicesCardContainer}
             >
               {servicesTable.map((item) => (
-                <ServiceCard key={item.title} props={item} />
+                <ServiceCard key={item.id} props={item} />
               ))}
             </Grid>
           </Container>
         </Container>
       </Box>
       <SendMessage />
-      <OurDoctorsSlider>
-        <Paper className={classes.ourServicesPaper}>
-          <Container fixed>
-            <Grid container className={classes.ourServicesGrid}>
-              <Grid item container className={classes.ourServicesGridTitle}>
-                <Grid item>
-                  <Typography variant="h3" className={classes.ourServicesTitle}>
-                    Наши врачи
-                  </Typography>
-                </Grid>
-              </Grid>
-              <Grid container className={classes.ourServicesCarouseleGrid}>
-                {doctorsList.map((item) => (
-                  <DoctorCard key={item.title} props={item} />
-                ))}
-              </Grid>
-
-              <Grid item>
-                <Button
-                  className={`${classes.mainRegistrationButton} ${classes.mainAboutUsButton} `}
-                  component={Link}
-                  to="/doctors"
-                >
-                  ВСЕ ВРАЧИ
-                </Button>
-              </Grid>
-            </Grid>
-          </Container>
-        </Paper>
-      </OurDoctorsSlider>
+      <OurDoctorsSlider doctorArray={doctorArray}></OurDoctorsSlider>
     </>
   );
 };
