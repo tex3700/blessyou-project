@@ -38,6 +38,16 @@ Route::controller(DoctorController::class)->group(function () {
     Route::delete('/doctors/delete/speciality', 'deleteDoctorToSpecialities');
 });
 
+Route::controller(PatientController::class)->group(function () {
+    Route::post('/patient-register', 'register')->name('patient.register');
+    Route::get('patients', 'index');
+    Route::get('/patient-private/{id}', 'show')->name('patient.private');
+    Route::post('/add-patient', 'store');
+    Route::get('/edit-patient/{id}', 'edit');
+    Route::put('/update-patient/{patient}', 'update');
+    Route::delete('/delete-patient/{patient}', 'destroy');
+});
+
 Route::controller(SpecialityController::class)->group(function () {
     Route::get('/specialities', 'index');
     Route::post('/specialities/add', 'store');
