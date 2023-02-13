@@ -5,12 +5,8 @@ use App\Http\Controllers\API\DoctorController;
 use App\Http\Controllers\API\PatientController;
 use App\Http\Controllers\API\SpecialityController;
 use App\Http\Controllers\API\DepartmentController;
-<<<<<<< HEAD
 use App\Http\Controllers\Auth\LoginController;
-=======
-use App\Http\Controllers\API\PatientController;
 use App\Http\Controllers\API\MailController;
->>>>>>> f63cfeef631ad5fe8e9b8e541d97f9f60850a20c
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
