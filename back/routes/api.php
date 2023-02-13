@@ -1,10 +1,10 @@
 <?php
 
-
 use App\Http\Controllers\API\EmployeeController;
 use App\Http\Controllers\API\DoctorController;
 use App\Http\Controllers\API\SpecialityController;
 use App\Http\Controllers\API\DepartmentController;
+use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -63,6 +63,8 @@ Route::controller(DepartmentController::class)->group(function () {
     Route::post('/departments/add/doctors', 'addDoctorToDepartment');
      Route::delete('/departments/delete/doctors', 'deleteDoctorToDepartment');
 });
+
+Route::get('/logout', [LoginController::class, 'logout']);
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
