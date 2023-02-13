@@ -1,6 +1,7 @@
 export const apiUrl =
   process.env.NODE_ENV !== "production" ? "https://blessyou-clinic.ru" : "";
 
+
 ///api для запросов картинок врачей
 export const apiStorage = `${apiUrl}/api/storage`;
 

@@ -92,4 +92,20 @@ class PatientController extends Controller
         return response()->json('Пациент удален', 204);
     }
 
+
+//    public function register(Request $request, RegistersActionContract $registerUserAction) {
+//        $request->validate([
+//            'name' => ['required', 'string', 'max:255'],
+//            'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
+//            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+//        ]);
+//        $data = $request->all();
+//        $user = $registerUserAction($data);
+//        $patient = new Patient();
+//         $patient->name = $request->name;
+//        $patient->user_id = $user->id;
+//        $patient->save();
+//        return response()->json($patient);
+//    }
+
 }
