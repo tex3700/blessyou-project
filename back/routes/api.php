@@ -1,12 +1,16 @@
 <?php
 
-
 use App\Http\Controllers\API\EmployeeController;
 use App\Http\Controllers\API\DoctorController;
+use App\Http\Controllers\API\PatientController;
 use App\Http\Controllers\API\SpecialityController;
 use App\Http\Controllers\API\DepartmentController;
+<<<<<<< HEAD
+use App\Http\Controllers\Auth\LoginController;
+=======
 use App\Http\Controllers\API\PatientController;
 use App\Http\Controllers\API\MailController;
+>>>>>>> f63cfeef631ad5fe8e9b8e541d97f9f60850a20c
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -41,6 +45,16 @@ Route::controller(DoctorController::class)->group(function () {
     Route::delete('/doctors/delete/speciality', 'deleteDoctorToSpecialities');
 });
 
+Route::controller(PatientController::class)->group(function () {
+    Route::post('/patient-register', 'register')->name('patient.register');
+    Route::get('patients', 'index');
+    Route::get('/patient-private/{id}', 'show')->name('patient.private');
+    Route::post('/add-patient', 'store');
+    Route::get('/edit-patient/{id}', 'edit');
+    Route::put('/update-patient/{patient}', 'update');
+    Route::delete('/delete-patient/{patient}', 'destroy');
+});
+
 Route::controller(SpecialityController::class)->group(function () {
     Route::get('/specialities', 'index');
     Route::post('/specialities/add', 'store');
@@ -56,6 +70,8 @@ Route::controller(DepartmentController::class)->group(function () {
     Route::post('/departments/add/doctors', 'addDoctorToDepartment');
      Route::delete('/departments/delete/doctors', 'deleteDoctorToDepartment');
 });
+
+Route::get('/logout', [LoginController::class, 'logout']);
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
