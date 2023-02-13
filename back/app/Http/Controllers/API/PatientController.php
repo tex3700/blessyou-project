@@ -44,7 +44,10 @@ class PatientController extends Controller
         $patient = Patient::create($request->all());
         $user->patient()->save($patient);
 
-        return response()->json( ['Пациент успашно добавлен', $user->id], 201 );
+       return response()->json( [
+            'message' => 'Пациент успашно добавлен',
+            'id' => $user->id],
+            201 );
     }
 
     public function store(Request $request): JsonResponse
