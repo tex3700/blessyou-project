@@ -5,6 +5,7 @@ use App\Http\Controllers\API\DoctorController;
 use App\Http\Controllers\API\PatientController;
 use App\Http\Controllers\API\SpecialityController;
 use App\Http\Controllers\API\DepartmentController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\API\MailController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,23 +21,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-<<<<<<<<< Temporary merge branch 1
-//Route::middleware("auth:api")->get('/test', function (){
-//    return "some";
-//});
-//Route::get('/user', function (Request $request){
-//    return "123";
-//})->middleware("auth:sanctum");
-//Route::post('/put', function (Request $request) {
-//    $fileContents = $request->avatar;
-//    Storage::put('avatars/1', $fileContents);
-//    return csrf_token(); 
-//
-//});
-Route::controller(MailController::class)->group(function(){
-    Route::post('/mail/send', 'send');
-});
-=========
+
 Route::controller(EmployeeController::class)->group(function () {
     Route::get('/employees', 'index');
     Route::get('/employee-private/{id}', 'show')->name('employee.private');
@@ -46,7 +31,6 @@ Route::controller(EmployeeController::class)->group(function () {
     Route::delete('/delete-employee/{employee}', 'destroy');
 });
 
->>>>>>>>> Temporary merge branch 2
 Route::controller(DoctorController::class)->group(function () {
     Route::get('/doctors', 'index');
     Route::post('/doctors/add', 'add')->middleware('validated:Doctor');
