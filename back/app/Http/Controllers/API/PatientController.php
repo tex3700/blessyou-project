@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class PatientController extends Controller
 {
@@ -33,7 +34,11 @@ class PatientController extends Controller
      */
     public function register(Request $request, RegisteredUserController $registeredUser): JsonResponse
     {
-        $registeredUser->store($request);
+        try {
+            $registeredUser->store($request);
+        } catch (ValidationException $exception) {
+            return response()->json($exception->getMessage(), 422);
+        }
 
         if (Auth::check()) {
             $user = Auth::user();
