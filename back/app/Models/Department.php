@@ -4,9 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Department extends Model {
-
+class Department extends Model
+{
     use HasFactory;
 
     public $timestamps = false;
@@ -15,9 +16,9 @@ class Department extends Model {
         'name',
         'description',
         'photo_path'
-        
     ];
-        public function doctors()
+
+    public function doctors(): BelongsToMany
     {
         return $this->belongsToMany(Doctor::class,'doctor_department','department_id','doctor_id');
     }

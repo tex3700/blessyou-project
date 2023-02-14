@@ -11,17 +11,21 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up() {
-        Schema::create('doctors', function (Blueprint $table) {
+    public function up(): void
+    {
+        Schema::create('employees', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')
+                ->nullable()
+                ->constrained('users')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->string('name')->nullable();
             $table->string('patronymic')->nullable();
-            $table->string('avatar_path')->nullable();
-            $table->string('photo_path')->nullable();
-            $table->string('info')->nullable();
             $table->string('surname')->nullable();
-            $table->timestamp('created_at')->nullable();
-            $table->timestamp('updated_at')->nullable();
+            $table->string('position')->nullable();
+            $table->text('description')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -30,8 +34,8 @@ return new class extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
-        Schema::dropIfExists('doctors');
+        Schema::dropIfExists('employees');
     }
 };
