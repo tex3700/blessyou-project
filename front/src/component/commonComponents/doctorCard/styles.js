@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     color: "#676767",
+    textAlign: "center",
   },
   cardButton: {
     color: "#4493B9",

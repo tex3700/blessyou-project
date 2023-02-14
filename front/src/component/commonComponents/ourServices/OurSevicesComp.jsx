@@ -141,7 +141,7 @@ export const OurSevicesComp = () => {
               component={Link}
               to="/services"
             >
-              ПОДРОБНЕЕ
+              ВСЕ УСЛУГИ
             </Button>
           </Grid>
         </Grid>
