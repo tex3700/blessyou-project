@@ -60,15 +60,12 @@ function App() {
 
   return (
     <>
-      <Header isAuth={isAuth} />
+      <Header />
 
       <Routes>
         {/* <Route path="/" element={<Main doctorArray={doctorArray} />} /> */}
         <Route path="/about" element={<Appointment />} />
-        {/* <Route
-          path="/services"
-          element={<Services doctorArray={doctorArray} />}
-        /> */}
+        <Route path="/services" element={<Services />} />
         <Route path="/doctors" element={<Appointment />} />
         <Route path="/contacts" element={<Receipts />} />
         {doctorArray.length > 0 && (

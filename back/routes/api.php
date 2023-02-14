@@ -20,9 +20,8 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::controller(MailController::class)->group(function(){
-    Route::post('/mail/send', 'send');
-});
+
+
 Route::controller(EmployeeController::class)->group(function () {
     Route::get('/employees', 'index');
     Route::get('/employee-private/{id}', 'show')->name('employee.private');
