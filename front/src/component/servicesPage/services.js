@@ -10,6 +10,8 @@ export const Services = () => {
   const classes = useStyles();
   const { servicesArray, doctorArray } = useContext(DataContext);
 
+  // console.log("doctorArray", doctorArray);
+
   return (
     <>
       <Box className={classes.servicesHead}>

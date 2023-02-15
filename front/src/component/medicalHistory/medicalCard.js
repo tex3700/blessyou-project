@@ -8,6 +8,8 @@ import { apiStorage } from "../../api";
 export const MedicalCard = ({ props }) => {
   const classes = useStyles();
 
+  // console.log("props ", props);
+
   return (
     <Box className={classes.medicalCard}>
       <Avatar alt="Doctor" src={`${apiStorage}/doctor/${props.photo_path}`} />

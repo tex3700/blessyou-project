@@ -8,7 +8,7 @@ export const MedicalHistory = () => {
   const classes = useStyles();
   const { doctorArray } = useContext(DataContext);
 
-  console.log("doctorArray", doctorArray);
+  // console.log("doctorArray", doctorArray);
 
   return (
     <>

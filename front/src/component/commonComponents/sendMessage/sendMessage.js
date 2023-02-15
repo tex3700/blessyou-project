@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Box, Container, Typography, Button } from "@material-ui/core";
 import { useStyles } from "./style";
+import { apiRequest } from "../../../api";
 
 export const SendMessage = () => {
   const classes = useStyles();
@@ -9,21 +10,21 @@ export const SendMessage = () => {
   const [message, setMessage] = useState("");
   const [number, setNumber] = useState("");
 
-  const handleRequestForm = async () => {
+  const handleRequestForm = async (event) => {
+    event.preventDefault();
     const body = {
       email: email,
       name: name,
       phone: number,
       text: message,
     };
-    if (name !== "") {
-      const data = await fetch("https://blessyou-clinic.ru/api/api/mail/send", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json;charset=utf-8",
-        },
-        body: JSON.stringify(body),
-      });
+    if (name) {
+      apiRequest("mail/send", "POST", body);
+
+      setName("");
+      setEmail("");
+      setMessage("");
+      setNumber("");
     }
   };
 
@@ -37,7 +38,7 @@ export const SendMessage = () => {
         >
           Отправить сообщение
         </Typography>
-        <form action="#">
+        <form onSubmit={handleRequestForm}>
           <Box className={classes.sendMessageInputBox}>
             <input
               type="text"
@@ -74,11 +75,7 @@ export const SendMessage = () => {
             value={message}
           ></textarea>
           <Box m={4} align="center">
-            <Button
-              type="submit"
-              className={classes.sendMessageButton}
-              // onClick={handleRequestForm}
-            >
+            <Button type="submit" className={classes.sendMessageButton}>
               ОТПРАВИТЬ СООБЩЕНИЕ
             </Button>
           </Box>
