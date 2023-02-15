@@ -57,7 +57,7 @@ export const SendMessage = () => {
             <input
               type="text"
               placeholder="Телефон"
-              pattern="\S+\+?\d+"
+              pattern="^\+?\d+$"
               onChange={(e) => setNumber(e.target.value)}
               value={number}
             />
@@ -77,7 +77,7 @@ export const SendMessage = () => {
             <Button
               type="submit"
               className={classes.sendMessageButton}
-              onClick={handleRequestForm}
+              // onClick={handleRequestForm}
             >
               ОТПРАВИТЬ СООБЩЕНИЕ
             </Button>

@@ -1,10 +1,14 @@
 import { Box, Container, Typography } from "@material-ui/core";
-import React from "react";
+import React, { useContext } from "react";
 import { useStyles } from "./styleMedical";
 import { MedicalCard } from "./medicalCard";
+import { DataContext } from "../../DataContext";
 
 export const MedicalHistory = () => {
   const classes = useStyles();
+  const { doctorArray } = useContext(DataContext);
+
+  console.log("doctorArray", doctorArray);
 
   return (
     <>
@@ -14,8 +18,8 @@ export const MedicalHistory = () => {
             Дата и специалист
           </Typography>
         </Box>
-        <MedicalCard title="Богомолова Анна Сергеевна" prof="Дерматолог" />
-        <MedicalCard title="Иванов Иван Иванович" prof="Гастроэнтеролог" />
+        <MedicalCard props={doctorArray[3]} />
+        <MedicalCard props={doctorArray[4]} />
       </Container>
       <Box style={{ minHeight: "300px" }}></Box>
     </>
