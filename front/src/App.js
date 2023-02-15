@@ -65,21 +65,15 @@ function App() {
       {/* Описание DataProvider в файле DataContext.js */}
       <DataProvider>
         <Routes>
-          {/* <Route path="/" element={<Main doctorArray={doctorArray} />} /> */}
           <Route path="/about" element={<Appointment />} />
-          {/* <Route
-          path="/services"
-          element={<Services doctorArray={doctorArray} />}
-        /> */}
           <Route path="/doctors" element={<Appointment />} />
           <Route path="/contacts" element={<Receipts />} />
           {doctorArray.length > 0 && (
             <Route path="/" element={<Main doctorArray={doctorArray} />} />
           )}
-          {doctorArray.length > 0 && (
-            <Route path="/services" element={<Services />} />
-          )}
-          {/* <Route path="/entryInLC" element={<EntryPage />} /> */}
+
+          <Route path="/services" element={<Services />} />
+
           <Route
             path="/entryInLC"
             element={
