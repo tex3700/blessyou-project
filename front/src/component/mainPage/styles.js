@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core";
-import mainPageBunner from "./../../static/image/mainPageBunner.jpg";
+import mainPageBunner from "./../../static/images/mainPageBunner.jpg";
 import mainAboutUs from "./../../static/image/mainAboutUs.jpg";
 
 const useStyles = makeStyles((theme) => ({
