@@ -4,23 +4,32 @@ import useStyles from "./styles";
 import DoctorCard from "../../component/commonComponents/doctorCard/DoctorCard";
 import  { SendMessage }  from "../../component/commonComponents/sendMessage/sendMessage"; 
 import OurSevicesComp from "../commonComponents/ourServices/OurSevicesComp";
+import { DataContext } from "../../DataContext";
 
 
-
-const doctorCardList = [
-  { text: "Иванов И.И.",   title: "Физеотерапевт",   image: "https://wmpics.space/di-PNZ3.jpg", path: "/doctorlist" },
-  { text: "Петрова А.А.",  title: "Педиатр",         image: "https://wmpics.space/di-1JYP.jpg", path: "/doctorlist" },
-  { text: "Смирнов А.Б.",  title: "Гастроэнтеролог", image: "https://wmpics.space/di-RR9F.jpg", path: "/doctorlist" },
-  { text: "Сидорова Н.В.", title: "Отоларинголог",   image: "https://wmpics.space/di-M72A.jpg", path: "/doctorlist" },
-  { text: "Иванов И.И.",   title: "Физеотерапевт",   image: "https://wmpics.space/di-PNZ3.jpg", path: "/doctorlist" },
-  { text: "Петрова А.А.",  title: "Педиатр",         image: "https://wmpics.space/di-1JYP.jpg", path: "/doctorlist" },
-  { text: "Смирнов А.Б.",  title: "Гастроэнтеролог", image: "https://wmpics.space/di-RR9F.jpg", path: "/doctorlist" },
-  { text: "Сидорова Н.В.", title: "Отоларинголог",   image: "https://wmpics.space/di-M72A.jpg", path: "/doctorlist" },
-];
-
-const DoctorList = () => {
+const DoctorList = ({ doctorArray }) => {
   const classes = useStyles();
+  const [count, setCount] = useState(0);
+  
 
+  const [currentArray, setCurrentArray] = useState([
+    doctorArray[0],
+    doctorArray[1],
+    doctorArray[2],
+    doctorArray[3],
+  ]);
+
+  setCurrentArray([
+    doctorArray[indexOne],
+    doctorArray[indexTwo],
+    doctorArray[indexThree],
+    doctorArray[indexFour],
+  ]);
+};
+
+useEffect(() => {
+  changeCurrentArray();
+}, [count]);
 
   return (
     
@@ -39,7 +48,7 @@ const DoctorList = () => {
     </div>
     <Container className={classes.cardGrid}>
       <Grid container spacing={2}> 
-          {doctorCardList.map((card) => (
+          {currentArray.map((card) => (
             <Grid item key={card}>  
                  <DoctorCard key={card.image} props={card}/>               
             </Grid>
@@ -48,6 +57,7 @@ const DoctorList = () => {
     </Container>
    <SendMessage /> 
  <OurSevicesComp />
+ <DataContext />
    </>
   );
 };
