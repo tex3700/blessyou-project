@@ -57,12 +57,12 @@ https://blessyou-clinic.ru/api
   "GET" /storage/department/{name_image.jpg}
 
 - АПИ для регистрации пользователя
-  "POST" /register
+  "POST" /api/patient-register
 
   струтура запроса на данный момент : {
   'name': 'string',
   'surname': 'string',
-  'patronimyc': 'string',
+  'patronymic': 'string',
   'email': 'string@mail.com',
   'password': 'string',
   }

@@ -34,7 +34,7 @@ import { apiRequest } from "./api";
 // });
 
 function App() {
-  const [isAuth, setIsAuth] = useState(false);
+  const [isAuth, setIsAuth] = useState(null);
   const navigate = useNavigate();
 
   // const redirectFunc = () => {

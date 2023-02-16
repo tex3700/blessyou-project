@@ -5,13 +5,13 @@ import {
   Typography,
   Grid,
   Button,
-  Paper,
   TextField,
-  Link,
 } from "@material-ui/core";
 import useStyles from "./styles";
+import { apiRequest } from "../../api";
 
-const SingIn = () => {
+//////
+const SingIn = ({ setIsAuth }) => {
   const classes = useStyles();
 
   const [email, setEmail] = useState("");
@@ -19,7 +19,7 @@ const SingIn = () => {
   const [repeatPassword, setRepeatPassword] = useState("");
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
-  const [middleName, setMiddleName] = useState("");
+  const [patronymic, setPatronymic] = useState("");
   const [valid, setValid] = useState(false);
 
   //очистка формы после всех обработок
@@ -29,7 +29,7 @@ const SingIn = () => {
     setRepeatPassword("");
     setName("");
     setSurname("");
-    setMiddleName("");
+    setPatronymic("");
   }
 
   //проверка емейла на правильность
@@ -38,42 +38,46 @@ const SingIn = () => {
 
     setEmail(event.target.value);
     setValid(regExp.test(event.target.value));
-    console.log("valid", valid);
+    console.log("test", regExp.test(event.target.value));
   }
   //проверка ФИО на правильность
   function handleValidationFIO(event) {
-    const regExp = /^[[А-Яа-яA-Za-z]+$/i;
-    console.log("event", event.target);
+    const regExp = /[А-Яа-яA-Za-z]*$/i;
+
     if (event.target.id === "surname" && regExp.test(event.target.value)) {
       setSurname(event.target.value);
     }
     if (event.target.id === "name" && regExp.test(event.target.value)) {
       setName(event.target.value);
     }
-    if (event.target.id === "middle-name" && regExp.test(event.target.value)) {
-      setMiddleName(event.target.value);
+    if (event.target.id === "patronymic" && regExp.test(event.target.value)) {
+      setPatronymic(event.target.value);
     }
-    // setValid(regExp.test(event.target.value));
   }
 
   //отправка данных для проверки на сервере
-  function handleForm(event) {
+  async function handleForm(event) {
     event.preventDefault();
 
-    if (valid) {
+    if (valid && password === repeatPassword) {
       let singInData = {
         email,
         password,
         name,
         surname,
-        middleName,
+        patronymic,
       };
-      console.log("log in data ", singInData);
-      //отправка на проверку входных данных
-      //когда появятся эндпоинты на сервере , тогда размоментирую
-      // apiRequest("logIn", "POST", singInData);
-
-      handleFormClear();
+      console.log("sign in data ", singInData);
+      try {
+        apiRequest("patient-register", "POST", singInData).then((data) =>
+          setIsAuth(data.id)
+        );
+        handleFormClear();
+      } catch (error) {
+        console.log("error ", error.message);
+      }
+    } else {
+      alert("Проверьте правильность написания email и совпадение");
     }
     setValid(false);
   }
@@ -92,8 +96,12 @@ const SingIn = () => {
                   required
                   className={classes.logInInput}
                   variant="outlined"
-                  placeholder="Логин (email)*"
+                  placeholder="Email*"
                   type="email"
+                  error={!valid && email !== ""}
+                  helperText={
+                    !valid && email !== "" ? "email введен некорректно" : ""
+                  }
                   value={email}
                   onChange={(e) => handleValidationEmail(e)}
                   InputProps={{
@@ -105,8 +113,8 @@ const SingIn = () => {
                   className={classes.logInInput}
                   variant="outlined"
                   id="surname"
-                  placeholder="Фамилия*"
                   type="text"
+                  placeholder="Фамилия*"
                   onChange={(e) => handleValidationFIO(e)}
                   value={surname}
                   InputProps={{
@@ -155,11 +163,11 @@ const SingIn = () => {
                   required
                   className={classes.logInInput}
                   variant="outlined"
-                  id="middle-name"
+                  id="patronymic"
                   placeholder="Отчество*"
                   type="text"
                   onChange={(e) => handleValidationFIO(e)}
-                  value={middleName}
+                  value={patronymic}
                   InputProps={{
                     classes: { notchedOutline: classes.noBorder },
                   }}
