@@ -12,6 +12,6 @@ class VerifyCsrfToken extends Middleware
      * @var array<int, string>
      */
     protected $except = [
-        //"http://https://blessyou-clinic.ru/api/*",
+        //"https://blessyou-clinic.ru/api/*",
     ];
 }
