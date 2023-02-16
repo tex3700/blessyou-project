@@ -33,7 +33,11 @@ class PatientController extends Controller
      */
     public function register(Request $request, RegisteredUserController $registeredUser): JsonResponse
     {
-        $registeredUser->store($request);
+        try {
+            $registeredUser->store($request);
+        } catch (ValidationException $exception) {
+            return response()->json($exception->getMessage(), 422);
+        }
 
         if (Auth::check()) {
             $user = Auth::user();

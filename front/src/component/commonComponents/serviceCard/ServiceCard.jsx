@@ -10,6 +10,7 @@ import {
 import React from "react";
 import useStyles from "./styles";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { apiStorage } from "../../../api";
 
 /////
 const ServiceCard = ({ props }) => {
@@ -20,15 +21,15 @@ const ServiceCard = ({ props }) => {
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image={props.image}
+          image={`${apiStorage}/department/${props.photo_path}`}
           title={props.title}
         />
         <CardContent>
           <Typography className={classes.cardTitle} gutterBottom variant="h5">
-            {`${props.title}`}
+            {props.name}
           </Typography>
           <Typography variant="body2" className={classes.cardText}>
-            {`${props.text}`}
+            {props.description}
           </Typography>
         </CardContent>
       </CardActionArea>
