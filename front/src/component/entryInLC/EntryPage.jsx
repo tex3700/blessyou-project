@@ -23,14 +23,7 @@ const usersArray = [
 /////////
 const EntryPage = ({ setIsAuth }) => {
   const classes = useStyles();
-  // const onSubmit = async (path, method, data) => {
-  //   try {
-  //     const userId = await apiRequest(path, method, data);
-  //     setIsAuth(userId);
-  //   } catch (error) {
-  //     console.log("error ", error.message);
-  //   }
-  // };
+
   return (
     <>
       <Box className={classes.componentHead}>
