@@ -1,35 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Box, Container, Typography, Button } from "@material-ui/core";
 import { useStyles } from "./style";
+import { apiRequest } from "../../../api";
 
-export const SendMessage = (ctx) => {
+export const SendMessage = () => {
   const classes = useStyles();
-  const [valueName, setValueName] = useState("");
-  const [valueEmail, setValueEmail] = useState("");
-  const [valuePhone, setValuePhone] = useState("");
-  const [valueText, setValueText] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [number, setNumber] = useState("");
 
-  const [messageArrey, setMessageArrey] = useState([]);
+  const handleRequestForm = async (event) => {
+    event.preventDefault();
+    const body = {
+      email: email,
+      name: name,
+      phone: number,
+      text: message,
+    };
+    if (name) {
+      apiRequest("mail/send", "POST", body);
 
-  const addMessageArrey = () => {
-    if (valueName !== "") {
-      setMessageArrey([
-        ...messageArrey,
-        {
-          name: valueName,
-          email: valueEmail,
-          phone: valuePhone,
-          text: valueText,
-        },
-      ]);
+      setName("");
+      setEmail("");
+      setMessage("");
+      setNumber("");
     }
-    setValueName("");
-    setValueEmail("");
-    setValuePhone("");
-    setValueText("");
   };
-
-  console.log(messageArrey);
 
   return (
     <Box className={classes.sendMessage}>
@@ -41,29 +38,29 @@ export const SendMessage = (ctx) => {
         >
           Отправить сообщение
         </Typography>
-        <form action="#">
+        <form onSubmit={handleRequestForm}>
           <Box className={classes.sendMessageInputBox}>
             <input
               type="text"
               placeholder="ФИО"
               pattern="\S+[А-Яа-яA-Za-z\s]+"
-              onChange={(e) => setValueName(e.target.value)}
-              value={valueName}
+              onChange={(e) => setName(e.target.value)}
+              value={name}
               required
             />
             <input
               type="Email"
               placeholder="Email"
-              pattern="\S+[a-z]@[0-9a-z_]+.[a-z]"
-              onChange={(e) => setValueEmail(e.target.value)}
-              value={valueEmail}
+              pattern="\S+@[0-9a-z_]+\.[a-z]+"
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
             />
             <input
-              type="number"
+              type="text"
               placeholder="Телефон"
-              pattern="\S+[+\d]+"
-              onChange={(e) => setValuePhone(e.target.value)}
-              value={valuePhone}
+              pattern="^\+?\d+$"
+              onChange={(e) => setNumber(e.target.value)}
+              value={number}
             />
           </Box>
 
@@ -74,15 +71,11 @@ export const SendMessage = (ctx) => {
             cols="30"
             rows="6"
             placeholder="Ваше сообщение"
-            onChange={(e) => setValueText(e.target.value)}
-            value={valueText}
+            onChange={(e) => setMessage(e.target.value)}
+            value={message}
           ></textarea>
           <Box m={4} align="center">
-            <Button
-              type="submit"
-              className={classes.sendMessageButton}
-              onClick={addMessageArrey}
-            >
+            <Button type="submit" className={classes.sendMessageButton}>
               ОТПРАВИТЬ СООБЩЕНИЕ
             </Button>
           </Box>
