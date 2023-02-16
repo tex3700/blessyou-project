@@ -25,7 +25,7 @@ class EmployeeController extends Controller
     {
         $employees = $this->model->get();
 
-        return response()->json($employees);
+        return response()->json(['data' => $employees, 'status' => 200]);
     }
 
     public function store(Request $request): JsonResponse
@@ -40,21 +40,23 @@ class EmployeeController extends Controller
 
         $user->employee()->save($employee);
 
-        return response()->json( 'Успешно сохранено', 201 );
+        return response()->json( [
+            'message' => 'Успешно сохранено',
+            'status' => 201], 201 );
     }
 
-    public function show($id): JsonResponse //Необходимо получить id user
+    public function show($id): JsonResponse
     {
         $employee = $this->model->where('user_id', '=', $id)->first();
 
-        return response()->json($employee);
+        return response()->json(['data' => $employee, 'status' => 200]);
     }
 
-    public function edit($id): JsonResponse // Необходимом получить id employee
+    public function edit($id): JsonResponse
     {
         $employee = $this->model->get()->find($id);
 
-        return response()->json($employee);
+        return response()->json(['data' => $employee, 'status' => 200]);
     }
 
     public function update(Request $request, Employee $employee): JsonResponse
@@ -62,7 +64,7 @@ class EmployeeController extends Controller
         $employee->update($request->all());
         $employee->user()->update($request->all());
 
-        return response()->json('Успешно обновлено');
+        return response()->json(['message' => 'Успешно обновлено', 'status' => 200]);
     }
 
     public function destroy(Employee $employee): JsonResponse
@@ -70,6 +72,8 @@ class EmployeeController extends Controller
         $employee->delete();
         $employee->user()->delete();
 
-        return response()->json('Сотрудник удален', 204);
+        return response()->json([
+            'message' => 'Сотрудник удален',
+            'status' => 204], 204);
     }
 }

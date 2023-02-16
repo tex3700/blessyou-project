@@ -81,7 +81,13 @@ Route::controller(DepartmentController::class)->group(function () {
      Route::delete('/departments/delete/doctors', 'deleteDoctorToDepartment');
 });
 
-Route::get('/logout', [LoginController::class, 'logout']);
+Route::controller(LoginController::class)->group(function () {
+    Route::post('/patient-login', 'login')
+        ->middleware('isPatient')->name('patient.login');
+    Route::post('/staff-login', 'login')
+        ->middleware('isStaff')->name('staff.login');
+    Route::post('/logout', 'logout');
+});
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
