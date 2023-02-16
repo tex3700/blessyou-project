@@ -40,7 +40,7 @@ class LoginController extends Controller
         }
 
         return response()->json([
-            'message' => 'User не авторизован',
+            'message' => 'Пользователь не авторизован',
             'status' => 401], 401);
     }
 }
