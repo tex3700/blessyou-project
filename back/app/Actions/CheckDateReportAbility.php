@@ -15,6 +15,7 @@ class CheckDateReportAbility {
     public function __invoke($arrayDates,$doctorid) {
         //$result = new DateTimeImmutable(reset($arrayDates));
         foreach ($arrayDates as $key => $value) {
+            $recordTimeAr = [];
             $recordToDoctor = DB::table('records')->where('doctor_id', $doctorid)
                             ->where('record_time', 'like', "$key%")->get();
             foreach ($recordToDoctor as $record) {
