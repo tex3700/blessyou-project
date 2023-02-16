@@ -22,9 +22,6 @@ class CheckDateReportAbility {
             }
               $result[$key] = array_diff($value, $recordTimeAr);
         }
-var_dump($result);
-die();
-
         return $result;
     }
 
