@@ -5,6 +5,8 @@ use App\Http\Controllers\API\DoctorController;
 use App\Http\Controllers\API\PatientController;
 use App\Http\Controllers\API\SpecialityController;
 use App\Http\Controllers\API\DepartmentController;
+use App\Http\Controllers\API\ScheduleController;
+use App\Http\Controllers\API\RecordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\API\MailController;
 use Illuminate\Http\Request;
@@ -20,8 +22,20 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-
+Route::controller(RecordController::class)->group(function(){
+   Route::post('/records/add', 'store');
+    Route::post('/records/all/possible', 'getPossibleDate');
+    Route::get('/records', 'index');
+   // Route::get('/schedules/{id}', 'getShedulebyDoctor');
+});
+Route::controller(ScheduleController::class)->group(function(){
+    Route::post('/schedule/add', 'store');
+    Route::get('/schedules', 'index');
+    Route::get('/schedules/{id}', 'getShedulebyDoctor');
+});
+Route::controller(MailController::class)->group(function(){
+    Route::post('/mail/send', 'send');
+});
 Route::controller(EmployeeController::class)->group(function () {
     Route::get('/employees', 'index');
     Route::get('/employee-private/{id}', 'show')->name('employee.private');
