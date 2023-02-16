@@ -54,29 +54,16 @@ class RecordController extends Controller {
     public function store(Request $request,ScheduleController $scheduleController): JsonResponse {
         //$result = $scheduleController->getShedulebyDoctor($request->doctor_id)->getData();
         //Нужно вынести в валидацию
-        $result = $this->getPossibleDate($request,$scheduleController);
-        var_dump($result);
-        die();
         $arRequest = $request->all();
-        $findDateAction = new AllPossibleReportForDateAction;
-        //$findDateAction(reset($result));
-
-        foreach($result as $key=>$value){
-            $allDate[$key] = $findDateAction($value);
-        }
-        $checkDateReportAbility = new CheckDateReportAbility;
-        $result = $checkDateReportAbility($allDate,$request->doctor_id);
-        var_dump($result);
-        die();
+        //$result = $this->getPossibleDate($request,$scheduleController);
+        //var_dump($result->getData());
         preg_match("/[\b[0-2]{1,2}:[0-2]{1,2}:[0-2]{1,2}/", $arRequest["receipt_time"], $matches);
         $date = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $arRequest["record_time"]);
         $time = explode(":", reset($matches));
         $arRequest["end_time"] = $date
                 ->modify("+ $time[0] hours $time[1] minutes $time[2] seconds ")
                 ->format('Y-m-d H:i:s');
-        //var_dump($arRequest);
-        //$patient = Record::create($request->all());
-
+        Record::create($arRequest);
         return response()->json('Успешно сохранено', 201);
     }
 
