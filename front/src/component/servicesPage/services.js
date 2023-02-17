@@ -43,7 +43,7 @@ export const Services = () => {
         </Container>
       </Box>
       <SendMessage />
-      <OurDoctorsSlider doctorArray={doctorArray} />
+      {doctorArray.length > 0 && <OurDoctorsSlider doctorArray={doctorArray} />}
     </>
   );
 };
