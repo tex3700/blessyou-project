@@ -1,92 +1,16 @@
-import React from "react";
-import {
-  Box,
-  Container,
-  Typography,
-  Grid,
-  Button,
-  Paper,
-} from "@material-ui/core";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Box, Container, Typography, Grid } from "@material-ui/core";
 import { useStyles } from "./servicesStyle";
-import physiotheraphy from "../../static/image/services/Physiotheraphy.jpg";
-import lorImage from "../../static/image/services/LOR.jpg";
-import pediatr from "../../static/image/services/Pediatr.jpg";
 import ServiceCard from "../commonComponents/serviceCard/ServiceCard";
-import ivanovDoctor from "../../static/image/doctors/ivanovDoctor.jpg";
-import petrovaDoctor from "../../static/image/doctors/petrovaDoctor.jpg";
-import smirnovDoctor from "../../static/image/doctors/smirnovDoctor.jpg";
-import sidorovaDoctor from "../../static/image/doctors/sidorovaDoctor.jpg";
-import DoctorCard from "../commonComponents/doctorCard/DoctorCard";
 import OurDoctorsSlider from "../commonComponents/ourDoctors/OurDoctorsSlider";
 import { SendMessage } from "../commonComponents";
-
-export const servicesTable = [
-  {
-    id: 1,
-    image: `${physiotheraphy}`,
-    title: "Физиотерапия",
-    text: "Все виды физиотерапевтических услуг, мануальный массаж и натуротерапия. Лучшие специалисты города ждут Вас...",
-  },
-  {
-    id: 2,
-    image: `${pediatr}`,
-    title: "Педиатрия",
-    text: "Педиатр – детский терапевт, который наблюдает Вашего ребенка с самого рождения и до совершеннолетия.",
-  },
-  {
-    id: 3,
-    image: `${lorImage}`,
-    title: "Оториноларингология",
-    text: "Лор-врач, или оториноларинголог, занимается диагностикой и лечением различной патологии уха, горла и носа. ",
-  },
-  {
-    id: 4,
-    image: `${physiotheraphy}`,
-    title: "Физиотерапия",
-    text: "Все виды физиотерапевтических услуг, мануальный массаж и натуротерапия. Лучшие специалисты города ждут Вас...",
-  },
-  {
-    id: 5,
-    image: `${pediatr}`,
-    title: "Педиатрия",
-    text: "Педиатр – детский терапевт, который наблюдает Вашего ребенка с самого рождения и до совершеннолетия.",
-  },
-  {
-    id: 6,
-    image: `${lorImage}`,
-    title: "Оториноларингология",
-    text: "Лор-врач, или оториноларинголог, занимается диагностикой и лечением различной патологии уха, горла и носа. ",
-  },
-];
-
-export const doctorsList = [
-  {
-    title: "Иванов И.И.",
-    text: "Физиотерапевт",
-    image: `${ivanovDoctor}`,
-  },
-  {
-    title: "Петрова А.А.",
-    text: "Педиатр",
-    image: `${petrovaDoctor}`,
-  },
-
-  {
-    title: "Смирнов А.Б.",
-    text: "Гатроэнтеролог",
-    image: `${smirnovDoctor}`,
-  },
-
-  {
-    title: "Сидорова Н.В.",
-    text: "Отоларинголог",
-    image: `${sidorovaDoctor}`,
-  },
-];
+import { DataContext } from "../../DataContext";
 
 export const Services = () => {
   const classes = useStyles();
+  const { servicesArray, doctorArray } = useContext(DataContext);
+
+  // console.log("doctorArray", doctorArray);
 
   return (
     <>
@@ -111,44 +35,15 @@ export const Services = () => {
               spacing={2}
               className={classes.servicesCardContainer}
             >
-              {servicesTable.map((item) => (
-                <ServiceCard key={item.title} props={item} />
+              {servicesArray.map((item) => (
+                <ServiceCard key={item.id} props={item} />
               ))}
             </Grid>
           </Container>
         </Container>
       </Box>
       <SendMessage />
-      <OurDoctorsSlider>
-        <Paper className={classes.ourServicesPaper}>
-          <Container fixed>
-            <Grid container className={classes.ourServicesGrid}>
-              <Grid item container className={classes.ourServicesGridTitle}>
-                <Grid item>
-                  <Typography variant="h3" className={classes.ourServicesTitle}>
-                    Наши врачи
-                  </Typography>
-                </Grid>
-              </Grid>
-              <Grid container className={classes.ourServicesCarouseleGrid}>
-                {doctorsList.map((item) => (
-                  <DoctorCard key={item.title} props={item} />
-                ))}
-              </Grid>
-
-              <Grid item>
-                <Button
-                  className={`${classes.mainRegistrationButton} ${classes.mainAboutUsButton} `}
-                  component={Link}
-                  to="/doctors"
-                >
-                  ВСЕ ВРАЧИ
-                </Button>
-              </Grid>
-            </Grid>
-          </Container>
-        </Paper>
-      </OurDoctorsSlider>
+      <OurDoctorsSlider doctorArray={doctorArray} />
     </>
   );
 };

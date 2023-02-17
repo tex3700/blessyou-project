@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
+use App\Actions\RegisterUserAction;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -11,9 +13,12 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+
+    public function register(): void
     {
-        //
+        $this->app->bind('App\Contracts\RegistersActionContract', function ($app) {
+            return new RegisterUserAction();
+        });
     }
 
     /**
@@ -21,8 +26,8 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
-        //
+        //Schema::defaultStringLength(255);
     }
 }

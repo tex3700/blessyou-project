@@ -33,3 +33,68 @@
    style.css
 
 6. Какие-либо библиотеки добавляем в проект только после обсуждения с коллегами.
+
+7. Переиспользуемы компоненты храняться в папке commomComponents
+
+#API для использования
+
+\*Основной API адрес запросов
+https://blessyou-clinic.ru/api
+
+- АПИ для получения списка врачей
+  "GET" /api/doctors/
+
+- Апи для получения полных фоторграфий докторов  
+   GET" /storage/doctor/${name_image.jpg}
+  на данный момент имя фото получаем в свойстве avatar_path
+
+- Апи для получения аватаров докторов для карточек в карусели
+  "GET" /storage/doctor_avatar/${name_image.png}
+
+на данный момент имя фото получаем в свойстве avatar_path
+
+- АПИ для получения картинок отделений
+  "GET" /storage/department/{name_image.jpg}
+
+- АПИ для регистрации пользователя
+  "POST" /register
+
+  струтура запроса на данный момент : {
+  'name': 'string',
+  'surname': 'string',
+  'patronymic': 'string',
+  'email': 'string@mail.com',
+  'password': 'string',
+  }
+  
+  - АПИ для регистрации пациента
+  "POST" /patient-register
+  (принимает {
+  'name': 'string',
+  'surname': 'string',
+  'patronymic': 'string',
+  'email': 'string@mail.com',
+  'password': 'string',
+  }
+  
+  регистрирует  и логинит user, в db сохраняет:
+  users: 'email': 'string@mail.com',
+  'password': 'string',
+  patients: 'name': 'string',
+  'surname': 'string',
+  'patronimyc': 'string',
+  
+  возвращает: {
+    "message": "Пациент успашно добавлен",
+    "id": 2 //(зарегестрированого юзера)
+    status: 201
+}
+
+-АПИ для получения данных зарегистрированного(залогиненого) пациента:
+"GET" /patient-private/{id} 
+
+принимает {id} (на фронте ${id}) - id зарегистрированного(залогиненного) юзера
+
+возвращает все данные из таблицы users и связанной с ней patients:
+users: {email,phone,is_patient(1),is_admin(0),is_doctor(0),is_employee(0)}
+patients: {id,name,surname,patronymic} (у пациента пока только эти поля, дольше будем добавлять)

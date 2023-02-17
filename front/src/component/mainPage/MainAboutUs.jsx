@@ -1,15 +1,6 @@
 import React from "react";
 import useStyles from "./styles";
-import {
-  Box,
-  Button,
-  Container,
-  Grid,
-  Icon,
-  ListItem,
-  Paper,
-  Typography,
-} from "@material-ui/core";
+import { Button, Container, Grid, Paper, Typography } from "@material-ui/core";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { Link } from "react-router-dom";
 /////

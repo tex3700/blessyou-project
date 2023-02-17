@@ -19,13 +19,30 @@ export const useStyles = makeStyles(() => ({
     justifyContent: "space-between",
     margin: "49px 0 24px 0",
     gap: "37px",
+    "& input": {
+      width: "300px",
+      minHeight: "60px",
+      background: "#FFFFFF",
+      borderRadius: "5px",
+      border: "transparent",
+      fontSize: "16px",
+      paddingLeft: "10px",
+    },
   },
-  sendMessageInput: {
-    width: "300px",
-    maxHeight: "60px",
-    background: "#FFFFFF",
+
+  sendMessageTextarea: {
+    width: "100%",
     borderRadius: "5px",
+    padding: "10px 0 0 10px",
+    border: "transparent",
+    fontSize: "20px",
   },
+  // sendMessageInput: {
+  //   width: "300px",
+  //   maxHeight: "60px",
+  //   background: "#FFFFFF",
+  //   borderRadius: "5px",
+  // },
 
   sendMessageButton: {
     width: "290px",

@@ -11,7 +11,7 @@ const linksArray = [
   { name: "Контакты", path: "/contacts" },
 ];
 
-const HeaderContent = () => {
+const HeaderContent = ({ isAuth }) => {
   const classes = useStyles();
   return (
     // <AppBar>
@@ -47,19 +47,13 @@ const HeaderContent = () => {
             className={classes.buttonWriteOn}
             variant="contained"
             size="large"
-            color="success"
             component={Link}
-            to="/patientAccount"
+            to={isAuth ? "/patientAccount" : "/entryInLC"}
           >
             Личный кабинет
           </Button>
         </Box>
-        <IconButton
-          className={classes.root}
-          // color="inherit"
-          component={Link}
-          to="/"
-        >
+        <IconButton className={classes.root} component={Link} to="/entryInLC">
           <Box className={classes.headerDoctorsEnterance}></Box>
         </IconButton>
       </Toolbar>
