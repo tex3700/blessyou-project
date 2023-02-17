@@ -7,8 +7,9 @@ import {
   PatientAccountPage,
   Services,
   PrivateRoute,
-  PublicRoute,
+  PublicRoute
 } from "./component";
+import DoctorList from "./component/DoctorList/doctorlList";
 
 import Header from "./component/header/header";
 // import { Container } from "@material-ui/core";
@@ -66,7 +67,7 @@ function App() {
       <DataProvider>
         <Routes>
           <Route path="/about" element={<Appointment />} />
-          <Route path="/doctors" element={<Appointment />} />
+          <Route path="/doctors" element={<DoctorList />} />
           <Route path="/contacts" element={<Receipts />} />
           {doctorArray.length > 0 && (
             <Route path="/" element={<Main doctorArray={doctorArray} />} />
