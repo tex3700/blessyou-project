@@ -2,22 +2,47 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { List, ListItem, ListItemText, Typography, Avatar, Box } from '@material-ui/core';
 import { CaptionList } from './captionList';
+import { greenColor, greyColor, dividerListItem } from '../../styleConst';
 
 const useStyles = makeStyles((theme) => ({
     listStyle: {
         paddingLeft: theme.spacing(3),
         paddingRight: theme.spacing(3)
     },
+    listItemStyle: {
+        borderBottom: dividerListItem,
+        '&:hover': {
+            '&  $doctorName': {
+                color: greenColor
+            }
+        }
+    },
+    doctorName: {
+        fontStyle: 'normal',
+        fontWeight: '600',
+        fontSize: '16px',
+        lineHeight: '24px',
+        color: greyColor
+    },
     avatarStyle: {
-        //backgroundColor: testColor,
         marginRight: theme.spacing(1),
         marginTop: theme.spacing(1)
     },
+    secondaryStr: {
+        fontStyle: 'normal',
+        fontWeight: '400',
+        fontSize: '12px',
+        lineHeight: '18px'
+    },
     info: {
-        display: 'block'
+        display: 'block',
+        color: '#4493B9'
+    },
+    nearestDateStr: {
+        color: greyColor
     },
     nearestDate: {
-        //display: 'block'
+        color: greenColor
     }
 }));
 
@@ -33,35 +58,35 @@ export const DoctorList = ({ specialistTypeName, doctorList, onSelectDoctor }) =
             <CaptionList caption={specialistTypeName}></CaptionList>
             <List>
                 {doctorList.map((doctorItem) => (
-                    <ListItem key={doctorItem.id} alignItems="flex-start"
+                    <ListItem className={classes.listItemStyle} key={doctorItem.id} alignItems="flex-start"
                         button={true} onClick={() => onSelectDoctor(doctorItem.id)}>
                         <Avatar className={classes.avatarStyle}
                             alt={`${doctorItem.surname} ${doctorItem.name} ${doctorItem.patronymic}`}
                             src={doctorItem.avatar}
                         />
                         <ListItemText
-                            primary={`${doctorItem.surname} ${doctorItem.name} ${doctorItem.patronymic}`}
+                            primary={<Typography className={classes.doctorName}>
+                                {`${doctorItem.surname} ${doctorItem.name} ${doctorItem.patronymic}`}
+                            </Typography>
+                            }
                             secondary={
-                                <React.Fragment>
+                                <>
                                     <Typography
-                                        className={classes.info}
-                                        component="span"
-                                        variant="body2"
-                                        color="primary"
-                                    >
+                                        className={`${classes.secondaryStr} ${classes.info}`}
+                                        component="span">
                                         {doctorItem.info}
                                     </Typography>
-
                                     <Typography
-                                        className={classes.nearestDate}
-                                        component="span"
-                                        variant="body2"
-                                    //color="primary"
-                                    >
-                                        {`Ближайшая дата приёма: ${doctorItem.nearestDate}`}
+                                        className={`${classes.secondaryStr} ${classes.nearestDateStr}`}
+                                        component="span">
+                                        {`Ближайшая дата приёма: `}
                                     </Typography>
-
-                                </React.Fragment>
+                                    <Typography
+                                        className={`${classes.secondaryStr} ${classes.nearestDate}`}
+                                        component="span">
+                                        {doctorItem.nearestDate}
+                                    </Typography>
+                                </>
                             }
                         />
                     </ListItem>

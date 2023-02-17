@@ -3,38 +3,54 @@ import { List, ListItem, ListItemText, Typography, Avatar, Box } from '@material
 import { CaptionList } from './captionList';
 
 import { makeStyles } from '@material-ui/core/styles';
-import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
 
-const testColor = '#00EE00';
+import { blueColor, greenColor, greyColor, dividerListItem, greenGradientBackground } from '../../styleConst';
 
 const useStyles = makeStyles((theme) => ({
     listStyle: {
         paddingLeft: theme.spacing(3),
         paddingRight: theme.spacing(3)
     },
-    /*
-    specialistList: {
-        width: '100%'
-
-        //color: theme.palette.common.white
-    },*/
+    listItemStyle: {
+        borderBottom: dividerListItem,
+        '&:hover': {
+            '&  $specialistName': {
+                color: greenColor
+            },
+            '& $avatarStyle': {
+                background: greenGradientBackground
+            }
+        }
+    },
     specialistName: {
         fontStyle: 'normal',
         fontWeight: '600',
         fontSize: '16px',
-        lineHeight: '24px'
+        lineHeight: '24px',
+        color: greyColor
     },
-    specialistName2: {
-        display: 'inline',
-        color: testColor
+    secondaryStr: {
+        fontStyle: 'normal',
+        fontWeight: '400',
+        fontSize: '12px',
+        lineHeight: '18px'
+    },
+    constStr: {
+        color: greyColor
     },
     specialistCount: {
-
+        color: greenColor
     },
     avatarStyle: {
-        backgroundColor: testColor,
+        backgroundColor: blueColor,
         marginRight: theme.spacing(1),
-        marginTop: theme.spacing(1)
+        marginTop: theme.spacing(1),
+        '& > img': {
+            maxWidth: '39px',
+            maxHeight: '39px',
+            width: '75%',
+            height: '75%'
+        }
     }
 
 }));
@@ -49,28 +65,26 @@ export const SpecialistTypeList = ({ specialistTypeList, onSelectSpecialistType 
             <CaptionList caption={'Специализации'}></CaptionList>
             <List>
                 {specialistTypeList.map((specialistTypeItem) => (
-                    <ListItem key={specialistTypeItem.id} alignItems="flex-start"
+                    <ListItem className={classes.listItemStyle} key={specialistTypeItem.id} alignItems="flex-start"
                         button={true} onClick={() => onSelectSpecialistType(specialistTypeItem.id)}>
-                        <Avatar className={classes.avatarStyle}>
-                            <LocalHospitalIcon />
-                        </Avatar>
-                        <Typography className={classes.specialistName}>
-                            {specialistTypeItem.name}
-                        </Typography>
+                        <Avatar className={classes.avatarStyle} src="/medical-record.svg"
+                            alt={specialistTypeItem.name} />
                         <ListItemText
-
+                            primary={
+                                <Typography className={classes.specialistName}>
+                                    {specialistTypeItem.name}
+                                </Typography>
+                            }
                             secondary={
-                                <React.Fragment>
-                                    {'Доступно для записи врачей: '}
+                                <>
+                                    <Typography className={`${classes.secondaryStr} ${classes.constStr}`} component="span">
+                                        {'Доступно для записи врачей: '}
+                                    </Typography>
                                     <Typography
-                                        className={classes.specialistName2}
-                                        component="span"
-                                        variant="body2"
-                                        color="primary"
-                                    >
+                                        className={`${classes.secondaryStr} ${classes.specialistCount}`} component="span">
                                         {specialistTypeItem.count}
                                     </Typography>
-                                </React.Fragment>
+                                </>
                             }
                         />
                     </ListItem>
