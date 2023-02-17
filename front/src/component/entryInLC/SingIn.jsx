@@ -42,7 +42,7 @@ const SingIn = ({ setIsAuth }) => {
   }
   //проверка ФИО на правильность
   function handleValidationFIO(event) {
-    const regExp = /[А-Яа-яA-Za-z]*$/i;
+    const regExp = /^[А-Яа-яA-Za-z]*$/gi;
 
     if (event.target.id === "surname" && regExp.test(event.target.value)) {
       setSurname(event.target.value);
