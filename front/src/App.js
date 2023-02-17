@@ -7,7 +7,7 @@ import {
   PatientAccountPage,
   Services,
   PrivateRoute,
-  PublicRoute
+  PublicRoute,
 } from "./component";
 import DoctorList from "./component/DoctorList/doctorlList";
 
@@ -48,7 +48,7 @@ function App() {
             path="/patientAccount/*"
             element={
               <PrivateRoute isAuth={isAuth}>
-                <PatientAccountPage />
+                <PatientAccountPage isAuth={isAuth} />
               </PrivateRoute>
             }
           />

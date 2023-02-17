@@ -45,15 +45,15 @@ const LogIn = ({ setIsAuth }) => {
       };
       console.log("log in data ", logInData);
 
-      // try {
-      //   apiRequest("logIn", "POST", logInData);.then((data) =>
-      //     setIsAuth(data.id)
-      //   );
+      try {
+        apiRequest("patient-login", "POST", logInData).then((data) =>
+          setIsAuth(data.id)
+        );
 
-      handleFormClear();
-      // } catch (error) {
-      //   alert("неправильный емейл или пароль");
-      // }
+        handleFormClear();
+      } catch (error) {
+        alert("неправильный емейл или пароль");
+      }
 
       //отправка на проверку входных данных
       //когда появятся эндпоинты на сервере , тогда размоментирую
