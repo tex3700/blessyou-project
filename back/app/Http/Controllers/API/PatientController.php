@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class PatientController extends Controller
 {
@@ -25,7 +26,7 @@ class PatientController extends Controller
     {
         $patients = $this->model->get();
 
-        return response()->json($patients);
+        return response()->json(['data' => $patients, 'status' => 200]);
     }
 
     /**
@@ -48,10 +49,10 @@ class PatientController extends Controller
         $patient = Patient::create($request->all());
         $user->patient()->save($patient);
 
-       return response()->json( [
+        return response()->json( [
             'message' => 'Пациент успашно добавлен',
-            'id' => $user->id],
-            201 );
+            'id' => $user->id,
+            'status' => 201], 201 );
     }
 
     public function store(Request $request): JsonResponse
@@ -59,28 +60,30 @@ class PatientController extends Controller
         $user = User::create([
             'email' => $request->email,
             'phone' => $request->phone,
-            'is_employee' => '1',
+            'is_patient' => '1',
         ]);
 
         $patient = Patient::create($request->all());
 
         $user->employee()->save($patient);
 
-        return response()->json( 'Успешно сохранено', 201 );
+        return response()->json( [
+            'message' => 'Успешно сохранено',
+            'status' => 201], 201 );
     }
 
     public function show($id): JsonResponse
     {
         $patient = $this->model->where('user_id', '=', $id)->first();
 
-        return response()->json($patient);
+        return response()->json(['data' => $patient, 'status' => 200]);
     }
 
     public function edit($id): JsonResponse
     {
         $patient = $this->model->get()->find($id);
 
-        return response()->json($patient);
+        return response()->json(['data' => $patient, 'status' => 200]);
     }
 
     public function update(Request $request, Patient $patient): JsonResponse
@@ -88,7 +91,9 @@ class PatientController extends Controller
         $patient->update($request->all());
         $patient->user()->update($request->all());
 
-        return response()->json('Успешно обновлено');
+        return response()->json([
+            'message' => 'Данные успешно обновлены',
+            'status' => 200]);
     }
 
     public function destroy(Patient $patient): JsonResponse
@@ -96,7 +101,9 @@ class PatientController extends Controller
         $patient->delete();
         $patient->user()->delete();
 
-        return response()->json('Пациент удален', 204);
+        return response()->json([
+            'message' => 'Пациент удален',
+            'status' => 204], 204);
     }
 
 

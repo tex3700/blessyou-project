@@ -5,13 +5,13 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import { Route, NavLink as ReactRouterLink, Routes, useLocation } from 'react-router-dom';
 import { Appointment } from '../appointment';
-import { Receipts } from '../receipts';
 import { PatientProfile } from '../patientProfile';
 import { MedicalHistory } from '../medicalHistory';
-//import { DialogSelectPatient } from '../dialogSelectPatient';
+import { DialogSelectPatient } from '../dialogSelectPatient';
 
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import { apiRequest } from '../../api';
+import { ActiveAppointments } from '../activeAppointments';
 
 const useStyles = makeStyles((theme) => ({
     accoutPage: {
@@ -101,8 +101,8 @@ const menu = [
         element: <Appointment />
     },
     {
-        caption: 'Мои записи', link: 'receipts', path: 'receipts',
-        element: <Receipts />
+        caption: 'Мои записи', link: 'activeAppointments', path: 'activeAppointments',
+        element: <ActiveAppointments />
     },
     {
         caption: 'История болезни', link: 'medicalHistory', path: 'medicalHistory',
@@ -112,7 +112,7 @@ const menu = [
 
 export const PatientAccountPage = () => {
 
-    //const [openDialog, setOpenDialog] = useState(false);
+    const [open, setOpen] = useState(false);
 
     const refAppointment = useRef(null);
     const location = useLocation();
@@ -134,54 +134,60 @@ export const PatientAccountPage = () => {
     }
 
     const onSelectPatientClick = () => {
-        //setOpenDialog(true);
+        setOpen(true);
     };
 
+    const onCloseDialog = () => {
+        setOpen(false);
+    }
     return (
-        <Box className={classes.accountPage}>
-            <Box className={classes.header}>
-                <Container fixed>
-                    <Typography className={classes.headerCaption} variant='h4'
-                    >
-                        {`Личный кабинет пациента | ${getActiveNavLinkCaption()}`}
-                    </Typography>
-                </Container>
+        <>
+            <Box className={classes.accountPage}>
+                <Box className={classes.header}>
+                    <Container fixed>
+                        <Typography className={classes.headerCaption} variant='h4'
+                        >
+                            {`Личный кабинет пациента | ${getActiveNavLinkCaption()}`}
+                        </Typography>
+                    </Container>
+                </Box>
+                <Box className={classes.menu}>
+                    <Container fixed>
+                        {
+                            menu.map((item, index) => (
+                                <MuiLink key={index} component={ReactRouterLink} to={item.link} className={classes.menuLink}
+                                    innerRef={item.link === 'activeAppointments' ? refAppointment : null}>
+                                    {item.caption}
+                                </MuiLink>
+                            ))
+                        }
+                    </Container>
+                </Box>
+                <Box className={classes.patientInfo}>
+                    <Container fixed>
+                        <Typography variant='body1' className={classes.patientName}>
+                            Здравствуйте, дорогой пациент
+                        </Typography>
+                        <AutorenewIcon className={classes.patientChange} onClick={onSelectPatientClick} />
+                        <Box className={classes.empty}></Box>
+                        <Typography variant='body1' className={classes.patientExit}
+                            onClick={() => onExit()}>
+                            Выход
+                        </Typography>
+                    </Container>
+                </Box>
+                <Box className={classes.contentBox}>
+                    <Routes>
+                        {
+                            menu.map((item, index) => (
+                                <Route key={index} path={item.path} element={item.element} />
+                            ))
+                        }
+                    </Routes>
+                </Box>
             </Box>
-            <Box className={classes.menu}>
-                <Container fixed>
-                    {
-                        menu.map((item, index) => (
-                            <MuiLink key={index} component={ReactRouterLink} to={item.link} className={classes.menuLink}
-                                innerRef={item.link === 'appointment' ? refAppointment : null}>
-                                {item.caption}
-                            </MuiLink>
-                        ))
-                    }
-                </Container>
-            </Box>
-            <Box className={classes.patientInfo}>
-                <Container fixed>
-                    <Typography variant='body1' className={classes.patientName}>
-                        Здравствуйте, дорогой пациент
-                    </Typography>
-                    <AutorenewIcon className={classes.patientChange} onClick={onSelectPatientClick()} />
-                    <Box className={classes.empty}></Box>
-                    <Typography variant='body1' className={classes.patientExit}
-                        onClick={() => onExit()}>
-                        Выход
-                    </Typography>
-                </Container>
-            </Box>
-            <Box className={classes.contentBox}>
-                <Routes>
-                    {
-                        menu.map((item, index) => (
-                            <Route key={index} path={item.path} element={item.element} />
-                        ))
-                    }
-                </Routes>
-            </Box>
-        </Box>
+            <DialogSelectPatient open={open} onClose={onCloseDialog}></DialogSelectPatient>
+        </>
     )
 }
 
