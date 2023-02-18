@@ -17,6 +17,11 @@ return [
 
     'paths' => [
         'api/*',
+        'api/api/*',
+        'api/patient-login',
+        'api/staff-login',
+        'api/logout',
+        'api/sanctum/csrf-cookie',
         'login',
         'patient-login',
         'staff-login',
@@ -24,18 +29,33 @@ return [
         'sanctum/csrf-cookie',
     ],
 
-    'allowed_methods' => ['*'],
+    'allowed_methods' => [
+        'POST',
+        'GET',
+        'OPTIONS',
+        'PUT',
+        'PATCH',
+        'DELETE',
+    ],
 
-    'allowed_origins' => [env('FRONTEND_URL', 'http://localhost:3000')],
+    'allowed_origins' => [env('FRONTEND_URL', 'http://localhost:3000'),
+                            'http://localhost:3000',
+                            'http://localhost:3000/',],
 
     'allowed_origins_patterns' => [],
 
-    'allowed_headers' => ['*'],
+    'allowed_headers' => [
+        'Content-Type',
+        'X-Auth-Token',
+        'Origin',
+        'Authorization',
+    ],
 
     'exposed_headers' => [],
 
     'max_age' => 0,
 
     'supports_credentials' => true,
+
 
 ];
