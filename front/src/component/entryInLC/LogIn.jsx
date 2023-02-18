@@ -13,7 +13,7 @@ import useStyles from "./styles";
 import { apiRequest } from "../../api";
 import { Navigate } from "react-router-dom";
 
-const LogIn = ({ onSubmit, isAuth }) => {
+const LogIn = ({ setIsAuth }) => {
   const classes = useStyles();
 
   const [email, setEmail] = useState("");
@@ -46,7 +46,11 @@ const LogIn = ({ onSubmit, isAuth }) => {
       console.log("log in data ", logInData);
 
       try {
-        isAuth = await onSubmit(email, password);
+        apiRequest("patient-login", "POST", logInData).then((data) =>
+          setIsAuth(data.id)
+        );
+
+        handleFormClear();
       } catch (error) {
         alert("неправильный емейл или пароль");
       }
@@ -54,8 +58,6 @@ const LogIn = ({ onSubmit, isAuth }) => {
       //отправка на проверку входных данных
       //когда появятся эндпоинты на сервере , тогда размоментирую
       // apiRequest("logIn", "POST", logInData);
-
-      handleFormClear();
     }
     setValid(false);
   }
@@ -77,9 +79,12 @@ const LogIn = ({ onSubmit, isAuth }) => {
                   variant="outlined"
                   placeholder="Логин (email)*"
                   type="email"
+                  error={!valid && email !== ""}
+                  helperText={
+                    !valid && email !== "" ? "email введен некорректно" : ""
+                  }
                   value={email}
                   onChange={(e) => handleValidation(e)}
-                  // helperText={!valid ? "Incorrect entry." : ""}
                   InputProps={{
                     classes: { notchedOutline: classes.noBorder },
                   }}
@@ -100,11 +105,7 @@ const LogIn = ({ onSubmit, isAuth }) => {
               </Grid>
               <Grid item container className={classes.logInGridItemButton}>
                 <Grid item>
-                  <Button
-                    type="submit"
-                    className={classes.logInButton}
-                    // onClick={handleFormClear}
-                  >
+                  <Button type="submit" className={classes.logInButton}>
                     ВОЙТИ В ЛИЧНЫЙ КАБИНЕТ
                   </Button>
                 </Grid>
