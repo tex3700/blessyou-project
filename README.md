@@ -88,3 +88,71 @@ https://blessyou-clinic.ru/api
 возвращает все данные из таблицы users и связанной с ней patients:
 users: {email,phone,is_patient(1),is_admin(0),is_doctor(0),is_employee(0)}
 patients: {id,name,surname,patronymic} (у пациента пока только эти поля, дольше будем добавлять)
+
+-АПИ для добавления,чтения пациентов связаных с зарегестрированным пациентом 
+(работают только когда пациент авторизировался):
+--"POST" 'add-relative'
+струтура запроса на данный момент : {
+  'name': 'string',
+  'surname': 'string',
+  'patronymic': 'string',
+  'birthday': 'date',
+  }
+
+  регистрирует и связывает с user авторизированного пациента, в db сохраняет:
+  patients: 
+  'name': 'string',
+  'surname': 'string',
+  'patronimyc': 'string',
+  'birthday': 'date',
+  'user_id': id user авторизированного пациента
+
+  возвращает: {
+  "message": "Пациент успашно добавлен",
+  "id": number //(юзера авторизированного пациента)
+  status: 201
+  }
+  
+--"GET" '/patient-relatives'
+
+возвращает всех пациентов связаных с авторизованным в данный момент пациентом:
+patients: {id,name,surname,patronymic,birthday}
+
+--"GET" '/edit-relative/{id}'
+
+принимает {id} (на фронте ${id}) - id связанного пациента
+
+возвращает донные связанного пациента:
+patients: {id,name,surname,patronymic,birthday}
+
+--"GET" '/edit-relative/{id}'
+
+принимает {id} (на фронте ${id}) - id связанного пациента
+
+возвращает донные связанного пациента:
+patients: {id,name,surname,patronymic,birthday}
+
+--"PUT" 'update-relative/{id}'
+
+принимает {id} (на фронте ${id}) - id связанного пациента
+и измененные/неизмененные данные
+data : {
+  'name': 'string',
+  'surname': 'string',
+  'patronymic': 'string',
+  'birthday': 'date',
+  }
+
+  обновляет данные в таблице patients: 
+  {name,surname,patronymic,birthday}
+
+  возвращает: {
+  'message': 'Данные успешно обновлены',
+  'status' : 200
+  }
+  
+-АПИ для деавторизацию юзера
+--"POST" 'logout'
+возвращает:
+'message' => 'logout successful', 'status' => 200;
+если никто небыл авторизован: 'message' => 'Пользователь не авторизован'
