@@ -12,6 +12,7 @@ class AuthenticatedSessionController extends Controller
 {
     /**
      * Handle an incoming authentication request.
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(LoginRequest $request): Response
     {
