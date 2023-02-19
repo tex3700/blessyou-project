@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme) => ({
   ourServicesGrid: {
     paddingTop: "70px",
     justifyContent: "center",
+    paddingBottom: "100px",
   },
   ourServicesGridTitle: {
     alignItems: "center",

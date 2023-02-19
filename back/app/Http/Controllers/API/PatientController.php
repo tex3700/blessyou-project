@@ -65,7 +65,7 @@ class PatientController extends Controller
 
         $patient = Patient::create($request->all());
 
-        $user->employee()->save($patient);
+        $user->patient()->save($patient);
 
         return response()->json( [
             'message' => 'Успешно сохранено',

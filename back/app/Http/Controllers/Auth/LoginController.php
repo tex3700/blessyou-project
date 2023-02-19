@@ -23,9 +23,13 @@ class LoginController extends Controller
     /**
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function login(LoginRequest $request): Response|JsonResponse
+    public function login(
+        AuthenticatedSessionController $authSession,
+        LoginRequest $request
+    ): Response|JsonResponse
     {
-        $request->authenticate();
+        //$request->authenticate();
+        $authSession->store($request);
 
         if (Auth::check()) {
 
