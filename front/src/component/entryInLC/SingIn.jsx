@@ -77,7 +77,7 @@ const SingIn = ({ setIsAuth }) => {
         console.log("error ", error.message);
       }
     } else {
-      alert("Проверьте правильность написания email и совпадение");
+      alert("Проверьте правильность написания email и совпадение паролей");
     }
     setValid(false);
   }

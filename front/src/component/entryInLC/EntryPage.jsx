@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Container,
@@ -11,18 +11,22 @@ import useStyles from "./styles";
 import LogIn from "./LogIn";
 import SingIn from "./SingIn";
 import { apiRequest } from "../../api";
-
-/////////
-const usersArray = [
-  { id: 1, name: "Dima", email: "test@mail.ru", password: "12345" },
-  { id: 2, name: "Vova", email: "mail@mail.ru", password: "56789" },
-];
+import ModalWindow from "../commonComponents/modalWindow/ModalWindow";
 
 /////////
 
 /////////
 const EntryPage = ({ setIsAuth }) => {
   const classes = useStyles();
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (value) => {
+    setOpen(false);
+  };
 
   return (
     <>
@@ -31,8 +35,9 @@ const EntryPage = ({ setIsAuth }) => {
           <Typography variant="h3">Вход в личный кабинет пациента</Typography>
         </Container>
       </Box>
-      <LogIn setIsAuth={setIsAuth} />
-      <SingIn setIsAuth={setIsAuth} />
+      <LogIn setIsAuth={setIsAuth} setOpen={setOpen} />
+      <SingIn setIsAuth={setIsAuth} setOpen={setOpen} />
+      <ModalWindow open={open} onClose={handleClose} />
     </>
   );
 };

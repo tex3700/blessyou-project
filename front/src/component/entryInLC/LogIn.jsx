@@ -13,7 +13,7 @@ import useStyles from "./styles";
 import { apiRequest } from "../../api";
 import { Navigate } from "react-router-dom";
 
-const LogIn = ({ setIsAuth }) => {
+const LogIn = ({ setIsAuth, setOpen }) => {
   const classes = useStyles();
 
   const [email, setEmail] = useState("");
@@ -52,7 +52,8 @@ const LogIn = ({ setIsAuth }) => {
 
         handleFormClear();
       } catch (error) {
-        alert("неправильный емейл или пароль");
+        setOpen(true);
+        // alert("неправильный емейл или пароль");
       }
 
       //отправка на проверку входных данных
