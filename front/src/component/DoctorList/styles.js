@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
     top: "-157px",
     height: "200px",
     borderRadius: "0",
+    alignItems: "center",
  },
  
   docTextH2: {
@@ -44,6 +45,10 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: "48px",
     color: "#76BF35",
   }, 
+
+  cardGrid: {
+    marginBottom: "107px",
+  },
  
 }));
 
