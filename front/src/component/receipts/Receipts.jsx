@@ -7,6 +7,9 @@ import TextField from "@mui/material/TextField";
 import useStyles from "../commonComponents/ourDoctors/styles";
 import { YMaps, Map } from "react-yandex-maps";
 import useStylesRecept from "./styles";
+import { apiRequest } from "../../api";
+
+//react-hook-form
 
 export const TextFieldCustom = styled(TextField)(({ theme }) => ({
   "& .MuiInputLabel-root": {
@@ -93,6 +96,51 @@ export const Receipts = () => {
   const [message, setMessage] = useState("");
   const [number, setNumber] = useState("");
 
+  const [isEmailError, setIsEmailError] = useState(false);
+  const [isNameError, setIsNameError] = useState(false);
+  const [isMessageError, setIsMessageError] = useState(false);
+
+  const isValidateEmailField = (value) => {
+    // return true, if has error
+    if (value.trim().length < 1) {
+      //required
+      return true;
+    }
+
+    if (
+      !/^([A-Za-zа-яА-ЯёЁ0-9_\-\.])+\@([A-Za-zа-яА-ЯёЁ0-9_\-\.])+\.([A-Za-zа-яА-ЯёЁ]{2,4})$/.test(
+        value
+      )
+    ) {
+      //check/... on email
+      return true;
+    }
+    return false;
+  };
+
+  const isValidateNameField = (value) => {
+    // return true, if has error
+    if (value.trim().length < 1) {
+      //required
+      return true;
+    }
+
+    if (!/^[a-zA-Zа-яА-ЯёЁ ]+$/g.test(value)) {
+      //check/... on only symbol
+      return true;
+    }
+    return false;
+  };
+
+  const isValidateMessageField = (value) => {
+    // return true, if has error
+    if (value.trim().length < 1) {
+      //required
+      return true;
+    }
+    return false;
+  };
+
   const handleRequestForm = async () => {
     const body = {
       email: email,
@@ -100,6 +148,8 @@ export const Receipts = () => {
       phone: number,
       text: message,
     };
+    // const data = await apiRequest("mail/send", "post", body);
+
     const data = await fetch("https://blessyou-clinic.ru/api/api/mail/send", {
       method: "POST",
       headers: {
@@ -152,8 +202,19 @@ export const Receipts = () => {
                     </Box>
                     <TextFieldCustom
                       value={name}
+                      error={isNameError}
+                      helperText={
+                        isNameError &&
+                        "Поле обязательное и должно содержать только символы"
+                      }
                       onChange={(e) => {
                         setName(e.target.value);
+                        const isValidate = isValidateNameField(e.target.value);
+                        if (isValidate) {
+                          setIsNameError(true);
+                        } else {
+                          setIsNameError(false);
+                        }
                       }}
                     />
                   </Box>
@@ -192,8 +253,16 @@ export const Receipts = () => {
                     </Box>
                     <TextFieldCustom
                       value={email}
+                      error={isEmailError}
+                      helperText={isEmailError && "Некорректный email"}
                       onChange={(e) => {
                         setEmail(e.target.value);
+                        const isValidate = isValidateEmailField(e.target.value);
+                        if (isValidate) {
+                          setIsEmailError(true);
+                        } else {
+                          setIsEmailError(false);
+                        }
                       }}
                     />
                   </Box>
@@ -212,8 +281,20 @@ export const Receipts = () => {
                     </Box>
                     <TextAreaCustom
                       value={message}
+                      error={isMessageError}
+                      helperText={
+                        isMessageError && "Поле обязательное для заполнения"
+                      }
                       onChange={(e) => {
                         setMessage(e.target.value);
+                        const isValidate = isValidateMessageField(
+                          e.target.value
+                        );
+                        if (isValidate) {
+                          setIsMessageError(true);
+                        } else {
+                          setIsMessageError(false);
+                        }
                       }}
                       multiline
                       rows={4}
@@ -224,9 +305,17 @@ export const Receipts = () => {
                   <Box sx={{ display: "flex", justifyContent: "center" }}>
                     <Button
                       className={`${commonClasses.mainRegistrationButton}
-                                                ${commonClasses.mainAboutUsButton} 
-                                                ${classesRecept.submit_button} 
-                                            `}
+                                  ${commonClasses.mainAboutUsButton} 
+                                  ${classesRecept.submit_button} 
+                                `}
+                      disabled={
+                        !email ||
+                        isEmailError ||
+                        !name ||
+                        isNameError ||
+                        isMessageError ||
+                        !message
+                      }
                       onClick={handleRequestForm}
                     >
                       ОТПРАВИТЬ СООБЩЕНИЕ
@@ -281,7 +370,7 @@ export const Receipts = () => {
                 >
                   <MailIcon className={classesRecept.icon_contact} />
                   <Typography className={classesRecept.email_contact}>
-                    welcome@blessyou.ru
+                    welcome@blessyou-clinic.ru
                   </Typography>
                 </Box>
               </Box>
