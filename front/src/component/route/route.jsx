@@ -1,10 +1,6 @@
 import { Navigate } from "react-router-dom";
 
-export function PrivateRoute({
-  isAuth,
-  to = "/patientAccount/appointment",
-  children,
-}) {
+export function PrivateRoute({ isAuth, to = "/", children }) {
   return isAuth ? children : <Navigate to={to} replace />;
 }
 

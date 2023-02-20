@@ -146,7 +146,7 @@ export const Receipts = () => {
                     }}
                   >
                     <Box sx={{ margin: "46px 0 7px 0" }}>
-                      <Typography color="textSecondary" variant="body3">
+                      <Typography color="textSecondary" variant="body2">
                         Ваше имя
                       </Typography>
                     </Box>
@@ -166,7 +166,7 @@ export const Receipts = () => {
                     }}
                   >
                     <Box sx={{ margin: "10px 0 7px 0" }}>
-                      <Typography color="textSecondary" variant="body3">
+                      <Typography color="textSecondary" variant="body2">
                         Телефон
                       </Typography>
                     </Box>
@@ -186,7 +186,7 @@ export const Receipts = () => {
                     }}
                   >
                     <Box sx={{ margin: "10px 0 7px 0" }}>
-                      <Typography color="textSecondary" variant="body3">
+                      <Typography color="textSecondary" variant="body2">
                         Email
                       </Typography>
                     </Box>
@@ -206,7 +206,7 @@ export const Receipts = () => {
                     }}
                   >
                     <Box sx={{ margin: "16px 0 7px 0" }}>
-                      <Typography color="textSecondary" variant="body3">
+                      <Typography color="textSecondary" variant="body2">
                         Ваше сообщение
                       </Typography>
                     </Box>

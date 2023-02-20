@@ -10,6 +10,7 @@ import {
 import useStyles from "./styles";
 import LogIn from "./LogIn";
 import SingIn from "./SingIn";
+import { apiRequest } from "../../api";
 
 /////////
 const usersArray = [
@@ -22,13 +23,7 @@ const usersArray = [
 /////////
 const EntryPage = ({ setIsAuth }) => {
   const classes = useStyles();
-  const onSubmit = (email, password) => {
-    const user = usersArray.find((item) => item.email === email);
-    if (password === user.password) {
-      return setIsAuth(true);
-    }
-    return setIsAuth(false);
-  };
+
   return (
     <>
       <Box className={classes.componentHead}>
@@ -36,8 +31,8 @@ const EntryPage = ({ setIsAuth }) => {
           <Typography variant="h3">Вход в личный кабинет пациента</Typography>
         </Container>
       </Box>
-      <LogIn onSubmit={onSubmit} />
-      <SingIn />
+      <LogIn setIsAuth={setIsAuth} />
+      <SingIn setIsAuth={setIsAuth} />
     </>
   );
 };

@@ -5,13 +5,12 @@ import DoctorCard from "../../component/commonComponents/doctorCard/DoctorCard";
 import  { SendMessage }  from "../../component/commonComponents/sendMessage/sendMessage"; 
 import OurSevicesComp from "../commonComponents/ourServices/OurSevicesComp";
 import { DataContext } from "../../DataContext";
-import { apiStorage } from "./../../../api";
 
 
 const DoctorList = () => {
   const classes = useStyles();
-  const { doctorListArray, doctorArray } = useContext(DataContext);
-  
+  const { doctorArray, servicesArray,  } = useContext(DataContext);
+
   return (
     
     <>
@@ -29,7 +28,7 @@ const DoctorList = () => {
     </div>
     <Container className={classes.cardGrid}>
       <Grid container spacing={2}> 
-          {doctorListArray.map((item) => (
+          {doctorArray.map((item) => (
             <Grid item key={item}>  
                  <DoctorCard key={item.id} props={item}/>               
             </Grid>
@@ -37,7 +36,7 @@ const DoctorList = () => {
       </Grid>   
     </Container>
    <SendMessage /> 
- <OurSevicesComp doctorArray={doctorArray}/>
+ <OurSevicesComp servicesArray={servicesArray} />
    </>
   );
 };

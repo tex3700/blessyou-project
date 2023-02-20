@@ -57,7 +57,7 @@ https://blessyou-clinic.ru/api
   "GET" /storage/department/{name_image.jpg}
 
 - АПИ для регистрации пользователя
-  "POST" /register
+  "POST" /api/patient-register
 
   струтура запроса на данный момент : {
   'name': 'string',
@@ -66,32 +66,22 @@ https://blessyou-clinic.ru/api
   'email': 'string@mail.com',
   'password': 'string',
   }
-  
-  - АПИ для регистрации пациента
-  "POST" /patient-register
-  (принимает {
-  'name': 'string',
-  'surname': 'string',
-  'patronymic': 'string',
-  'email': 'string@mail.com',
-  'password': 'string',
-  }
-  
-  регистрирует  и логинит user, в db сохраняет:
+
+  регистрирует и логинит user, в db сохраняет:
   users: 'email': 'string@mail.com',
   'password': 'string',
   patients: 'name': 'string',
   'surname': 'string',
   'patronimyc': 'string',
-  
+
   возвращает: {
-    "message": "Пациент успашно добавлен",
-    "id": 2 //(зарегестрированого юзера)
-    status: 201
-}
+  "message": "Пациент успашно добавлен",
+  "id": number //(зарегестрированого юзера)
+  status: 201
+  }
 
 -АПИ для получения данных зарегистрированного(залогиненого) пациента:
-"GET" /patient-private/{id} 
+"GET" /patient-private/{id}
 
 принимает {id} (на фронте ${id}) - id зарегистрированного(залогиненного) юзера
 
