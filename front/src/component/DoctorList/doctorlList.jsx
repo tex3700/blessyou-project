@@ -1,69 +1,17 @@
 import { Box, Container, Paper, Typography, Grid } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import useStyles from "./styles";
 import DoctorCard from "../../component/commonComponents/doctorCard/DoctorCard";
 import  { SendMessage }  from "../../component/commonComponents/sendMessage/sendMessage"; 
 import OurSevicesComp from "../commonComponents/ourServices/OurSevicesComp";
 import { DataContext } from "../../DataContext";
+import { apiStorage } from "./../../../api";
 
 
-const DoctorList = ({ doctorArray }) => {
+const DoctorList = () => {
   const classes = useStyles();
-  const [count, setCount] = useState(0);
+  const { doctorListArray, doctorArray } = useContext(DataContext);
   
-
-  const [currentArray, setCurrentArray] = useState([
-    doctorArray[0],
-    doctorArray[1],
-    doctorArray[2],
-    doctorArray[3],
-  ]);
-
-
-  if (count < 0) {
-    setCount(doctorArray.length - 1);
-  }
-
-  if (count === doctorArray.length) {
-    setCount(0);
-  }
-
-  function caoruseleHandler(number) {
-    let innnerNumber = number + 1;
-
-    if (innnerNumber === doctorArray.length) {
-      innnerNumber = 0;
-
-      return innnerNumber;
-    }
-    if (innnerNumber < 0) {
-      innnerNumber = doctorArray.length - 1;
-
-      return innnerNumber;
-    }
-
-    return innnerNumber;
-  }
-
-  const changeCurrentArray = () => {
-    let indexOne = count;
-    let indexTwo = caoruseleHandler(indexOne);
-    let indexThree = caoruseleHandler(indexTwo);
-    let indexFour = caoruseleHandler(indexThree);
-
-    setCurrentArray([
-      doctorArray[indexOne],
-      doctorArray[indexTwo],
-      doctorArray[indexThree],
-      doctorArray[indexFour],
-    ]);
-  };
-
-  useEffect(() => {
-    changeCurrentArray();
-  }, [count]);
-
-
   return (
     
     <>
@@ -81,16 +29,15 @@ const DoctorList = ({ doctorArray }) => {
     </div>
     <Container className={classes.cardGrid}>
       <Grid container spacing={2}> 
-          {currentArray.map((card) => (
-            <Grid item key={card}>  
-                 <DoctorCard key={card.image} props={card}/>               
+          {doctorListArray.map((item) => (
+            <Grid item key={item}>  
+                 <DoctorCard key={item.id} props={item}/>               
             </Grid>
           ))}
       </Grid>   
     </Container>
    <SendMessage /> 
- <OurSevicesComp />
- <DataContext />
+ <OurSevicesComp doctorArray={doctorArray}/>
    </>
   );
 };
