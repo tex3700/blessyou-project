@@ -36,7 +36,7 @@ const DoctorList = () => {
       </Grid>   
     </Container>
    <SendMessage /> 
- <OurSevicesComp servicesArray={servicesArray} />
+   {servicesArray.length > 0 && <OurSevicesComp servicesArray={servicesArray} />}
    </>
   );
 };
