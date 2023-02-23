@@ -1,23 +1,21 @@
 {
   "files": {
     "main.css": "/static/css/main.817b7d1b.css",
-    "main.js": "/static/js/main.0451e4fb.js",
+    "main.js": "/static/js/main.0ab77686.js",
     "static/media/mainPageBunner.jpg": "/static/media/mainPageBunner.623f2b70b38b64650c3c.jpg",
     "static/media/mainAboutUs.jpg": "/static/media/mainAboutUs.903711a2d6e10b17aa15.jpg",
     "static/media/Pediatr.jpg": "/static/media/Pediatr.2973fd6ce98d8855cbd9.jpg",
     "static/media/LOR.jpg": "/static/media/LOR.8b00508fdeb3eeea91df.jpg",
     "static/media/Physiotheraphy.jpg": "/static/media/Physiotheraphy.a59b66fea1ed1b173f17.jpg",
-    "static/media/ivanovDoctor.jpg": "/static/media/ivanovDoctor.f1c47a213fc2c07f515d.jpg",
-    "static/media/petrovaDoctor.jpg": "/static/media/petrovaDoctor.395bc06a9fe698bd4767.jpg",
-    "static/media/smirnovDoctor.jpg": "/static/media/smirnovDoctor.53a89aed0b508ef94c27.jpg",
-    "static/media/sidorovaDoctor.jpg": "/static/media/sidorovaDoctor.91a8f9cf05f5e8dcf177.jpg",
+    "static/media/searchMed.svg": "/static/media/searchMed.431a250183d9d33627976be4e005681b.svg",
     "static/media/enteranceDoctorsIcon.svg": "/static/media/enteranceDoctorsIcon.fe3fa341cf3f12dfe313439297ec45c3.svg",
+    "static/media/sentMed.svg": "/static/media/sentMed.7b34ad90c0e6f6fe35dda8318d883a8c.svg",
     "index.html": "/index.html",
     "main.817b7d1b.css.map": "/static/css/main.817b7d1b.css.map",
-    "main.0451e4fb.js.map": "/static/js/main.0451e4fb.js.map"
+    "main.0ab77686.js.map": "/static/js/main.0ab77686.js.map"
   },
   "entrypoints": [
     "static/css/main.817b7d1b.css",
-    "static/js/main.0451e4fb.js"
+    "static/js/main.0ab77686.js"
   ]
 }

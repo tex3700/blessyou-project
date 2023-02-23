@@ -4,6 +4,7 @@ import search from "../../static/icons/medical/searchMed.svg";
 import sent from "../../static/icons/medical/sentMed.svg";
 import { Avatar, Box, CardMedia, Typography } from "@material-ui/core";
 import { apiStorage } from "../../api";
+import { Link } from "react-router-dom";
 
 export const MedicalCard = ({ props }) => {
   const classes = useStyles();
@@ -22,7 +23,12 @@ export const MedicalCard = ({ props }) => {
       </Box>
       <Box>
         <CardMedia className={classes.medicalIgm} image={`${search}`} />
-        <CardMedia className={classes.medicalIgm} image={`${sent}`} />
+        <CardMedia
+          className={classes.medicalIgm}
+          image={`${sent}`}
+          component={Link}
+          to="/contacts"
+        />
       </Box>
     </Box>
   );
