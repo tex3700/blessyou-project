@@ -4,32 +4,35 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Patient;
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class PatientRelativeController extends Controller
 {
-    public function store(Request $request): JsonResponse
+    public function store(Request $request, User $user): JsonResponse
     {
-        if (Auth::check()) {
-            $user = Auth::user();
-        }
+//        if (Auth::check()) {
+//            $user = Auth::user();
 
         $patient = Patient::create($request->all());
         $user->patient()->save($patient);
 
-        return response()->json( [
+        return response()->json([
             'message' => 'Пациент успашно добавлен',
             'id' => $user->id,
-            'status' => 201], 201 );
+            'status' => 201], 201);
+//        }
+//        return response()->json([
+//            'message' => 'Пользователь не авторизоваан',
+//            'status' => 401], 401);
     }
 
-    public function show(): JsonResponse
+    public function show(User $user): JsonResponse
     {
-        if (Auth::check()) {
-            $user = Auth::user();
-        }
+//        if (Auth::check()) {
+//            $user = Auth::user();
 
         $patients = $user->patient()->get();
 
@@ -37,7 +40,11 @@ class PatientRelativeController extends Controller
 
         return !is_null($patientsAnother)
             ? response()->json(['data' => $patientsAnother, 'status' => 200])
-            : response()->json(['message' => "Не найдено связанных записей", 'status' => 422]);
+            : response()->json(['message' => "Не найдено связанных записей", 'status' => 204], 204);
+//        }
+//        return response()->json([
+//            'message' => 'Пользователь не авторизоваан',
+//            'status' => 401], 401);
     }
 
     public function edit(Patient $patient): JsonResponse
