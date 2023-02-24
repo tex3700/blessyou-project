@@ -76,9 +76,10 @@ const SingIn = ({ setIsAuth, handleOpen }) => {
           setIsAuth(data.id);
           setValid(false);
           handleFormClear();
+        } else {
+          console.log("set", data.status);
+          handleOpen(data);
         }
-        console.log("set", data.status);
-        handleOpen(data);
       });
     } else {
       alert("Проверьте правильность написания email и совпадение паролей");
