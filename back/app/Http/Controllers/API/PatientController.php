@@ -32,7 +32,10 @@ class PatientController extends Controller
     /**
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function register(Request $request, RegisteredUserController $registeredUser): JsonResponse
+    public function register(
+        Request $request,
+        RegisteredUserController $registeredUser
+    ): JsonResponse
     {
         try {
             $registeredUser->store($request);
@@ -44,15 +47,18 @@ class PatientController extends Controller
             $user = Auth::user();
             $user->is_patient = '1';
             $user->save();
+
+            $patient = Patient::create($request->all());
+            $user->patient()->save($patient);
+
+            return response()->json([
+                'message' => 'Пациент успашно добавлен',
+                'id' => $user->id,
+                'status' => 201], 201);
         }
-
-        $patient = Patient::create($request->all());
-        $user->patient()->save($patient);
-
-        return response()->json( [
-            'message' => 'Пациент успашно добавлен',
-            'id' => $user->id,
-            'status' => 201], 201 );
+        return response()->json([
+            'message' => 'Произошла ошибка при регистрации или авторизации пользователя',
+            'status' => 422], 422);
     }
 
     public function store(Request $request): JsonResponse
@@ -65,7 +71,7 @@ class PatientController extends Controller
 
         $patient = Patient::create($request->all());
 
-        $user->employee()->save($patient);
+        $user->patient()->save($patient);
 
         return response()->json( [
             'message' => 'Успешно сохранено',

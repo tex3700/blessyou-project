@@ -11,7 +11,7 @@ import useStyles from "./styles";
 import { apiRequest } from "../../api";
 
 //////
-const SingIn = ({ setIsAuth }) => {
+const SingIn = ({ setIsAuth, handleOpen }) => {
   const classes = useStyles();
 
   const [email, setEmail] = useState("");
@@ -68,18 +68,23 @@ const SingIn = ({ setIsAuth }) => {
         patronymic,
       };
       console.log("sign in data ", singInData);
-      try {
-        apiRequest("patient-register", "POST", singInData).then((data) =>
-          setIsAuth(data.id)
-        );
-        handleFormClear();
-      } catch (error) {
-        console.log("error ", error.message);
-      }
+
+      apiRequest("patient-register", "POST", singInData).then((data) => {
+        console.log("data ", data);
+        if (data.status >= 200 && data.status <= 299) {
+          console.log("422", data);
+          setIsAuth(data.id);
+          setValid(false);
+          handleFormClear();
+        } else {
+          console.log("set", data.status);
+          handleOpen(data);
+        }
+      });
     } else {
-      alert("Проверьте правильность написания email и совпадение");
+      alert("Проверьте правильность написания email и совпадение паролей");
     }
-    setValid(false);
+    // setValid(false);
   }
   return (
     <>
@@ -128,6 +133,11 @@ const SingIn = ({ setIsAuth }) => {
                   id="password"
                   placeholder="Пароль*"
                   type="password"
+                  helperText={
+                    password && password.length < 8
+                      ? "пароль должен быть не менее 8 символов"
+                      : ""
+                  }
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   InputProps={{
