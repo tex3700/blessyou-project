@@ -7,48 +7,20 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import Dialog from "@material-ui/core/Dialog";
 
 import useStyles from "./styles";
+import { DialogContent, DialogContentText } from "@material-ui/core";
 
 /////
-const emails = ["username@gmail.com", "user02@gmail.com"];
 
-const ModalWindow = (props) => {
+const ModalWindow = ({ onClose, modalMessage, open }) => {
   const classes = useStyles();
-  const { onClose, selectedValue, open } = props;
-
-  const handleClose = () => {
-    onClose(selectedValue);
-  };
-
-  const handleListItemClick = (value) => {
-    onClose(value);
-  };
+  // const { onClose, modalMessage, open } = props;
 
   return (
-    <Dialog
-      onClose={handleClose}
-      aria-labelledby="simple-dialog-title"
-      open={open}
-    >
-      <DialogTitle id="simple-dialog-title">Set backup account</DialogTitle>
-      <List>
-        {emails.map((email) => (
-          <ListItem
-            button
-            onClick={() => handleListItemClick(email)}
-            key={email}
-          >
-            <ListItemText primary={email} />
-          </ListItem>
-        ))}
-
-        <ListItem
-          autoFocus
-          button
-          onClick={() => handleListItemClick("addAccount")}
-        >
-          <ListItemText primary="Add account" />
-        </ListItem>
-      </List>
+    <Dialog onClose={onClose} aria-labelledby="simple-dialog-title" open={open}>
+      <DialogTitle id="simple-dialog-title">Что-то пошло не так</DialogTitle>
+      <DialogContent>
+        <DialogContentText>{modalMessage}</DialogContentText>
+      </DialogContent>
     </Dialog>
   );
 };

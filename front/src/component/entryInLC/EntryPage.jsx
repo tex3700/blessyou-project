@@ -19,12 +19,15 @@ import ModalWindow from "../commonComponents/modalWindow/ModalWindow";
 const EntryPage = ({ setIsAuth }) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
 
-  const handleOpen = () => {
+  const handleOpen = (value) => {
+    setModalMessage(value);
     setOpen(true);
   };
 
-  const handleClose = (value) => {
+  const handleClose = () => {
+    setModalMessage("");
     setOpen(false);
   };
 
@@ -35,9 +38,13 @@ const EntryPage = ({ setIsAuth }) => {
           <Typography variant="h3">Вход в личный кабинет пациента</Typography>
         </Container>
       </Box>
-      <LogIn setIsAuth={setIsAuth} setOpen={setOpen} />
-      <SingIn setIsAuth={setIsAuth} setOpen={setOpen} />
-      <ModalWindow open={open} onClose={handleClose} />
+      <LogIn setIsAuth={setIsAuth} handleOpen={handleOpen} />
+      <SingIn setIsAuth={setIsAuth} handleOpen={handleOpen} />
+      <ModalWindow
+        open={open}
+        onClose={handleClose}
+        modalMessage={modalMessage}
+      />
     </>
   );
 };
