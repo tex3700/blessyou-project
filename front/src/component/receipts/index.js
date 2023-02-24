@@ -1,1 +1,1 @@
-export { Receipts } from './Receipts';
+export { Receipts } from "./Receipts.jsx";

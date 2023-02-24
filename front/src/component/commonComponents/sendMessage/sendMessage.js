@@ -18,7 +18,7 @@ export const SendMessage = () => {
       phone: number,
       text: message,
     };
-    if (name) {
+    if (name && email && message) {
       apiRequest("mail/send", "POST", body);
 
       setName("");
@@ -54,6 +54,7 @@ export const SendMessage = () => {
               pattern="\S+@[0-9a-z_]+\.[a-z]+"
               onChange={(e) => setEmail(e.target.value)}
               value={email}
+              required
             />
             <input
               type="text"
@@ -73,6 +74,7 @@ export const SendMessage = () => {
             placeholder="Ваше сообщение"
             onChange={(e) => setMessage(e.target.value)}
             value={message}
+            required
           ></textarea>
           <Box m={4} align="center">
             <Button type="submit" className={classes.sendMessageButton}>
