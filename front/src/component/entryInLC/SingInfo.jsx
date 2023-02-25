@@ -11,7 +11,7 @@ import useStyles from "./styles";
 import { apiRequest } from "../../api";
 
 //////
-const SingIn = ({ setIsAuth, handleOpen }) => {
+const SingInfo = ({ setIsAuth }) => {
   const classes = useStyles();
 
   const [email, setEmail] = useState("");
@@ -60,40 +60,35 @@ const SingIn = ({ setIsAuth, handleOpen }) => {
     event.preventDefault();
 
     if (valid && password === repeatPassword) {
-      let singInData = {
+      let singInfoData = {
         email,
         password,
         name,
         surname,
         patronymic,
       };
-      console.log("sign in data ", singInData);
-
-      apiRequest("patient-register", "POST", singInData).then((data) => {
-        console.log("data ", data);
-        if (data.status >= 200 && data.status <= 299) {
-          console.log("422", data);
-          setIsAuth(data.id);
-          setValid(false);
-          handleFormClear();
-        } else {
-          console.log("set", data.status);
-          handleOpen(data);
-        }
-      });
+      console.log("sign in data ", singInfoData);
+      try {
+        apiRequest("patient-register", "POST", singInfoData).then((data) =>
+          setIsAuth(data.id)
+        );
+        handleFormClear();
+      } catch (error) {
+        console.log("error ", error.message);
+      }
     } else {
-      alert("Проверьте правильность написания email и совпадение паролей");
+      alert("Проверьте правильность написания email и совпадение");
     }
-    // setValid(false);
+    setValid(false);
   }
   return (
     <>
       <Box className={classes.logInContainer}>
         <Container fixed>
           <Typography variant="h3" className={classes.logInTitle}>
-            Регистрация нового пользователя
+            Личная информация
           </Typography>
-
+                
           <form className={classes.logInFrom} onSubmit={handleForm}>
             <Grid container className={classes.logInGridContainer}>
               <Grid item className={classes.logInGridItemInput}>
@@ -133,11 +128,6 @@ const SingIn = ({ setIsAuth, handleOpen }) => {
                   id="password"
                   placeholder="Пароль*"
                   type="password"
-                  helperText={
-                    password && password.length < 8
-                      ? "пароль должен быть не менее 8 символов"
-                      : ""
-                  }
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   InputProps={{
@@ -198,4 +188,4 @@ const SingIn = ({ setIsAuth, handleOpen }) => {
   );
 };
 
-export default SingIn;
+export default SingInfo;

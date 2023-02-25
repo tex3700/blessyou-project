@@ -21,7 +21,7 @@ class CheckDateReportAbility {
             foreach ($recordToDoctor as $record) {
                 $recordTimeAr[] = $record->record_time;
             }
-              $result[$key] = array_diff($value, $recordTimeAr);
+              $result[$key] = array_values(array_diff($value, $recordTimeAr));
         }
         return $result;
     }

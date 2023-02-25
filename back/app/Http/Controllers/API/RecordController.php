@@ -15,6 +15,9 @@ use App\Actions\FindDateAction;
 use App\Actions\AllPossibleReportForDateAction;
 use App\Actions\CheckDateReportAbility;
 
+use Illuminate\Validation\ValidationException;
+
+
 class RecordController extends Controller {
 
     private Builder $model;
@@ -51,20 +54,31 @@ class RecordController extends Controller {
         return response()->json($allPossibleReport);
     }
 
-    public function store(Request $request,ScheduleController $scheduleController): JsonResponse {
-        //$result = $scheduleController->getShedulebyDoctor($request->doctor_id)->getData();
-        //Нужно вынести в валидацию
-        $arRequest = $request->all();
-        //$result = $this->getPossibleDate($request,$scheduleController);
-        //var_dump($result->getData());
-        preg_match("/[\b[0-2]{1,2}:[0-2]{1,2}:[0-2]{1,2}/", $arRequest["receipt_time"], $matches);
-        $date = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $arRequest["record_time"]);
-        $time = explode(":", reset($matches));
-        $arRequest["end_time"] = $date
-                ->modify("+ $time[0] hours $time[1] minutes $time[2] seconds ")
+    public function store(Request $request, ScheduleController $scheduleController): JsonResponse {
+        try {
+            $validatedFields = $request->validate([
+                "doctor_id" => ['required', 'int'],
+                "patient_id" => ['required', 'int'],
+                "record_time" => ['required', 'date_format:Y-m-d H:i:s'], //Должен соотвествовать формату "2023-02-22 01:00:00"
+                "receipt_time" => ['required', 'date_format:H:i:s'], //Должен соотвествовать формату "1:00:00" без нуля
+            ]);
+        } catch (ValidationException $exception) {
+            $result = $exception->errors();
+            return response()->json($result, 422);
+        }
+        $date = new DateTimeImmutable($validatedFields["record_time"]);
+        $time = explode(":", $validatedFields["receipt_time"]);
+        $validatedFields["end_time"] = $date
+                ->modify("+ $time[0] hours $time[1] minutes $time[2] seconds ") //Не нашёл лучшего способа добавлять динамическое количество времени
                 ->format('Y-m-d H:i:s');
-        Record::create($arRequest);
-        return response()->json('Успешно сохранено', 201);
+        $checkTimeDoctorSchedule = new \App\Actions\CheckTimeDoctorSchedule();
+        $result = $checkTimeDoctorSchedule($validatedFields["doctor_id"],$validatedFields["record_time"]);
+        if($result){
+            Record::create($validatedFields);
+            return response()->json('Успешно сохранено', 201);
+        }
+         return response()->json('Не сохранено', 402);
+
     }
 
 }

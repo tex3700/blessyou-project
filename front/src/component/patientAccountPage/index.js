@@ -17,7 +17,7 @@ import { DialogSelectPatient } from "../dialogSelectPatient";
 import AutorenewIcon from "@mui/icons-material/Autorenew";
 import { apiRequest } from "../../api";
 import { ActiveAppointments } from "../activeAppointments";
-import { data } from "../appointment/data";
+// import { data } from "../appointment/data";
 
 const useStyles = makeStyles((theme) => ({
   accoutPage: {

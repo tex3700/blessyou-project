@@ -1,65 +1,48 @@
 import { Box, Container, Paper, Typography, Grid } from "@material-ui/core";
-import React from "react";
+import React, { useContext } from "react";
 import useStyles from "./styles";
 import DoctorCard from "../../component/commonComponents/doctorCard/DoctorCard";
-import  { SendMessage }  from "../../component/commonComponents/sendMessage/sendMessage"; 
+import { SendMessage } from "../../component/commonComponents/sendMessage/sendMessage";
 import OurSevicesComp from "../commonComponents/ourServices/OurSevicesComp";
-
-
-
-const doctorCardList = [
-  { text: "Иванов И.И.",   title: "Физеотерапевт",   image: "https://wmpics.space/di-PNZ3.jpg", path: "/doctorlist" },
-  { text: "Петрова А.А.",  title: "Педиатр",         image: "https://wmpics.space/di-1JYP.jpg", path: "/doctorlist" },
-  { text: "Смирнов А.Б.",  title: "Гастроэнтеролог", image: "https://wmpics.space/di-RR9F.jpg", path: "/doctorlist" },
-  { text: "Сидорова Н.В.", title: "Отоларинголог",   image: "https://wmpics.space/di-M72A.jpg", path: "/doctorlist" },
-  { text: "Иванов И.И.",   title: "Физеотерапевт",   image: "https://wmpics.space/di-PNZ3.jpg", path: "/doctorlist" },
-  { text: "Петрова А.А.",  title: "Педиатр",         image: "https://wmpics.space/di-1JYP.jpg", path: "/doctorlist" },
-  { text: "Смирнов А.Б.",  title: "Гастроэнтеролог", image: "https://wmpics.space/di-RR9F.jpg", path: "/doctorlist" },
-  { text: "Сидорова Н.В.", title: "Отоларинголог",   image: "https://wmpics.space/di-M72A.jpg", path: "/doctorlist" },
-];
+import { DataContext } from "../../DataContext";
 
 const DoctorList = () => {
   const classes = useStyles();
-
+  const { doctorArray, servicesArray } = useContext(DataContext);
 
   return (
-    
     <>
-    <Paper className={classes.docPaper}>
-      <Container fixed>
-        <Box className="mainBox" mt={20}>
-          <Typography className={classes.docTextH2} variant="h2">
-            Наши врачи</Typography>
-        </Box>
-      </Container>
-    </Paper>
-    <div className={classes.docContent}>
-    <Typography className={classes.docTextH3} variant="h3">
-      Команда высококлассных специалистов</Typography>
-    </div>
-    <Container className={classes.cardGrid}>
-      <Grid container spacing={2}> 
-          {doctorCardList.map((card) => (
-            <Grid item key={card}>  
-                 <DoctorCard key={card.image} props={card}/>               
+      <Paper className={classes.docPaper}>
+        <Container fixed>
+          <Box className="mainBox" mt={20}>
+            <Typography className={classes.docTextH2} variant="h2">
+              Наши врачи
+            </Typography>
+          </Box>
+        </Container>
+      </Paper>
+      <div className={classes.docContent}>
+        <Typography className={classes.docTextH3} variant="h3">
+          Команда высококлассных специалистов
+        </Typography>
+      </div>
+      <Container className={classes.cardGrid}>
+        <Grid container spacing={2} justifyContent="space-between">
+          {doctorArray.map((item) => (
+            <Grid item key={item.id}>
+              <DoctorCard key={item.id} props={item} />
             </Grid>
           ))}
-      </Grid>   
-    </Container>
-   <SendMessage /> 
- <OurSevicesComp />
-   </>
+
+        </Grid>
+      </Container>
+      <SendMessage />
+      {servicesArray.length > 0 && (
+        <OurSevicesComp servicesArray={servicesArray} />
+      )}
+    </>
+
   );
 };
 
 export default DoctorList;
-
-
-
-
- 
-
-
-
-
-
