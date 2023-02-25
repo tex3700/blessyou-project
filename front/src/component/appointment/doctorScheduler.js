@@ -31,8 +31,6 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'space-between'
     },
     calendarBox: {
-        //flexGrow: 1,
-        //border: '1px solid rgba(224, 224, 224, 1)'
         marginBottom: theme.spacing(20),
         marginRight: theme.spacing(6)
 
@@ -46,7 +44,6 @@ const useStyles = makeStyles((theme) => ({
     },
     table: {
         borderLeft: '1px solid rgba(224, 224, 224, 1)',
-        //maxWidth: '600px',
         '& .MuiTableCell-body': {
             //    borderLeft: '1px solid red'
         }
@@ -55,10 +52,8 @@ const useStyles = makeStyles((theme) => ({
         border: '1px solid rgba(224, 224, 224, 1)',
         width: '90px',
         height: '80px',
-        //maxWidth: '80px',
         padding: theme.spacing(1),
         '& > div': {
-            //width: '100%',
             width: '90px',
             maxWidth: '90px',
             height: '100%',
@@ -141,7 +136,6 @@ const useStyles = makeStyles((theme) => ({
         background: 'white',
         boxShadow: '5px 10px 50px rgba(16, 112, 177, 0.2)',
         borderRadius: '10px',
-        //justifyContent: 'center',
         textAlign: 'center',
         '& .MuiSelect-select:focus': {
             backgroundColor: 'inherit',
