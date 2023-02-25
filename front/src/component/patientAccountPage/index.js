@@ -2,12 +2,13 @@ import { Container, Box, Link as MuiLink, Typography } from "@material-ui/core";
 import React, { useEffect, useRef, useState } from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
+import { SS_ACTIVEPATIENT, SS_ACTIVEPATIENTNAME, getName } from "../../patientUtils";
 
 import {
   Route,
   NavLink as ReactRouterLink,
   Routes,
-  useLocation,
+  useLocation, useNavigate
 } from "react-router-dom";
 import { Appointment } from "../appointment";
 import { PatientProfile } from "../patientProfile";
@@ -17,8 +18,6 @@ import { DialogSelectPatient } from "../dialogSelectPatient";
 import AutorenewIcon from "@mui/icons-material/Autorenew";
 import { apiRequest } from "../../api";
 import { ActiveAppointments } from "../activeAppointments";
-// import { data } from "../appointment/data";
-
 const useStyles = makeStyles((theme) => ({
   accoutPage: {
     display: "flex",
@@ -97,80 +96,77 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const menu = [
-  {
-    caption: "Профиль",
-    link: "patientProfile",
-    path: "patientProfile",
-    element: <PatientProfile />,
-  },
-  {
-    caption: "Запись на прием",
-    link: "appointment",
-    path: "appointment/*",
-    element: <Appointment />,
-  },
-  {
-    caption: "Мои записи",
-    link: "activeAppointments",
-    path: "activeAppointments",
-    element: <ActiveAppointments />,
-  },
-  {
-    caption: "История болезни",
-    link: "medicalHistory",
-    path: "medicalHistory",
-    element: <MedicalHistory />,
-  },
-];
 
 export const PatientAccountPage = ({ isAuth }) => {
   const [open, setOpen] = useState(false);
   const [userData, setUserData] = useState({ data: {}, activePatient: 0 });
 
+  const menu = [
+    {
+      caption: "Профиль",
+      link: "patientProfile",
+      path: "patientProfile",
+      element: <PatientProfile />,
+    },
+    {
+      caption: "Запись на прием",
+      link: "appointment",
+      path: "appointment/*",
+      element: <Appointment />,
+    },
+    {
+      caption: "Мои записи",
+      link: "activeAppointments",
+      path: "activeAppointments",
+      element: <ActiveAppointments activePatientId={userData.activePatient} />,
+    },
+    {
+      caption: "История болезни",
+      link: "medicalHistory",
+      path: "medicalHistory",
+      element: <MedicalHistory />,
+    },
+  ];
+
   const refAppointment = useRef(null);
   const location = useLocation();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     apiRequest(`patient-private/${isAuth}`, 'GET').then(result => {
       console.log('useEffect data ', result.data);
       setUserData({ data: result.data, activePatient: result.data.id });
-      sessionStorage.setItem('activePatient', result.data.id);
+
+      sessionStorage.setItem(SS_ACTIVEPATIENT, result.data.id);
+      sessionStorage.setItem(SS_ACTIVEPATIENTNAME, getPatientName(result.data.id));
 
       refAppointment.current?.click();
-
-      apiRequest(`patient-relatives/${result.data.id}`, 'GET').then(result => {
-        console.log('patient-relatives ', result);
-      })
     })
   }, [isAuth]);
 
   const getActiveNavLinkCaption = () => {
-    const pathname = location.pathname.replace("/patientAccount/", "");
+    const pathname = location.pathname.replace('/patientAccount/', '');
     const activeMenu = menu.find((item) => pathname.startsWith(item.link, 0));
-    return activeMenu ? activeMenu.caption : "";
+    return activeMenu ? activeMenu.caption : '';
   };
 
   // пока так
   const getPatientName = (id) => {
-    return `${userData.data.surname} ${userData.data.name} ${userData.data.patronymic}`;
+    if (id === userData.data.id)
+      return getName(userData.data);
+    else {
+      const name = sessionStorage.getItem(SS_ACTIVEPATIENTNAME);
+      return name;
+    }
   };
 
   const classes = useStyles();
 
   const onExit = () => {
-    //apiRequest('logout/19', 'POST');
-    //return;
-
-    //apiRequest("doctors", "GET").then((data) => console.log(data));
-    const userId = sessionStorage.getItem('activePatient');
-    const data = {
-      name: 'Анна',
-      patronymic: 'Васильевна',
-      surname: 'Иванова',
-      birthday: '2013-09-01'
-    };
-    apiRequest(`add-relative/${userId}`, 'POST', data).then(result => console.log('add patient result', result))
+    apiRequest('logout', 'POST').then(result => {
+      navigate('/');
+    })
   };
 
   const onSelectPatientClick = () => {
@@ -181,27 +177,13 @@ export const PatientAccountPage = ({ isAuth }) => {
     setOpen(false);
   };
 
-  ///test apiRequest for set user data
+  const onChangePatient = (id, name) => {
+    sessionStorage.setItem(SS_ACTIVEPATIENT, id);
+    sessionStorage.setItem(SS_ACTIVEPATIENTNAME, name);
 
-  /*
-    const userDataFetch = async (isAuth) => {
-      let userUrl = `patient-private/${isAuth}`;
-      try {
-        let res = await apiRequest(userUrl, "Get");
-        console.log("responce", res);
-        await setUserData(res.data);
-      } catch (error) {
-        console.log("error", error);
-      }
-    };
-    ///
-    useEffect(() => {
-      await userDataFetch(isAuth);
-      console.log("useEffect", userData);
-    }, []);
-    //console.log("isAuth", userData);
-  */
-  ///
+    setUserData({ ...userData, activePatient: id });
+  }
+
   return (
     <>
       <Box className={classes.accountPage}>
@@ -256,10 +238,7 @@ export const PatientAccountPage = ({ isAuth }) => {
           </Routes>
         </Box>
       </Box>
-      <DialogSelectPatient
-        open={open}
-        onClose={onCloseDialog}
-      ></DialogSelectPatient>
+      <DialogSelectPatient userData={userData} open={open} onClose={onCloseDialog} onChangePatient={onChangePatient} />
     </>
   );
 };

@@ -98,6 +98,9 @@ export const Appointment = () => {
             case 3:
                 refLink3.current.click();
                 break;
+            default:
+                refLink1.current.click();
+                break;
         }
     }, [info]);
 
