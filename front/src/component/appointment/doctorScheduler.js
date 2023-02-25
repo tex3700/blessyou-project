@@ -366,9 +366,9 @@ export const DoctorScheduler = ({ specialistTypeName, name, id }) => {
             // запрос на запись
             const data = {
                 doctor_id: id,
-                patient_id: '', /// ВРЕМЕННО, потом дописать
+                patient_id: +sessionStorage.getItem('activePatient'),
                 record_time: dateTimeForRequest(selectedTime.startTime),
-                receiptTime: '00:20:00'
+                receipt_time: '00:20:00'
             }
 
             // console.log('data = ', data);

@@ -126,13 +126,24 @@ const menu = [
 
 export const PatientAccountPage = ({ isAuth }) => {
   const [open, setOpen] = useState(false);
+  const [userData, setUserData] = useState({ data: {}, activePatient: 0 });
 
   const refAppointment = useRef(null);
   const location = useLocation();
 
   useEffect(() => {
-    refAppointment.current?.click();
-  }, []);
+    apiRequest(`patient-private/${isAuth}`, 'GET').then(result => {
+      console.log('useEffect data ', result.data);
+      setUserData({ data: result.data, activePatient: result.data.id });
+      sessionStorage.setItem('activePatient', result.data.id);
+
+      refAppointment.current?.click();
+
+      apiRequest(`patient-relatives/${result.data.id}`, 'GET').then(result => {
+        console.log('patient-relatives ', result);
+      })
+    })
+  }, [isAuth]);
 
   const getActiveNavLinkCaption = () => {
     const pathname = location.pathname.replace("/patientAccount/", "");
@@ -140,10 +151,26 @@ export const PatientAccountPage = ({ isAuth }) => {
     return activeMenu ? activeMenu.caption : "";
   };
 
+  // пока так
+  const getPatientName = (id) => {
+    return `${userData.data.surname} ${userData.data.name} ${userData.data.patronymic}`;
+  };
+
   const classes = useStyles();
 
   const onExit = () => {
-    apiRequest("doctors", "GET").then((data) => console.log(data));
+    //apiRequest('logout/19', 'POST');
+    //return;
+
+    //apiRequest("doctors", "GET").then((data) => console.log(data));
+    const userId = sessionStorage.getItem('activePatient');
+    const data = {
+      name: 'Анна',
+      patronymic: 'Васильевна',
+      surname: 'Иванова',
+      birthday: '2013-09-01'
+    };
+    apiRequest(`add-relative/${userId}`, 'POST', data).then(result => console.log('add patient result', result))
   };
 
   const onSelectPatientClick = () => {
@@ -155,25 +182,25 @@ export const PatientAccountPage = ({ isAuth }) => {
   };
 
   ///test apiRequest for set user data
-  const [userData, setUserData] = useState("");
 
-  const userDataFetch = async (isAuth) => {
-    let userUrl = `patient-private/${isAuth}`;
-    try {
-      let res = await apiRequest(userUrl, "Get");
-      console.log("responce", res);
-      await setUserData(res.data);
-    } catch (error) {
-      console.log("error", error);
-    }
-  };
-  ///
-  useEffect(() => {
-    userDataFetch(isAuth);
-    console.log("ueEffect", userData);
-  }, []);
-  console.log("isAuth", userData);
-
+  /*
+    const userDataFetch = async (isAuth) => {
+      let userUrl = `patient-private/${isAuth}`;
+      try {
+        let res = await apiRequest(userUrl, "Get");
+        console.log("responce", res);
+        await setUserData(res.data);
+      } catch (error) {
+        console.log("error", error);
+      }
+    };
+    ///
+    useEffect(() => {
+      await userDataFetch(isAuth);
+      console.log("useEffect", userData);
+    }, []);
+    //console.log("isAuth", userData);
+  */
   ///
   return (
     <>
@@ -205,7 +232,7 @@ export const PatientAccountPage = ({ isAuth }) => {
         <Box className={classes.patientInfo}>
           <Container fixed>
             <Typography variant="body1" className={classes.patientName}>
-              Здравствуйте, дорогой пациент
+              {`Здравствуйте, ${getPatientName(userData.activePatient)}`}
             </Typography>
             <AutorenewIcon
               className={classes.patientChange}
