@@ -1,4 +1,4 @@
-import { Container, Box, Link as MuiLink, Typography } from "@material-ui/core";
+import { Container, Box, Link as MuiLink, Typography, Button, IconButton } from "@material-ui/core";
 import React, { useEffect, useRef, useState } from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -79,6 +79,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(3),
     marginRight: theme.spacing(1),
     color: "#676767",
+    alignSelf: 'center'
   },
   patientChange: {
     color: "#4493B9",
@@ -97,7 +98,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export const PatientAccountPage = ({ isAuth }) => {
+export const PatientAccountPage = ({ isAuth, setIsAuth }) => {
   const [open, setOpen] = useState(false);
   const [userData, setUserData] = useState({ data: {}, activePatient: 0 });
 
@@ -165,6 +166,7 @@ export const PatientAccountPage = ({ isAuth }) => {
 
   const onExit = () => {
     apiRequest('logout', 'POST').then(result => {
+      setIsAuth(null);
       navigate('/');
     })
   };
@@ -216,18 +218,16 @@ export const PatientAccountPage = ({ isAuth }) => {
             <Typography variant="body1" className={classes.patientName}>
               {`Здравствуйте, ${getPatientName(userData.activePatient)}`}
             </Typography>
-            <AutorenewIcon
-              className={classes.patientChange}
-              onClick={onSelectPatientClick}
-            />
+            <IconButton size="small">
+              <AutorenewIcon
+                className={classes.patientChange}
+                onClick={onSelectPatientClick}
+              />
+            </IconButton>
             <Box className={classes.empty}></Box>
-            <Typography
-              variant="body1"
-              className={classes.patientExit}
-              onClick={() => onExit()}
-            >
+            <Button className={classes.patientExit} onClick={onExit} size="small" variant="text">
               Выход
-            </Typography>
+            </Button>
           </Container>
         </Box>
         <Box className={classes.contentBox}>
