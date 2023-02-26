@@ -53,7 +53,11 @@ const HeaderContent = ({ isAuth }) => {
             Личный кабинет
           </Button>
         </Box>
-        <IconButton className={classes.root} component={Link} to="/entryInLC">
+        <IconButton
+          className={classes.root}
+          component={Link}
+          to="/entryForDoctor"
+        >
           <Box className={classes.headerDoctorsEnterance}></Box>
         </IconButton>
       </Toolbar>

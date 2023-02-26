@@ -9,14 +9,13 @@ import {
 } from "@material-ui/core";
 import useStyles from "./styles";
 import LogIn from "./LogIn";
-import SingIn from "./SingIn";
-import { apiRequest } from "../../api";
+
 import ModalWindow from "../commonComponents/modalWindow/ModalWindow";
 
 /////////передаем роль для сервера
-const role = "is_patient";
+const role = "is_doctor";
 /////////
-const EntryPage = ({ setIsAuth }) => {
+const EntryForDoctor = ({ setIsAuth }) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
@@ -35,11 +34,11 @@ const EntryPage = ({ setIsAuth }) => {
     <>
       <Box className={classes.componentHead}>
         <Container fixed>
-          <Typography variant="h3">Вход в личный кабинет пациента</Typography>
+          <Typography variant="h3">Вход в личный кабинет сотрудника</Typography>
         </Container>
       </Box>
       <LogIn setIsAuth={setIsAuth} handleOpen={handleOpen} role={role} />
-      <SingIn setIsAuth={setIsAuth} handleOpen={handleOpen} role={role} />
+
       <ModalWindow
         open={open}
         onClose={handleClose}
@@ -49,4 +48,4 @@ const EntryPage = ({ setIsAuth }) => {
   );
 };
 
-export default EntryPage;
+export default EntryForDoctor;

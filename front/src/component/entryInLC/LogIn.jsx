@@ -13,7 +13,7 @@ import useStyles from "./styles";
 import { apiRequest } from "../../api";
 import { Navigate } from "react-router-dom";
 
-const LogIn = ({ setIsAuth, handleOpen }) => {
+const LogIn = ({ setIsAuth, handleOpen, role }) => {
   const classes = useStyles();
 
   const [email, setEmail] = useState("");
@@ -42,6 +42,7 @@ const LogIn = ({ setIsAuth, handleOpen }) => {
       let logInData = {
         email,
         password,
+        role,
       };
       console.log("log in data ", logInData);
 

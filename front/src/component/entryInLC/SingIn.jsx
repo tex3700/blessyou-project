@@ -11,7 +11,7 @@ import useStyles from "./styles";
 import { apiRequest } from "../../api";
 
 //////
-const SingIn = ({ setIsAuth, handleOpen }) => {
+const SingIn = ({ setIsAuth, handleOpen, role }) => {
   const classes = useStyles();
 
   const [email, setEmail] = useState("");
@@ -66,6 +66,7 @@ const SingIn = ({ setIsAuth, handleOpen }) => {
         name,
         surname,
         patronymic,
+        role,
       };
       console.log("sign in data ", singInData);
 

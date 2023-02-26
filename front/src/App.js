@@ -19,6 +19,7 @@ import EntryPage from "./component/entryInLC/EntryPage";
 import { useEffect, useState } from "react";
 import { apiRequest } from "./api";
 import { DataProvider } from "./DataContext";
+import EntryForDoctor from "./component/entryInLC/EntryForDoctor";
 
 /////
 function App() {
@@ -41,6 +42,14 @@ function App() {
             element={
               <PublicRoute isAuth={isAuth}>
                 <EntryPage setIsAuth={setIsAuth} />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/entryForDoctor"
+            element={
+              <PublicRoute isAuth={isAuth}>
+                <EntryForDoctor setIsAuth={setIsAuth} />
               </PublicRoute>
             }
           />
