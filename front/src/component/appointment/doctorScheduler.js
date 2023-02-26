@@ -17,6 +17,7 @@ import { greenGradientBackground, greyColor } from '../../styleConst';
 
 import { DialogConfirmAppointment } from './dialogConfirmAppointment';
 import { apiRequest } from '../../api';
+import { SS_ACTIVEPATIENT, SS_ACTIVEPATIENTNAME } from '../../patientUtils';
 
 const useStyles = makeStyles((theme) => ({
     area: {
@@ -274,8 +275,6 @@ export const DoctorScheduler = ({ specialistTypeName, name, id }) => {
         //console.log('b = ', b);
     };
 
-
-
     const getSelectedMonth = (month, year) => {
         return `${monthCaptionList[month]} ${year}`
     }
@@ -290,7 +289,6 @@ export const DoctorScheduler = ({ specialistTypeName, name, id }) => {
         const dayScheduler = scheduler.total[key];
         return dayScheduler ? getIntervalCaption(dayScheduler.startTime, dayScheduler.endTime) : '';
     }
-
 
     const isActiveCell = (day) => {
         let result = false;
@@ -347,7 +345,7 @@ export const DoctorScheduler = ({ specialistTypeName, name, id }) => {
         const selectedTimeStr = getIntervalCaption(selectedTime.startTime, selectedTime.endTime);
         const time = `${dateToStr(dayScheduler.day, monthList[selectedMonthIndex].month, monthList[selectedMonthIndex].year)}, ${selectedTimeStr}`
 
-        setAppointmentInfo({ patientName: 'дорогой пациент', doctorName: name, time })
+        setAppointmentInfo({ patientName: sessionStorage.getItem(SS_ACTIVEPATIENTNAME), doctorName: name, time })
         setOpen(true);
     }
 
@@ -360,7 +358,7 @@ export const DoctorScheduler = ({ specialistTypeName, name, id }) => {
             // запрос на запись
             const data = {
                 doctor_id: id,
-                patient_id: +sessionStorage.getItem('activePatient'),
+                patient_id: +sessionStorage.getItem(SS_ACTIVEPATIENT),
                 record_time: dateTimeForRequest(selectedTime.startTime),
                 receipt_time: '00:20:00'
             }
@@ -475,11 +473,3 @@ export const DoctorScheduler = ({ specialistTypeName, name, id }) => {
 }
 
 // https://www.figma.com/file/99PEjd4zvWIRyPToqKT2sy/BLESSYOU?node-id=29%3A2&t=YArLIDKqOYrEtblF-0
-/*
-<MenuItem value={10}>Февраль 2023г.</MenuItem>
-                            <MenuItem value={20}>Март 2023г.</MenuItem>
-*/
-/*
- <DoctorScedulerTime scheduler={dayScheduler}>
-                                </DoctorScedulerTime>
-*/
