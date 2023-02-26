@@ -1,12 +1,16 @@
 import { Box, Container, Typography } from "@material-ui/core";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 // import { useStyles } from "../medicalHistory/styleMedical";
 import { MedicalCard, useStyles } from "../medicalHistory/";
 import { DataContext } from "../../DataContext";
 
-export const ActiveAppointments = () => {
+export const ActiveAppointments = ({ activePatientId }) => {
   const classes = useStyles();
   const { doctorArray } = useContext(DataContext);
+
+  useEffect(() => {
+    console.log('activeAppointments activePatientId = ', activePatientId)
+  }, [activePatientId]);
 
   // console.log("doctorArray", doctorArray);
 

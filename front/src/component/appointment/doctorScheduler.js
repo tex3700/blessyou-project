@@ -2,15 +2,21 @@ import {
     Box, Typography, Table, TableCell, TableBody, TableRow,
     TableHead, Select, MenuItem, Button
 } from '@material-ui/core';
+
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
 
-import { dayList, monthList as monthCaptionList, getIntervalCaption, getDayNumber, dateToStr } from './dateUtils';
+import {
+    dayList, monthList as monthCaptionList, getIntervalCaption,
+    getDayNumber, dateToStr, getDateKey, dateTimeForRequest
+} from './dateUtils';
 import { CaptionList } from './captionList';
 import { greenGradientBackground, greyColor } from '../../styleConst';
 
 import { DialogConfirmAppointment } from './dialogConfirmAppointment';
+import { apiRequest } from '../../api';
 
 const useStyles = makeStyles((theme) => ({
     area: {
@@ -25,8 +31,6 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'space-between'
     },
     calendarBox: {
-        //flexGrow: 1,
-        //border: '1px solid rgba(224, 224, 224, 1)'
         marginBottom: theme.spacing(20),
         marginRight: theme.spacing(6)
 
@@ -40,7 +44,6 @@ const useStyles = makeStyles((theme) => ({
     },
     table: {
         borderLeft: '1px solid rgba(224, 224, 224, 1)',
-        //maxWidth: '600px',
         '& .MuiTableCell-body': {
             //    borderLeft: '1px solid red'
         }
@@ -49,10 +52,8 @@ const useStyles = makeStyles((theme) => ({
         border: '1px solid rgba(224, 224, 224, 1)',
         width: '90px',
         height: '80px',
-        //maxWidth: '80px',
         padding: theme.spacing(1),
         '& > div': {
-            //width: '100%',
             width: '90px',
             maxWidth: '90px',
             height: '100%',
@@ -69,7 +70,7 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: '400',
         fontSize: '12px',
         lineHeight: '18px',
-        color: 'white'
+        color: 'white',
     },
     timeBox: {
         display: 'flex',
@@ -135,7 +136,6 @@ const useStyles = makeStyles((theme) => ({
         background: 'white',
         boxShadow: '5px 10px 50px rgba(16, 112, 177, 0.2)',
         borderRadius: '10px',
-        //justifyContent: 'center',
         textAlign: 'center',
         '& .MuiSelect-select:focus': {
             backgroundColor: 'inherit',
@@ -185,79 +185,52 @@ export const DoctorScheduler = ({ specialistTypeName, name, id }) => {
 
     const [calendar, setCalendar] = useState({ month: 0, year: 0, table: [] });
     const [scheduler, setScheduler] = useState({ time: [], total: [] });
-    const [dayScheduler, setDayScheduler] = useState([]);
+    const [dayScheduler, setDayScheduler] = useState({});
+
+    const navigate = useNavigate();
 
     useEffect(() => {
-        const d = new Date;
-        const month = d.getMonth();
-        const year = d.getFullYear();
+        apiRequest('records/all/possible', 'POST', { doctor_id: id, days_amount: 30 }).then(data => {
+            console.log('data = ', data);
 
-        //console.log(month, year);
-        createCalendar(month, year);
+            const monthList = [];
+            const totalSceduler = [];
+            let prevMonth = -1;
 
-        // данные из таблицы scheduler
-        // генерируем 10 записей в день по 20 минут
-        const today = d.getDate();
-        const s = [];
-        const t = [];
-        for (let i = 1; i <= 5; i++) {
-            const dd = new Date(year, month, today + i, 8, 0, 0);
-            const totalStartTime = dd.getTime();
-            //let totalEndTime = null;
-            for (let j = 1; j <= 5; j++) {
-                const startTime = dd.getTime();
-                //console.log('1 ', dd);
-                dd.setMinutes(dd.getMinutes() + 20);
-                //console.log('2 ', dd);
-                //totalEndTime = dd
-                //console.log('3 ', startTime, dd);
+            for (let key in data) {
+                const dayScheduler = data[key];
 
-                s.push({
-                    startTime: startTime,
-                    endTime: dd.getTime(),
-                    pacientId: i === 2 ? '1' : ''
-                });
-            }
-            t.push({
-                day: today + i, month, year,
-                startTime: totalStartTime,
-                endTime: dd.getTime(), isActive: i !== 2
-            })
-        };
+                const d = new Date(key);
+                const m = d.getMonth();
+                const y = d.getFullYear();
+                console.log('m = ', m, ' y = ', y)
+                if (prevMonth !== m) {
+                    monthList.push({ month: m, year: y });
+                    prevMonth = m;
+                }
 
-        // на следующий месяц
-        for (let i = 1; i <= 3; i++) {
-            const dd = new Date(year, month + 1, today + i, 8, 0, 0);
-            const totalStartTime = dd.getTime();
-            let totalEndTime = null;
-            for (let j = 1; j <= 5; j++) {
-                const startTime = dd.getTime();
-                //console.log('1 ', dd);
-                dd.setMinutes(dd.getMinutes() + 20);
-                //console.log('2 ', dd);
-                totalEndTime = dd
-                //console.log('3 ', startTime, dd);
+                // проход по массиву времени, нахождение минимального и макимального
+                let startTime = new Date(dayScheduler[0]);
+                let endTime = new Date(dayScheduler[0]);
+                for (let i = 1; i < dayScheduler.length; i++) {
+                    const d = new Date(dayScheduler[i]);
+                    if (d < startTime)
+                        startTime = d;
+                    if (d > endTime)
+                        endTime = d;
+                }
+                endTime.setMinutes(20);
+                totalSceduler[key] = { startTime, endTime }
+            };
 
-                s.push({
-                    startTime: startTime,
-                    endTime: dd.getTime(),
-                    pacientId: i === 2 ? '1' : ''
-                });
-            }
-            t.push({
-                day: today + i, month: month + 1, year,
-                startTime: totalStartTime,
-                endTime: dd.getTime(), isActive: i !== 2
-            })
-        };
-        //console.log(s, t);
-
-
-        setScheduler({ time: s, total: t });
-
-        setMonthList([{ month: 1, year: 2023 }, { month: 2, year: 2023 }]);
-        setSelectedMonthIndex(0);
+            if (monthList.length > 0) {
+                setMonthList(monthList);
+                setSelectedMonthIndex(0);
+                setScheduler({ time: data, total: totalSceduler });
+            };
+        });
     }, []);
+
 
     const createCalendar = (month, year) => {
         // номер дня недели первого дня месяца
@@ -312,15 +285,20 @@ export const DoctorScheduler = ({ specialistTypeName, name, id }) => {
         if (day === 0)
             return '';
 
-        const dayScheduler = scheduler.total.find(item => item.day === day && item.month === calendar.month && item.year === calendar.year);
+        const key = getDateKey(day, calendar.month, calendar.year);
+
+        const dayScheduler = scheduler.total[key];
         return dayScheduler ? getIntervalCaption(dayScheduler.startTime, dayScheduler.endTime) : '';
     }
+
 
     const isActiveCell = (day) => {
         let result = false;
 
         if (day > 0) {
-            const dayScheduler = scheduler.total.find(item => item.day === day && item.month === calendar.month && item.year === calendar.year);
+
+            const key = getDateKey(day, calendar.month, calendar.year);
+            const dayScheduler = scheduler.total[key];
             if (dayScheduler)
                 result = true;
         }
@@ -328,16 +306,27 @@ export const DoctorScheduler = ({ specialistTypeName, name, id }) => {
     }
 
     const onSelectDay = (day) => {
+        //console.log('onSelectDay ', day);
+
         if (day > 0) {
-            const t1 = new Date(calendar.year, calendar.month, day);
-            const i1 = t1.getTime();
+            const key = getDateKey(day, calendar.month, calendar.year);
+            const dayScheduler = scheduler.time[key];
 
-            const t2 = new Date(calendar.year, calendar.month, day + 1);
-            const i2 = t2.getTime();
+            if (dayScheduler) {
+                const f = dayScheduler.map(item => {
+                    let endTime = new Date(item);
+                    //console.log('onSelectDay endTime = ', endTime)
+                    endTime.setMinutes(endTime.getMinutes() + 20);
+                    return { startTime: new Date(item), endTime }
+                });
+                //console.log('f = ', f);
 
-            const f = scheduler.time.filter(item => item.startTime >= i1 && item.endTime < i2);
-            setDayScheduler({ day, scheduler: f });
-            setSelectedSchedulerIndex(0);
+                //const f = scheduler.time.filter(item => item.startTime >= i1 && item.endTime < i2);
+                setDayScheduler({ day, scheduler: f });
+                setSelectedSchedulerIndex(0);
+            }
+            else
+                setDayScheduler({});
         }
         else
             setDayScheduler({});
@@ -354,29 +343,35 @@ export const DoctorScheduler = ({ specialistTypeName, name, id }) => {
     };
 
     const onAppointmentClick = () => {
-        /*
-        const d = dayScheduler.day;
-        console.log(d);
-        const m = monthList[selectedMonthIndex];
-        console.log(m);
-        const l = ['08:00 - 08:20', '08:20 - 08:40', '08:40 - 09:00',
-            '09:00 - 09:20', '09:20 - 09:40'];
-        const t = l[selectedSchedulerIndex];
-        console.log(t);
-        const time = '15.02.2023г. 08:00 - 08:20'; */
-        const l = ['08:00 - 08:20', '08:20 - 08:40', '08:40 - 09:00',
-            '09:00 - 09:20', '09:20 - 09:40'];
-        console.log('aaa', monthList, selectedMonthIndex, monthList[selectedMonthIndex].month);
-        const time = `${dateToStr(dayScheduler.day, monthList[selectedMonthIndex].month, monthList[selectedMonthIndex].year)}, ${l[selectedSchedulerIndex]}`
+        const selectedTime = dayScheduler.scheduler[selectedSchedulerIndex];
+        const selectedTimeStr = getIntervalCaption(selectedTime.startTime, selectedTime.endTime);
+        const time = `${dateToStr(dayScheduler.day, monthList[selectedMonthIndex].month, monthList[selectedMonthIndex].year)}, ${selectedTimeStr}`
+
         setAppointmentInfo({ patientName: 'дорогой пациент', doctorName: name, time })
         setOpen(true);
     }
 
     const onDialogConfirmAppointmentClose = (flagConfirm) => {
         setOpen(false);
-        console.log('flagConfirm = ', flagConfirm)
+
         if (flagConfirm) {
+            const selectedTime = dayScheduler.scheduler[selectedSchedulerIndex];
+
             // запрос на запись
+            const data = {
+                doctor_id: id,
+                patient_id: +sessionStorage.getItem('activePatient'),
+                record_time: dateTimeForRequest(selectedTime.startTime),
+                receipt_time: '00:20:00'
+            }
+
+            // console.log('data = ', data);
+
+            apiRequest('records/add', 'POST', data).then(data => {
+                console.log('records/add data ', data);
+                // редирект на Мои записи
+                navigate('/patientAccount/activeAppointments');
+            })
         }
     };
 
@@ -384,11 +379,6 @@ export const DoctorScheduler = ({ specialistTypeName, name, id }) => {
         if (selectedMonthIndex > -1)
             createCalendar(monthList[selectedMonthIndex].month, monthList[selectedMonthIndex].year);
     }, [selectedMonthIndex]);
-
-    //useEffect(() => {
-    //    console.log('monthList =', monthList)
-    //},
-    //    [monthList]);
 
     const classes = useStyles();
 
@@ -451,7 +441,7 @@ export const DoctorScheduler = ({ specialistTypeName, name, id }) => {
                     </Box >
                     <Box className={classes.timeBox}>
                         {
-                            dayScheduler.scheduler?.length > 0 ?
+                            dayScheduler?.scheduler?.length > 0 ?
                                 <>
                                     <Box className={`${classes.captionArea} ${classes.captionText}`}>
                                         Выберите время приёма
@@ -460,12 +450,11 @@ export const DoctorScheduler = ({ specialistTypeName, name, id }) => {
                                         disableUnderline={true}
                                         value={selectedSchedulerIndex} onChange={onSchedulerChange}
                                         MenuProps={{ classes: { paper: classes.schedulerPaper, list: classes.schedulerList } }}>
-
-                                        <MenuItem value={0}>08:00 - 08:20</MenuItem>
-                                        <MenuItem value={1}>08:20 - 08:40</MenuItem>
-                                        <MenuItem value={2}>08:40 - 09:00</MenuItem>
-                                        <MenuItem value={3}>09:00 - 09:20</MenuItem>
-                                        <MenuItem value={4}>09:20 - 09:40</MenuItem>
+                                        {
+                                            dayScheduler.scheduler.map((time, timeIndex) => (
+                                                <MenuItem value={timeIndex} key={`ss${timeIndex}`}>{getIntervalCaption(time.startTime, time.endTime)}</MenuItem>
+                                            ))
+                                        }
                                     </Select>
                                     <Box className={classes.btnBox}>
                                         <Button className={classes.btn} onClick={onAppointmentClick}>
