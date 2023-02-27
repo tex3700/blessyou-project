@@ -10,10 +10,7 @@ import {
   useLocation,
 } from "react-router-dom";
 import { Appointment } from "../appointment";
-import { PatientProfile } from "../patientProfile";
-import { MedicalHistory } from "../medicalHistory";
 import { DialogSelectPatient } from "../dialogSelectPatient";
-
 import AutorenewIcon from "@mui/icons-material/Autorenew";
 import { apiRequest } from "../../api";
 import { ActiveAppointments } from "../activeAppointments";
@@ -99,10 +96,16 @@ const useStyles = makeStyles((theme) => ({
 
 const menu = [
   {
-    caption: "Профиль",
-    link: "patientProfile",
-    path: "patientProfile",
-    element: <PatientProfile />,
+    caption: "Запись на прием",
+    link: "appointment",
+    path: "appointment/*",
+    element: <Appointment />,
+  },
+  {
+    caption: "Мои записи",
+    link: "activeAppointments",
+    path: "activeAppointments",
+    element: <ActiveAppointments />,
   },
 ] 
   
