@@ -151,3 +151,54 @@ data : {
 возвращает:
 'message' => 'logout successful', 'status' => 200;
 если никто небыл авторизован: 'message' => 'Пользователь не авторизован'
+
+-АПИ для работы с моделью Doctor:
+--GET /doctors
+возвращает всех докторов все поля таблицы doctors и поля из связаной таблицы users
+
+--GET /doctor-private/{id}
+принимает id связанного с доктором юзера
+возвращает доктора все поля таблицы doctors и поля из связаной таблицы users
+
+--POST /add-doctor
+создает запись в таблице users и таблице doctors
+принимает:
+{'email'-string,
+ 'phone'-string,
+ 'name'-string,
+ 'surname'-string,
+ 'patronymic'-string,
+ 'speciality_id'-string,
+ 'avatar_path'-string,
+ 'photo_path'-string,} все поля необязательны.
+ возвращает:
+ 'message' => 'Успешно сохранено',
+ 'status' => 201.
+ 
+ --"GET" '/edit-doctor/{id}'
+
+принимает {id} (на фронте ${id}) - id доктора
+
+возвращает данные доктора и связаного юзера(для редактированаия):
+patients: {id,name,surname,patronymic,email,phone,speciality_id,avatar_path,photo_path}
+
+--"PUT" 'update-doctor/{id}'
+
+принимает {id} (на фронте ${id}) - id доктора
+и измененные/неизмененные данные
+data : {'email'-string,
+ 'phone'-string,
+ 'name'-string,
+ 'surname'-string,
+ 'patronymic'-string,
+ 'speciality_id'-string,
+ 'avatar_path'-string,
+ 'photo_path'-string,}
+
+  обновляет данные в таблице doctors и users: 
+  {name,surname,patronymic,email,phone,speciality_id,avatar_path,photo_path}
+
+  возвращает: {
+  'message': 'Данные успешно обновлены',
+  'status' : 200
+  }
