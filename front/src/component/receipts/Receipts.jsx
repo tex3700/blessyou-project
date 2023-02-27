@@ -1,15 +1,44 @@
 import React, { useState } from "react";
+import { YMaps, Map } from "react-yandex-maps";
+
 import CallIcon from "@mui/icons-material/Call";
 import MailIcon from "@mui/icons-material/Mail";
-import { Button, Box, Card, Typography, Container } from "@material-ui/core";
-import { styled } from "@mui/material/styles";
+
+import {
+  Button,
+  Box,
+  Card,
+  Typography,
+  Container,
+  Snackbar,
+} from "@material-ui/core";
 import TextField from "@mui/material/TextField";
+import { styled } from "@mui/material/styles";
+
+import { Theme } from "@mui/material";
 import useStyles from "../commonComponents/ourDoctors/styles";
-import { YMaps, Map } from "react-yandex-maps";
 import useStylesRecept from "./styles";
 import { apiRequest } from "../../api";
 
-//react-hook-form
+const classes = {
+  snackbarStyles: (theme: Theme) => ({
+    borderRadius: "16px",
+    bottom: "50%",
+    "& .MuiPaper-root": {
+      background:
+        "linear-gradient(270deg, #37A12F -4.12%, #80DB2E 102.94%) !important",
+      boxShadow: "0px 15px 10px rgb(125 214 246 / 13%) !important",
+    },
+  }),
+};
+const StyledSnackbar = styled(Snackbar)(({ theme, props }) => ({
+  "& .MuiSnackbar-root": {
+    background: "green !important",
+    "& .MuiSnackbar-anchorOriginBottomCenter": {
+      bottom: "50%",
+    },
+  },
+}));
 
 export const TextFieldCustom = styled(TextField)(({ theme }) => ({
   "& .MuiInputLabel-root": {
@@ -32,7 +61,7 @@ export const TextFieldCustom = styled(TextField)(({ theme }) => ({
     borderRadius: "10px !important",
     position: "relative",
     background: "#FFFFFF",
-    fontSize: 16,
+    fontSize: 36,
     marginTop: 0,
     padding: "18px 16px",
 
@@ -91,6 +120,7 @@ export const Receipts = () => {
   const classesRecept = useStylesRecept();
   const commonClasses = useStyles();
 
+  const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
@@ -100,6 +130,10 @@ export const Receipts = () => {
   const [isNameError, setIsNameError] = useState(false);
   const [isMessageError, setIsMessageError] = useState(false);
 
+  const handleCloseSnackbar = () => {
+    setOpen(false);
+  };
+
   const isValidateEmailField = (value) => {
     // return true, if has error
     if (value.trim().length < 1) {
@@ -108,7 +142,7 @@ export const Receipts = () => {
     }
 
     if (
-      !/^([A-Za-zа-яА-ЯёЁ0-9_\-\.])+\@([A-Za-zа-яА-ЯёЁ0-9_\-\.])+\.([A-Za-zа-яА-ЯёЁ]{2,4})$/.test(
+      !/^([A-Za-za-яА-ЯёЁ0-9_\-\.])+\@([A-Za-za-яА-ЯёЁ0-9_\-\.])+\.([A-Za-za-яА-ЯёЁ]{2,4})$/.test(
         value
       )
     ) {
@@ -141,22 +175,39 @@ export const Receipts = () => {
     return false;
   };
 
+  const resetFields = () => {
+    setName("");
+    setEmail("");
+    setNumber("");
+    setMessage("");
+  };
+
+  const showSnackBar = () => {
+    setOpen(true);
+    setTimeout(() => setOpen(false), 49000);
+  };
   const handleRequestForm = async () => {
+    //submit
     const body = {
       email: email,
       name: name,
       phone: number,
       text: message,
     };
-    // const data = await apiRequest("mail/send", "post", body);
-
-    const data = await fetch("https://blessyou-clinic.ru/api/api/mail/send", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json;charset=utf-8",
-      },
-      body: JSON.stringify(body),
-    });
+    try {
+      const data = await fetch("https://blessyou-clinic.ru/api/api/mail/send", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        body: JSON.stringify(body),
+      });
+    } catch {
+      console.log("Eroror");
+    } finally {
+      resetFields();
+      showSnackBar();
+    }
   };
 
   return (
@@ -197,7 +248,7 @@ export const Receipts = () => {
                   >
                     <Box sx={{ margin: "46px 0 7px 0" }}>
                       <Typography color="textSecondary" variant="body3">
-                        Ваше имя
+                        Ваше имя*
                       </Typography>
                     </Box>
                     <TextFieldCustom
@@ -248,7 +299,7 @@ export const Receipts = () => {
                   >
                     <Box sx={{ margin: "10px 0 7px 0" }}>
                       <Typography color="textSecondary" variant="body3">
-                        Email
+                        Email*
                       </Typography>
                     </Box>
                     <TextFieldCustom
@@ -276,7 +327,7 @@ export const Receipts = () => {
                   >
                     <Box sx={{ margin: "16px 0 7px 0" }}>
                       <Typography color="textSecondary" variant="body3">
-                        Ваше сообщение
+                        Ваше сообщение*
                       </Typography>
                     </Box>
                     <TextAreaCustom
@@ -390,6 +441,14 @@ export const Receipts = () => {
           </Box>
         </Box>
       </Box>
+      <StyledSnackbar
+        //true/false
+        open={open}
+        sx={classes.snackbarStyles}
+        onClose={handleCloseSnackbar}
+        // anchorOrigin={{ 'top', 'horizontal' }}
+        message={"Мы уже читаем Ваше сообщение!"}
+      />
     </>
   );
 };
