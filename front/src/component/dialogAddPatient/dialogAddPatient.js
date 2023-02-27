@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Modal, Typography, Button, TextField, Divider, Box, RadioGroup, Radio, FormControlLabel } from '@material-ui/core';
+import { Modal, Typography, Button, TextField, Divider, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import AddIcon from '@mui/icons-material/Add';
 
 import {
     greenGradientBackground, greyGradientBackground,
-    blueColor, greyColor, modalStyle, buttonStyle, greenColor,
+    greyColor, modalStyle, buttonStyle,
 } from '../../styleConst';
-import { grey } from '@material-ui/core/colors';
-
+import { apiRequest } from '../../api';
 
 const useStyles = makeStyles((theme) => ({
     caption: {
@@ -77,21 +76,29 @@ const useStyles = makeStyles((theme) => ({
 
 const initialState = {
     name: '',
-    patronimyc: '',
+    patronymic: '',
     surname: '',
     birthDate: null,
     gender: 'femail'
 };
 
-export const DialogAddPatient = ({ open, onClose }) => {
+export const DialogAddPatient = ({ userId, open, onClose }) => {
 
     const [info, setInfo] = useState(initialState);
 
     const classes = useStyles();
 
     const onAddPatientClick = () => {
-        // валидация
-        onClose(true);
+        const data = {
+            name: info.name,
+            patronymic: info.patronymic,
+            surname: info.surname,
+            birthday: info.birthDate
+        };
+
+        apiRequest(`add-relative/${userId}`, 'POST', data).then(result => {
+            onClose(true);
+        });
     };
 
     useEffect(() => {
@@ -99,11 +106,6 @@ export const DialogAddPatient = ({ open, onClose }) => {
             setInfo(initialState);
     }, [open]);
 
-    /*
-    useEffect(() => {
-        console.log('change info', info)
-    }, [info]);
-*/
     const onSurnameChange = (event) => {
         setInfo({ ...info, surname: event.target.value });
     };
@@ -112,8 +114,8 @@ export const DialogAddPatient = ({ open, onClose }) => {
         setInfo({ ...info, name: event.target.value });
     };
 
-    const onPatronimycChange = (event) => {
-        setInfo({ ...info, patronimyc: event.target.value });
+    const onPatronymicChange = (event) => {
+        setInfo({ ...info, patronymic: event.target.value });
     };
 
     const onBirthDateChange = (event) => {
@@ -135,7 +137,7 @@ export const DialogAddPatient = ({ open, onClose }) => {
                         value={info.name} onChange={onNameChange}
                         InputLabelProps={{ shrink: true }} variant="outlined" />
                     <TextField className={classes.txt} id="patronimyc" required label="Отчество"
-                        value={info.patronimyc} onChange={onPatronimycChange}
+                        value={info.patronymic} onChange={onPatronymicChange}
                         InputLabelProps={{ shrink: true }} variant="outlined" />
                     <TextField className={classes.txt} id="birthDate" required label="Дата рождения"
                         value={info.birthDate} onChange={onBirthDateChange}
@@ -159,14 +161,3 @@ export const DialogAddPatient = ({ open, onClose }) => {
         </Modal>
     )
 }
-
-/*
-<RadioGroup row aria-label="Пол" name="gender" defaultValue={value} value={value} onChange={handleChange}>
-                        <FormControlLabel value="mail" control={<Radio></Radio>} />
-                        <FormControlLabel value="femail" control={<Radio></Radio>} />
-                    </RadioGroup>
-<RadioGroup row aria-label="Пол" name="gender" defaultValue={value} value={value} onChange={handleChange}>
-                        <FormControlLabel value="mail" control={<Button className={`${classes.radio} ${classes.radioChecked && value === 'mail'}`}>МУЖСКОЙ</Button>} />
-                        <FormControlLabel value="femail" control={<Button className={`${classes.radio} ${classes.radioChecked && value === 'femail'}`}>ЖЕНСКИЙ</Button>} />
-                    </RadioGroup>
-*/

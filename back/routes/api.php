@@ -30,6 +30,7 @@ Route::controller(RecordController::class)->group(function(){
    Route::post('/records/add', 'store');
     Route::post('/records/all/possible', 'getPossibleDate');
     Route::get('/records', 'index');
+    Route::get('/records/patient/{id}', 'getRecordsByPatientId');
    // Route::get('/schedules/{id}', 'getShedulebyDoctor');
 });
 
@@ -97,8 +98,8 @@ Route::controller(LoginController::class)->group(function () {
 });
 
 Route::controller(PatientRelativeController::class)->group(function () {
-    Route::get('/patient-relatives', 'show')->name('patient.private');
-    Route::post('/add-relative', 'store');
+    Route::get('/patient-relatives/{user}', 'show')->name('patient.relatives');
+    Route::post('/add-relative/{user}', 'store');
     Route::get('/edit-relative/{patient}', 'edit');
     Route::put('/update-relative/{patient}', 'update');
     Route::delete('/delete-relative/{patient}', 'destroy');

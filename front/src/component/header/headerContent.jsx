@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import enteranceDoctorsIcon from "./../../static/icons/enteranceDoctorsIcon.svg";
 
 const linksArray = [
-  { name: "О клинике", path: "/about" },
+  // { name: "О клинике", path: "/about" },
   { name: "Услуги", path: "/services" },
   { name: "Врачи", path: "/doctors" },
   { name: "Контакты", path: "/contacts" },
