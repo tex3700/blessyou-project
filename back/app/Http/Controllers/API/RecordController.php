@@ -80,5 +80,13 @@ class RecordController extends Controller {
          return response()->json('Не сохранено', 402);
 
     }
+    
+    public function getRecordsByPatientId($id){
+        $model = Record::where([
+    ['patient_id', '=', $id],
+    ['record_time', '>', new DateTime]
+                ])->take(10)->get();
+        return response()->json($model, 201);
+    }
 
 }
