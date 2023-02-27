@@ -80,9 +80,17 @@ class PatientController extends Controller
 
     public function show($id): JsonResponse
     {
+//        if (Auth::check()) {
+//            $id = Auth::id();
+
         $patient = $this->model->where('user_id', '=', $id)->first();
 
         return response()->json(['data' => $patient, 'status' => 200]);
+
+//        }
+//        return response()->json([
+//            'message' => 'Пользователь не авторизоваан',
+//            'status' => 401], 401);
     }
 
     public function edit($id): JsonResponse
