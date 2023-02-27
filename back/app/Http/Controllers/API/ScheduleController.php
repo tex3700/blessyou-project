@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Validation\ValidationException;
 //use App\Models\Day;
 
 /**
@@ -28,6 +29,17 @@ class ScheduleController extends Controller {
 
     //put your code here
     public function store(Request $request): JsonResponse {
+        try {
+            $validatedFields = $request->validate([
+                "doctor_id" => ['required', 'int'],
+                "day_id" => ['required', 'int'],
+                "start_time" => ['required', 'date_format:H:i:s'], //Должен соотвествовать формату "01:00:00"
+                "end_time" => ['required', 'date_format:H:i:s'], //Должен соотвествовать формату "01:00:00" 
+            ]);
+        } catch (ValidationException $exception) {
+            $result = $exception->errors();
+            return response()->json($result, 422);
+        }
         Schedule::create($request->all());
         return response()->json('Успешно сохранено', 201);
     }
