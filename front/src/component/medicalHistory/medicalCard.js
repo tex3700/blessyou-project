@@ -1,18 +1,12 @@
-import React, { useLayoutEffect, useState } from "react";
+import React from "react";
 import { useStyles } from "./styleMedical";
 import search from "../../static/icons/medical/searchMed.svg";
 import sent from "../../static/icons/medical/sentMed.svg";
 import { Avatar, Box, CardMedia, Typography } from "@material-ui/core";
 import { apiStorage } from "../../api";
-import { Button } from "@material-ui/core";
 
 export const MedicalCard = ({ props, changeRenderButtonCard }) => {
   const classes = useStyles();
-  const [visible, setVisible] = useState(false);
-
-  useLayoutEffect(() => {
-    setVisible(changeRenderButtonCard);
-  }, [changeRenderButtonCard]);
 
   return (
     <Box className={classes.medicalCard}>
@@ -27,17 +21,8 @@ export const MedicalCard = ({ props, changeRenderButtonCard }) => {
         <p>{props.info}</p>
       </Box>
       <Box style={{ alignSelf: "center" }}>
-        {!visible && (
-          <CardMedia className={classes.medicalIgm} image={`${search}`} />
-        )}
-        {!visible && (
-          <CardMedia className={classes.medicalIgm} image={`${sent}`} />
-        )}
-        {visible && (
-          <Button size="small" className={classes.medicalButton}>
-            Отменить
-          </Button>
-        )}
+        <CardMedia className={classes.medicalIgm} image={`${search}`} />
+        <CardMedia className={classes.medicalIgm} image={`${sent}`} />
       </Box>
     </Box>
   );

@@ -15,13 +15,13 @@ export const useStyles = makeStyles(() => ({
   medicalTitlleBox: {
     borderBottom: "1px solid #4493B9",
     padding: "16px 0",
-    marginTop: "16px",
+    margin: "16px 0 10px",
   },
   medicalCard: {
     display: "flex",
-    margin: "15px 0",
-    paddingBottom: "15px",
+    padding: "15px 0",
     borderBottom: "1px solid #F2F7FA",
+    "&:hover": { background: "#F2F7FA" },
     "&:hover $medicalButton": { display: "block" },
     "&:hover $medicalDateText": { color: "#76BF35" },
   },
