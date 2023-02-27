@@ -38,7 +38,7 @@ class PatientRelativeController extends Controller
 
         $patientsAnother = $patients->except($patients->first()->id);
 
-        return !is_null($patientsAnother)
+        return !empty($patientsAnother)
             ? response()->json(['data' => $patientsAnother, 'status' => 200])
             : response()->json(['message' => "Не найдено связанных записей", 'status' => 204], 204);
 //        }

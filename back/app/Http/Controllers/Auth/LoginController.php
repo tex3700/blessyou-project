@@ -9,15 +9,25 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    public function logout(): JsonResponse
+    public function logout(
+        AuthenticatedSessionController $authSession,
+        Request $request
+    ): JsonResponse
     {
         if (Auth::check()) {
 
-            Auth::logout();
-            return response()->json(['message' => 'logout successful', 'status' => 200]);
+//            Auth::logout();
+
+            $authSession->destroy($request);
+
+//            return response()->json(['message' => 'logout successful', 'status' => 200]);
+
+            return !Auth::check()
+                ? response()->json(['message' => 'logout successful', 'status' => 200])
+                : response()->json(['message' => 'logout fall for any reason', 'status' => 204], 204);
 
         }
-        return response()->json(['message' => 'Пользователь не авторизован']);
+        return response()->json(['message' => 'Пользователь не авторизован', 'status' => 401], 401);
     }
 
     /**
