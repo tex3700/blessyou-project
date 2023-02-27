@@ -26,6 +26,7 @@ Route::controller(RecordController::class)->group(function(){
    Route::post('/records/add', 'store');
     Route::post('/records/all/possible', 'getPossibleDate');
     Route::get('/records', 'index');
+    Route::get('/records/patient/{id}', 'getRecordsByPatientId');
    // Route::get('/schedules/{id}', 'getShedulebyDoctor');
 });
 Route::controller(ScheduleController::class)->group(function(){
