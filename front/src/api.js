@@ -11,7 +11,7 @@ export const apiRequest = (endpoint, method, data) => {
 
   return fetch(s, {
     method: method,
-    headers: { "Content-Type": "application/json", Accept: "application/json" },
+    headers: { "Content-Type": "application/json", "Accept": "application/json" },
     credentials: "include",
     body: JSON.stringify(data),
   })

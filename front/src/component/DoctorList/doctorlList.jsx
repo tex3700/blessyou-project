@@ -33,6 +33,7 @@ const DoctorList = () => {
               <DoctorCard key={item.id} props={item} />
             </Grid>
           ))}
+
         </Grid>
       </Container>
       <SendMessage />
@@ -40,6 +41,7 @@ const DoctorList = () => {
         <OurSevicesComp servicesArray={servicesArray} />
       )}
     </>
+
   );
 };
 

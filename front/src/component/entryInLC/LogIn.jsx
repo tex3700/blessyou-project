@@ -13,7 +13,7 @@ import useStyles from "./styles";
 import { apiRequest } from "../../api";
 import { Navigate } from "react-router-dom";
 
-const LogIn = ({ setIsAuth }) => {
+const LogIn = ({ setIsAuth, handleOpen }) => {
   const classes = useStyles();
 
   const [email, setEmail] = useState("");
@@ -45,21 +45,19 @@ const LogIn = ({ setIsAuth }) => {
       };
       console.log("log in data ", logInData);
 
-      try {
-        apiRequest("patient-login", "POST", logInData).then((data) =>
-          setIsAuth(data.id)
-        );
-
-        handleFormClear();
-      } catch (error) {
-        alert("неправильный емейл или пароль");
-      }
-
-      //отправка на проверку входных данных
-      //когда появятся эндпоинты на сервере , тогда размоментирую
-      // apiRequest("logIn", "POST", logInData);
+      apiRequest("patient-login", "POST", logInData).then((data) => {
+        console.log("data ", data);
+        if (data.status >= 200 && data.status <= 299) {
+          console.log("set", data.status);
+          setIsAuth(data.id);
+          setValid(false);
+          handleFormClear();
+        } else {
+          console.log("422", data.message);
+          handleOpen(data.message);
+        }
+      });
     }
-    setValid(false);
   }
   return (
     <>
