@@ -18,6 +18,7 @@ class Patient extends Model
 //        'avatar_path',
 //        'photo_path',
         'user_id',
+        'birthday',
     ];
 
     public function user(): Model|BelongsTo|null
