@@ -20,7 +20,7 @@ export const DataProvider = ({ children }) => {
 
   useEffect(() => {
     apiRequest("doctors", "GET").then((data) => {
-      setDoctorArray(data);
+      setDoctorArray(data.data);
     });
   }, []);
 
