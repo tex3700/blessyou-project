@@ -30,6 +30,7 @@ Route::controller(RecordController::class)->group(function(){
    Route::post('/records/add', 'store');
     Route::post('/records/all/possible', 'getPossibleDate');
     Route::get('/records', 'index');
+    Route::get('/records/patient/{id}', 'getRecordsByPatientId');
    // Route::get('/schedules/{id}', 'getShedulebyDoctor');
 });
 
@@ -54,10 +55,13 @@ Route::controller(EmployeeController::class)->group(function () {
 
 Route::controller(DoctorController::class)->group(function () {
     Route::get('/doctors', 'index');
-    Route::post('/doctors/add', 'add')->middleware('validated:Doctor');
-     Route::post('/doctors/update', 'update')->middleware('validated:Doctor');
+    Route::post('/add-doctor', 'store')->middleware('validated:Doctor');
+    Route::get('/edit-doctor/{id}', 'edit');
+    Route::put('/update-doctor/{doctor}', 'update')->middleware('validated:Doctor');
+    Route::delete('/delete-doctor/{doctor}', 'destroy');
+    Route::get('/doctor-private/{id}', 'show')->name('doctor.private');
     Route::post('/doctors/get/specialities', 'getDoctorSpecialities');
-     Route::post('/doctors/get/departments', 'getDoctorDepartments');
+    Route::post('/doctors/get/departments', 'getDoctorDepartments');
     Route::post('/doctors/add/speciality', 'addDoctorToSpecialities');
     Route::delete('/doctors/delete/speciality', 'deleteDoctorToSpecialities');
 });
