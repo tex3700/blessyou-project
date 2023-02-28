@@ -13,21 +13,15 @@ import {
     blueColor, greyColor, modalStyle, buttonStyle, greenColor,
 } from '../../styleConst';
 
+import { apiRequest } from '../../api';
+import { getName } from '../../patientUtils';
+
 const textStyle = {
     fontStyle: 'normal',
     fontWeight: '600',
     fontSize: '16px',
     lineHeight: '24px'
 };
-
-const patients = [
-    {
-        id: '1', name: 'Любимый пациент', isActive: true
-    },
-    {
-        id: '2', name: 'Доченька любимого пациента', isActive: false
-    }
-];
 
 const useStyles = makeStyles((theme) => ({
     captionBox: {
@@ -87,11 +81,18 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export const DialogSelectPatient = ({ open, onClose }) => {
+export const DialogSelectPatient = ({ userData, open, onClose, onChangePatient }) => {
 
+    const [patients, setPatients] = useState([]);
     const [selectedPatient, setSelectedPatient] = useState('');
     const [openDialogAddPatient, setOpenDialogAddPatient] = useState(false);
 
+    useEffect(() => {
+        if (userData.activePatient === 0)
+            return;
+
+        selectPatients();
+    }, [userData]);
 
     useEffect(() => {
         if (open)
@@ -100,18 +101,40 @@ export const DialogSelectPatient = ({ open, onClose }) => {
 
     const classes = useStyles();
 
+    const selectPatients = () => {
+        apiRequest(`patient-relatives/${userData.data.user_id}`, 'GET').then(result => {
+            // пациент, закрепленный за пользователем
+            const a = [{ id: userData.data.id, name: getName(userData.data) }]
+            // дополнительные пациенты
+            const p = result.data.map(item => { return { id: item.id, name: getName(item) } });
+            //console.log('patient-relatives ', p);
+
+            setPatients([...a, ...p]);
+        })
+    }
 
     const onSelectItemClick = (id) => {
         setSelectedPatient(id);
+    }
+
+    const onSelectPatientClick = () => {
+        const p = patients.find(item => item.id === selectedPatient);
+        onChangePatient(p.id, p.name);
+        onClose(true);
     }
 
     const onAddPatientClick = () => {
         setOpenDialogAddPatient(true);
     }
 
-    const onCloseDialogAddPatient = () => {
+    const onCloseDialogAddPatient = (flagAdd) => {
+        if (flagAdd) {
+            // опять запрос для списка пациентов :(
+            selectPatients();
+        }
         setOpenDialogAddPatient(false);
     }
+
 
     return (
         <>
@@ -131,8 +154,8 @@ export const DialogSelectPatient = ({ open, onClose }) => {
                         {
                             patients.map((item) => (
                                 <ListItem className={`${classes.listItemStyle} ${item.id === selectedPatient && classes.selectedPatient}`} key={item.id}
-                                    button={true} onClick={() => onSelectItemClick(item.id)}>
-                                    {item.isActive ? <CheckIcon /> : <></>}
+                                    button={true} onClick={() => onSelectItemClick(item.id, item.name)}>
+                                    {item.id === userData.activePatient ? <CheckIcon /> : <></>}
                                     <Typography className={classes.patient}>
                                         {item.name}
                                     </Typography>
@@ -141,7 +164,7 @@ export const DialogSelectPatient = ({ open, onClose }) => {
                         }
                     </List>
                     <Button className={classes.btnSelect} disabled={selectedPatient === ''}
-                        onClick={() => onClose(true)}>
+                        onClick={onSelectPatientClick}>
                         <CheckIcon />ВЫБРАТЬ
                     </Button>
                     <Button className={classes.btnAdd} onClick={onAddPatientClick}>
@@ -150,7 +173,7 @@ export const DialogSelectPatient = ({ open, onClose }) => {
                     <Button className={classes.btnCancel} onClick={() => onClose(false)}>ОТМЕНА</Button>
                 </Box>
             </Modal>
-            <DialogAddPatient open={openDialogAddPatient} onClose={onCloseDialogAddPatient}></DialogAddPatient>
+            <DialogAddPatient userId={userData.data.user_id} open={openDialogAddPatient} onClose={onCloseDialogAddPatient}></DialogAddPatient>
         </>
     )
 }

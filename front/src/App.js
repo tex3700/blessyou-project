@@ -48,7 +48,7 @@ function App() {
             path="/patientAccount/*"
             element={
               <PrivateRoute isAuth={isAuth}>
-                <PatientAccountPage isAuth={isAuth} />
+                <PatientAccountPage isAuth={isAuth} setIsAuth={setIsAuth} />
               </PrivateRoute>
             }
           />

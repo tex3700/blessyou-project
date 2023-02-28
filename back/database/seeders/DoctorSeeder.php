@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -15,19 +16,23 @@ class DoctorSeeder extends Seeder
             "id" => 1,
             "name" => "Алексей",
             "patronymic"=> "Викторович",
-            "avatar_path"=> "a1.png",
+            "avatar_path"=> "a2.png",
             "info" => "Специалист высшей категории",
             "surname" => "Виноградов",
             "photo_path" => "p1.jpg",
+            "email" => "av@mail.ru",
+            "phone" => "9009000001",
         ],
         2 => [
             "id" => 2,
             "name" => "Алла",
             "patronymic" => "Петровна",
-            "avatar_path" => "a2.png",
+            "avatar_path" => "a1.png",
             "info" => "Специалист по грудному вскармливанию",
             "surname" => "Иванова",
             "photo_path" => "p2.jpg",
+            "email" => "ap@mail.ru",
+            "phone" => "9009000002",
         ],
         3 => [
             "id" => 3,
@@ -37,6 +42,8 @@ class DoctorSeeder extends Seeder
             "info" => "",
             "surname" => "Никитин",
             "photo_path" => "p3.jpg",
+            "email" => "fp@mail.ru",
+            "phone" => "9009000003",
         ],
         4 => [
             "id" => 4,
@@ -46,24 +53,30 @@ class DoctorSeeder extends Seeder
             "info" => "Специалист высшей категории, гл.врач мед.центра",
             "surname" => "Никитина",
             "photo_path" => "p4.jpg",
+            "email" => "ef@mail.ru",
+            "phone" => "9009000004",
         ],
         5 => [
             "id" => 5,
             "name" => "Иван",
             "patronymic" => "Петрович",
-            "avatar_path" => "a5.png",
+            "avatar_path" => "a6.png",
             "info" => "",
             "surname" => "Иванов",
             "photo_path" => "p5.jpg",
+            "email" => "ip@mail.ru",
+            "phone" => "9009000005",
         ],
         6 => [
             "id" => 6,
             "name" => "Анатолий",
             "patronymic" => "Владимирович",
-            "avatar_path" => "a6.png",
+            "avatar_path" => "a5.png",
             "info" => "",
             "surname" => "Туманов",
             "photo_path" => "p6.jpg",
+            "email" => "anv@mail.ru",
+            "phone" => "9009000006",
         ],
         7 => [
             "id" => 7,
@@ -73,6 +86,8 @@ class DoctorSeeder extends Seeder
             "info" => "Специалист первой категории",
             "surname" => "Березина",
             "photo_path" => "p7.jpg",
+            "email" => "ab@mail.ru",
+            "phone" => "9009000007",
         ],
         8 => [
             "id" => 8,
@@ -82,6 +97,8 @@ class DoctorSeeder extends Seeder
             "info" => "Специалист первой категории",
             "surname" => "Рыбникова",
             "photo_path" => "p8.jpg",
+            "email" => "ev@mail.ru",
+            "phone" => "9009000008",
         ],
     ];
 
@@ -99,8 +116,16 @@ class DoctorSeeder extends Seeder
     {
         $data = [];
         foreach ($this->doctors as $doctor) {
+
+            $user = User::create([
+                'email' => $doctor["email"],
+                'phone' => $doctor["phone"],
+                'is_doctor' => '1',
+            ]);
+
             $data[] = [
                 'id' => $doctor['id'],
+                'user_id' => $user->id,
                 "name" => $doctor["name"],
                 "patronymic" => $doctor["patronymic"],
                 "surname" => $doctor["surname"],

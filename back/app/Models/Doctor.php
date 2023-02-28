@@ -4,19 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\{ BelongsTo, BelongsToMany };
+use Illuminate\Database\Eloquent\Relations\{ BelongsTo, BelongsToMany, HasMany };
 
 class Doctor extends Model
 {
 
     protected $fillable = [
         'id',
+        'user_id',
         'name',
         'surname',
         'patronymic',
         'speciality_id',
         'avatar_path',
-        'photo_path'
+        'photo_path',
     ];
 
     public function user(): Model|BelongsTo|null
@@ -32,8 +33,8 @@ class Doctor extends Model
     {
         return $this->belongsToMany(Department::class,'doctor_department','doctor_id','department_id');
     }
-        public function schedule()
-    {
+        public function schedule(): HasMany
+        {
       return $this->hasMany(Schedule::class);
     }
 }

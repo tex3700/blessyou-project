@@ -11,12 +11,15 @@ const addZero = (n) => {
 }
 
 const timeToStr = (time) => {
-    const d = new Date(time);
-    return `${addZero(d.getHours())}:${addZero(d.getMinutes())}`;
+    return `${addZero(time.getHours())}:${addZero(time.getMinutes())}`;
 }
 
 export const getIntervalCaption = (startTime, endTime) => {
-    return `${timeToStr(startTime)} - ${timeToStr(endTime)}`;
+    if (typeof (startTime) === 'object')
+        return `${timeToStr(startTime)} - ${timeToStr(endTime)}`
+    else
+        return `${timeToStr(new Date(startTime))} - ${timeToStr(new Date(endTime))}`;
+
 }
 
 export const getDayNumber = (d) => {
@@ -25,4 +28,12 @@ export const getDayNumber = (d) => {
 
 export const dateToStr = (day, month, year) => {
     return `${addZero(day)}.${addZero(month + 1)}.${year}`;
+}
+
+export const getDateKey = (day, month, year) => {
+    return `${year}-${addZero(month + 1)}-${addZero(day)}`;
+}
+
+export const dateTimeForRequest = (date) => {
+    return `${date.getFullYear()}-${addZero(date.getMonth() + 1)}-${addZero(date.getDate())} ${addZero(date.getHours())}:${addZero(date.getMinutes())}:00`
 }
