@@ -81,6 +81,7 @@ const SingInfo = ({ setIsAuth }) => {
     }
     setValid(false);
   }
+  
   return (
     <>
       <Box className={classes.logInContainer}>
