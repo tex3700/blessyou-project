@@ -154,7 +154,8 @@ export const PatientAccountPage = ({ isAuth, setIsAuth }) => {
 
   // пока так
   const getPatientName = (id) => {
-    if (id === userData.data.id)
+    //console.log('getPatientName ', userData, id)
+    if (id == userData.data.id)
       return getName(userData.data);
     else {
       const name = sessionStorage.getItem(SS_ACTIVEPATIENTNAME);
