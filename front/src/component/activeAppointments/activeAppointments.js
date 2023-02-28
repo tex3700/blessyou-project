@@ -18,8 +18,8 @@ export const ActiveAppointments = () => {
             Дата и специалист
           </Typography>
         </Box>
-        <MedicalCard props={doctorArray[5]} />
-        <MedicalCard props={doctorArray[7]} />
+        <MedicalCard props={doctorArray[5]} changeRenderButtonCard="true" />
+        <MedicalCard props={doctorArray[7]} changeRenderButtonCard="true" />
       </Container>
       <Box style={{ minHeight: "300px" }}></Box>
     </>

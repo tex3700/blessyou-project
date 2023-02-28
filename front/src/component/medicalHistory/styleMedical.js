@@ -7,6 +7,10 @@ export const useStyles = makeStyles(() => ({
     lineHeight: "30px",
     color: "#676767",
   },
+  medicalButton: {
+    color: "#76BF35",
+    display: "none",
+  },
 
   medicalTitlleBox: {
     borderBottom: "1px solid #4493B9",
@@ -17,7 +21,12 @@ export const useStyles = makeStyles(() => ({
     display: "flex",
     margin: "15px 0",
     paddingBottom: "15px",
-    borderBottom: "1px solid #4493B9",
+    borderBottom: "1px solid #F2F7FA",
+    "&:hover $medicalButton": { display: "block" },
+    "&:hover $medicalDateText": { color: "#76BF35" },
+  },
+  medicalDateText: {
+    color: "#676767",
   },
   medicalIgm: {
     width: "27px",
