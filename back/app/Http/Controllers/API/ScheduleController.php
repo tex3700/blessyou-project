@@ -34,7 +34,7 @@ class ScheduleController extends Controller {
                 "doctor_id" => ['required', 'int'],
                 "day_id" => ['required', 'int'],
                 "start_time" => ['required', 'date_format:H:i:s'], //Должен соотвествовать формату "01:00:00"
-                "end_time" => ['required', 'date_format:H:i:s'], //Должен соотвествовать формату "01:00:00" 
+                "end_time" => ['required', 'date_format:H:i:s'], //Должен соотвествовать формату "01:00:00"
             ]);
         } catch (ValidationException $exception) {
             $result = $exception->errors();
