@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('records', function (Blueprint $table) {
             $table->id();
             $table->foreignId('doctor_id')->nullable()
-                    ->constrained('doctors')->onUpdate('cascade')->onDelete('cascade');
+                    ->constrained('doctors');
             $table->foreignId('patient_id')->nullable()
-                    ->constrained('patients')->onUpdate('cascade')->onDelete('cascade');
+                    ->constrained('patients');
             $table->dateTime('record_time', $precision = 0)->nullable();
             $table->dateTime('end_time', $precision = 0)->nullable();
             $table->time('receipt_time')->nullable();
