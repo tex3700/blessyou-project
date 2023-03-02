@@ -48,6 +48,7 @@ class DoctorController extends Controller {
 //        return response()->json([
 //            'message' => 'Пользователь не авторизоваан',
 //            'status' => 401], 401);
+
     }
 
     public function store(Request $request): JsonResponse

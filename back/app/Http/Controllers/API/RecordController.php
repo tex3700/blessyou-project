@@ -24,8 +24,8 @@ class RecordController extends Controller {
 
     public function __construct() {
         $this->model = Record::query()
-                ->join('doctors', 'records.doctor_id', '=', 'doctors.id')
-               ->join('patients', 'records.patient_id', '=', 'patients.id');
+            ->join('doctors', 'records.doctor_id', '=', 'doctors.id')
+            ->join('patients', 'records.patient_id', '=', 'patients.id');
     }
 
     public function index() {
@@ -42,9 +42,9 @@ class RecordController extends Controller {
         $findDateAction = new AllPossibleReportForDateAction;
         $checkDateReportAbility = new CheckDateReportAbility;
         $allPossibleDate = $this->getAllPossibleDatesForReport(
-                        $request->doctor_id,
-                        $request->days_amount, $scheduleController
-                        );
+            $request->doctor_id,
+            $request->days_amount, $scheduleController
+        );
 
         if (!is_null($allPossibleDate)) {
             foreach ($allPossibleDate as $key => $value) {
@@ -72,23 +72,23 @@ class RecordController extends Controller {
         $date = new DateTimeImmutable($validatedFields["record_time"]);
         $time = explode(":", $validatedFields["receipt_time"]);
         $validatedFields["end_time"] = $date
-                ->modify("+ $time[0] hours $time[1] minutes $time[2] seconds ") //Не нашёл лучшего способа добавлять динамическое количество времени
-                ->format('Y-m-d H:i:s');
+            ->modify("+ $time[0] hours $time[1] minutes $time[2] seconds ") //Не нашёл лучшего способа добавлять динамическое количество времени
+            ->format('Y-m-d H:i:s');
         $checkTimeDoctorSchedule = new \App\Actions\CheckTimeDoctorSchedule();
         $result = $checkTimeDoctorSchedule($validatedFields["doctor_id"],$validatedFields["record_time"]);
         if($result){
             Record::create($validatedFields);
             return response()->json('Успешно сохранено', 201);
         }
-         return response()->json('Не сохранено', 402);
+        return response()->json('Не сохранено', 402);
 
     }
 
     public function getRecordsByPatientId($id){
         $model = Record::where([
-    ['patient_id', '=', $id],
-    ['record_time', '>', new DateTime]
-                ])->take(10)->get();
+            ['patient_id', '=', $id],
+            ['record_time', '>', new DateTime]
+        ])->take(10)->get();
         return response()->json($model, 201);
     }
 
@@ -102,3 +102,4 @@ class RecordController extends Controller {
     }
 
 }
+

@@ -27,12 +27,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::controller(RecordController::class)->group(function(){
-   Route::post('/records/add', 'store');
+    Route::post('/records/add', 'store');
     Route::post('/records/all/possible', 'getPossibleDate');
     Route::get('/records', 'index');
     Route::get('/records/patient/{id}', 'getRecordsByPatientId');
     Route::delete('/delete-record/{record}', 'destroy');
-   // Route::get('/schedules/{id}', 'getShedulebyDoctor');
+    // Route::get('/schedules/{id}', 'getShedulebyDoctor');
 });
 
 Route::controller(ScheduleController::class)->group(function(){
@@ -91,7 +91,7 @@ Route::controller(DepartmentController::class)->group(function () {
     Route::post('/departments/update', 'update')->middleware('validated:Department');
     Route::post('/departments/get/doctors', 'getDoctorDepartment');
     Route::post('/departments/add/doctors', 'addDoctorToDepartment');
-     Route::delete('/departments/delete/doctors', 'deleteDoctorToDepartment');
+    Route::delete('/departments/delete/doctors', 'deleteDoctorToDepartment');
 });
 
 Route::controller(LoginController::class)->group(function () {
@@ -113,3 +113,4 @@ Route::controller(PatientRelativeController::class)->group(function () {
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
+

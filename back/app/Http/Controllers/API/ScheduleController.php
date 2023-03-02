@@ -24,7 +24,7 @@ class ScheduleController extends Controller {
 
     public function __construct() {
         $this->model = Schedule::query()
-                ->join('days', 'schedules.day_id', '=', 'days.id');
+            ->join('days', 'schedules.day_id', '=', 'days.id');
     }
 
     //put your code here
@@ -59,3 +59,4 @@ class ScheduleController extends Controller {
     }
 
 }
+
