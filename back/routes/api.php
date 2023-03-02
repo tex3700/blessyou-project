@@ -31,6 +31,7 @@ Route::controller(RecordController::class)->group(function(){
     Route::post('/records/all/possible', 'getPossibleDate');
     Route::get('/records', 'index');
     Route::get('/records/patient/{id}', 'getRecordsByPatientId');
+    Route::delete('/delete-record/{record}', 'destroy');
    // Route::get('/schedules/{id}', 'getShedulebyDoctor');
 });
 

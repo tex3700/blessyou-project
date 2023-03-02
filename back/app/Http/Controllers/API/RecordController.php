@@ -92,4 +92,13 @@ class RecordController extends Controller {
         return response()->json($model, 201);
     }
 
+    public function destroy(Record $record): JsonResponse
+    {
+        $record->delete();
+
+        return response()->json([
+            'message' => 'Запись отменена',
+            'status' => 204], 204);
+    }
+
 }
