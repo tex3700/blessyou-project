@@ -65,6 +65,7 @@ Route::controller(DoctorController::class)->group(function () {
     Route::post('/doctors/get/departments', 'getDoctorDepartments');
     Route::post('/doctors/add/speciality', 'addDoctorToSpecialities');
     Route::delete('/doctors/delete/speciality', 'deleteDoctorToSpecialities');
+    Route::get('/doctors/next-records', 'doctorsNextRecords');
 });
 
 Route::controller(PatientController::class)->group(function () {

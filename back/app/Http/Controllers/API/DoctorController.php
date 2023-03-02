@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Actions\GetNextRecordsDataAction;
 use App\Http\Controllers\Controller;
+use App\Models\Department;
 use App\Models\Doctor;
+use App\Models\DoctorDepartment;
 use App\Models\DoctorSpeciality;
+use App\Models\Schedule;
 use App\Models\Speciality;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
@@ -128,6 +132,17 @@ class DoctorController extends Controller {
             return true;
         }
         return false;
+    }
+
+    public function doctorsNextRecords(): JsonResponse
+    {
+        $doctorsAvailable = array_unique(Schedule::query()->pluck('doctor_id')->all());
+        sort($doctorsAvailable);
+        $getNextRecordsData = new GetNextRecordsDataAction;
+
+        $doctorsRecordsNext = array_map( fn($value) => $getNextRecordsData($value), array_unique($doctorsAvailable));
+
+        return response()->json($doctorsRecordsNext);
     }
 
 }
