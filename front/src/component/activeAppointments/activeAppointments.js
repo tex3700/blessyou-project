@@ -26,7 +26,7 @@ export const ActiveAppointments = ({ activePatientId }) => {
 
     // создаем "костыль" для соединения 2-х массивов, для вывода докторов
     const [result] = doctorArray.filter(
-      (itemFilter) => itemFilter.id === item.doctor_id
+        (itemFilter) => itemFilter.id === item.doctor_id
     );
 
     // возвращаю новый массив и добавляю поле записи на приём
@@ -39,19 +39,19 @@ export const ActiveAppointments = ({ activePatientId }) => {
   });
 
   return (
-    <>
-      <Container fixed>
-        <Box className={classes.medicalTitlleBox}>
-          <Typography className={classes.medicalTitlle}>
-            Дата и специалист
-          </Typography>
-        </Box>
+      <>
+        <Container fixed>
+          <Box className={classes.medicalTitlleBox}>
+            <Typography className={classes.medicalTitlle}>
+              Дата и специалист
+            </Typography>
+          </Box>
 
-        {arreyRecordDoctors.map((item, i) => (
-          <MedicalCard key={i} index={i} props={item} />
-        ))}
-      </Container>
-      <Box style={{ minHeight: "300px" }}></Box>
-    </>
+          {arreyRecordDoctors.map((item, i) => (
+              <MedicalCard key={i} index={i} props={item} />
+          ))}
+        </Container>
+        <Box style={{ minHeight: "300px" }}></Box>
+      </>
   );
 };

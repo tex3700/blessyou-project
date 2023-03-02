@@ -8,7 +8,7 @@ use DateInterval;
 use DateTimeImmutable;
 
 class FindDateAction{
-    private $days = [    
+    private $days = [
     1=>'monday',
     2=>'tuesday',
     3=>'wednesday',
@@ -17,7 +17,8 @@ class FindDateAction{
     6=>'sunday',
     7=>'saturday'
      ];
-      public function __invoke($doctorWorkShecdule, $numOfDays) {
+      public function __invoke($doctorWorkShecdule, $numOfDays): ?array
+      {
         $period = new DatePeriod(new DateTime(), new DateInterval('P1D'),$numOfDays, DatePeriod::EXCLUDE_START_DATE);
         foreach ($period as $value) {
             $dates[] = $value->format('Y-m-d');
@@ -30,7 +31,7 @@ class FindDateAction{
             $nearDayId = array_search($nearlyDay, $dates);
             while (isset($dates[$nearDayId])) {
                 $resultData[$dates[$nearDayId]] = [
-                    "avaible_data_min" => 
+                    "avaible_data_min" =>
                     DateTimeImmutable::createFromFormat('Y-m-d H:i:s',$dates[$nearDayId] . " " . $value->start_time),
                     "avaible_data_max" =>
                     DateTimeImmutable::createFromFormat('Y-m-d H:i:s',$dates[$nearDayId] . " " . $value->end_time)
@@ -38,8 +39,13 @@ class FindDateAction{
                 $nearDayId += 7;
             }
         }
-        asort($resultData);
-        return $resultData;
+            if (empty($resultData)) {
+                return null;
+            }
+
+            asort($resultData);
+
+            return $resultData;
     }
 
 }
