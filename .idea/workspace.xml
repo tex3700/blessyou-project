@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fc64272b-3153-40ac-bf1c-3a799c7bbd72" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/front/src/component/activeAppointments/activeAppointmentCard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/app/Http/Controllers/API/DoctorController.php" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/Http/Controllers/API/DoctorController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/app/Http/Controllers/API/RecordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/Http/Controllers/API/RecordController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/app/Http/Controllers/API/ScheduleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/Http/Controllers/API/ScheduleController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/database/seeders/AdminSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/back/database/seeders/AdminSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/database/seeders/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/back/database/seeders/DatabaseSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/back/routes/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/component/activeAppointments/activeAppointments.js" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/component/activeAppointments/activeAppointments.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/component/medicalHistory/medicalCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/component/medicalHistory/medicalCard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/component/medicalHistory/styleMedical.js" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/component/medicalHistory/styleMedical.js" afterDir="false" />
-    </list>
+    <list default="true" id="fc64272b-3153-40ac-bf1c-3a799c7bbd72" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -193,7 +182,7 @@
       <workItem from="1677388568204" duration="21037000" />
       <workItem from="1677562783841" duration="8997000" />
       <workItem from="1677664015689" duration="11355000" />
-      <workItem from="1677742252920" duration="34420000" />
+      <workItem from="1677742252920" duration="34954000" />
     </task>
     <servers />
   </component>
