@@ -46,12 +46,15 @@ class RecordController extends Controller {
                         $request->days_amount, $scheduleController
                         );
 
-        foreach($allPossibleDate as $key=>$value){
-            $allDate[$key] = $findDateAction($value);
-        }
+        if (!is_null($allPossibleDate)) {
+            foreach ($allPossibleDate as $key => $value) {
+                $allDate[$key] = $findDateAction($value);
+            }
 
-        $allPossibleReport = $checkDateReportAbility($allDate,$request->doctor_id);
-        return response()->json($allPossibleReport);
+            $allPossibleReport = $checkDateReportAbility($allDate, $request->doctor_id);
+            return response()->json($allPossibleReport);
+        }
+        return response()->json(['message' => 'Нет доступных записей для выбранного врача']);
     }
 
     public function store(Request $request, ScheduleController $scheduleController): JsonResponse {
@@ -80,7 +83,7 @@ class RecordController extends Controller {
          return response()->json('Не сохранено', 402);
 
     }
-    
+
     public function getRecordsByPatientId($id){
         $model = Record::where([
     ['patient_id', '=', $id],
