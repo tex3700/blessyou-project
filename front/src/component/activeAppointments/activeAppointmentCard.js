@@ -11,7 +11,7 @@ export const MedicalCard = ({ props }) => {
   // console.log("props", props);
 
   const deleteCardDate = () => {
-    setVisible((props = !visible));
+    setVisible((props.i = !visible));
     apiRequest(`delete-record/${props.id_record}`, "DELETE").then((data) => {
       console.log("result", data);
     });
