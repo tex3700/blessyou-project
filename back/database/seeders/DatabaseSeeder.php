@@ -26,9 +26,6 @@ class DatabaseSeeder extends Seeder
         $this->call(SpecialitySeeder::class);
         $this->call(DepartmentSeeder::class);
         $this->call(DaySeeder::class);
-<<<<<<< HEAD
-=======
-        $this->call(AdminSeeder::class);
->>>>>>> 82f34c2e54299dfc9da2dab14aa31790ee6a1c64
+
     }
 }
