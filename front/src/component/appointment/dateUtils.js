@@ -30,6 +30,11 @@ export const dateToStr = (day, month, year) => {
     return `${addZero(day)}.${addZero(month + 1)}.${year}`;
 }
 
+export const dateKeyToStr = (key) => {
+    const date = new Date(key);
+    return dateToStr(date.getDate(), date.getMonth(), date.getFullYear());
+};
+
 export const getDateKey = (day, month, year) => {
     return `${year}-${addZero(month + 1)}-${addZero(day)}`;
 }
