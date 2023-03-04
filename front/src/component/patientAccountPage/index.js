@@ -140,11 +140,12 @@ export const PatientAccountPage = ({ isAuth, setIsAuth }) => {
       setUserData({ data: result.data, activePatient: result.data.id });
 
       sessionStorage.setItem(SS_ACTIVEPATIENT, result.data.id);
-      sessionStorage.setItem(SS_ACTIVEPATIENTNAME, getPatientName(result.data.id));
+      sessionStorage.setItem(SS_ACTIVEPATIENTNAME, getName(result.data));
 
       refAppointment.current?.click();
     })
   }, [isAuth]);
+
 
   const getActiveNavLinkCaption = () => {
     const pathname = location.pathname.replace('/patientAccount/', '');
@@ -154,7 +155,7 @@ export const PatientAccountPage = ({ isAuth, setIsAuth }) => {
 
   // пока так
   const getPatientName = (id) => {
-    //console.log('getPatientName ', userData, id)
+    console.log('getPatientName ', userData.data, id)
     if (id == userData.data.id)
       return getName(userData.data);
     else {

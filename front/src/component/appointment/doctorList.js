@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { List, ListItem, ListItemText, Typography, Avatar, Box } from '@material-ui/core';
 import { CaptionList } from './captionList';
 import { greenColor, greyColor, dividerListItem } from '../../styleConst';
+import { apiStorage } from '../../api';
 
 const useStyles = makeStyles((theme) => ({
     listStyle: {
@@ -51,7 +52,7 @@ export const DoctorList = ({ specialistTypeName, doctorList, onSelectDoctor }) =
 
     const classes = useStyles();
 
-    console.log(doctorList);
+    console.log('doctorList = ', doctorList);
 
     return (
         <Box className={classes.listStyle}>
@@ -62,7 +63,7 @@ export const DoctorList = ({ specialistTypeName, doctorList, onSelectDoctor }) =
                         button={true} onClick={() => onSelectDoctor(doctorItem.id)}>
                         <Avatar className={classes.avatarStyle}
                             alt={`${doctorItem.surname} ${doctorItem.name} ${doctorItem.patronymic}`}
-                            src={doctorItem.avatar}
+                            src={`${apiStorage}/doctor_avatar/${doctorItem.avatar_path}`}
                         />
                         <ListItemText
                             primary={<Typography className={classes.doctorName}>

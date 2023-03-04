@@ -1,12 +1,15 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import { Container, Box, Link as MuiLink, Typography } from '@material-ui/core';
 import { Route, NavLink as ReactRouterLink, Routes } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { data } from './data';
 import { SpecialistTypeList } from './specialistTypeList';
 import { DoctorList } from './doctorList';
 import { DoctorScheduler } from './doctorScheduler';
+
+import { apiRequest } from '../../api';
+import { DataContext } from '../../DataContext';
+import { dateKeyToStr } from './dateUtils';
 
 const useStyles = makeStyles((theme) => ({
     menu: {
@@ -60,6 +63,10 @@ const useStyles = makeStyles((theme) => ({
 
 export const Appointment = () => {
 
+    const { doctorArray } = useContext(DataContext);
+
+    const [apiData, setApiData] = useState([]);
+
     const [specialistTypeList, setSpecialistTypeList] = useState([]);
 
     const [info, setInfo] = useState({ step: 1, specialistTypeId: 0, specialistTypeName: '', doctorList: [], doctorId: 0, doctorName: '' });
@@ -69,23 +76,30 @@ export const Appointment = () => {
     const refLink3 = useRef(null);
 
     useEffect(() => {
+
+        apiRequest('doctors/next-records', 'GET').then(data => {
+            console.log('next-record data = ', data);
+
+            setApiData(data);
+        })
+    }, []);
+
+    useEffect(() => {
         const l = [];
-        data.forEach(item => {
-            const idx = l.findIndex(elem => elem.id === item.specialistTypeId)
-            if (idx > -1) {
+
+        apiData.forEach(item => {
+            const idx = l.findIndex(elem => elem.name === item.department)
+            if (idx > -1)
                 l[idx].count++;
-                // еще здесь сравнить даты
-            }
             else
                 l.push({
-                    id: item.specialistTypeId, name: item.specialistTypeName,
-                    count: 1, nearestDate: item.nearestDate
+                    id: l.length + 1, name: item.department,
+                    count: 1
                 })
         })
-        console.log(l);
+        setSpecialistTypeList(l);
 
-        setSpecialistTypeList(l)
-    }, []);
+    }, [apiData]);
 
     useEffect(() => {
         switch (info.step) {
@@ -105,12 +119,23 @@ export const Appointment = () => {
     }, [info]);
 
     const onSelectSpecialistType = (id) => {
-        console.log('select specialistTypeId = ', id);
+        const department = specialistTypeList.find(item => item.id === id);
+        const l = apiData.filter(item => item.department === department.name);
 
-        const doctorList = data.filter(item => item.specialistTypeId === id);
-        const s = doctorList.length === 0 ? '' : doctorList[0].specialistTypeName;
+        const doctorList = l.map(item => {
+            const doctor = doctorArray.find(d => d.id === item.id);
+            return {
+                id: item.id,
+                name: doctor.name,
+                patronymic: doctor.patronymic,
+                surname: doctor.surname,
+                info: doctor.info,
+                avatar_path: doctor.avatar_path,
+                nearestDate: dateKeyToStr(item.date)
+            }
+        });
 
-        setInfo({ step: 2, specialistTypeId: id, specialistTypeName: s, doctorList: doctorList, doctorId: 0 });
+        setInfo({ step: 2, specialistTypeId: id, specialistTypeName: department.name, doctorList: doctorList, doctorId: 0 });
     }
 
     const onSelectDoctor = (id) => {
