@@ -363,7 +363,7 @@ export const DoctorScheduler = ({ specialistTypeName, name, id }) => {
                 receipt_time: '00:20:00'
             }
 
-            // console.log('data = ', data);
+            console.log('Запись на прием data = ', data);
 
             apiRequest('records/add', 'POST', data).then(data => {
                 console.log('records/add data ', data);
