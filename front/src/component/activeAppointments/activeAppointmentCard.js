@@ -1,21 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { useStyles } from "../medicalHistory/styleMedical";
 import { Avatar, Box, Typography } from "@material-ui/core";
-import { apiRequest, apiStorage } from "../../api";
+import { apiStorage } from "../../api";
 import { Button } from "@material-ui/core";
 
-export const MedicalCard = ({ props }) => {
+export const MedicalCard = ({ props, deleteCardDate, visible }) => {
   const classes = useStyles();
-  const [visible, setVisible] = useState(true);
 
   // console.log("props", props);
-
-  const deleteCardDate = () => {
-    setVisible((props.i = !visible));
-    apiRequest(`delete-record/${props.id_record}`, "DELETE").then((data) => {
-      console.log("result", data);
-    });
-  };
 
   if (visible) {
     return (
@@ -32,7 +24,9 @@ export const MedicalCard = ({ props }) => {
         </Box>
         <Box style={{ alignSelf: "center" }}>
           <Button
-            onClick={deleteCardDate}
+            onClick={() => {
+              deleteCardDate(props.id_record);
+            }}
             size="small"
             className={classes.medicalButton}
           >
