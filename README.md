@@ -168,7 +168,6 @@ data : {
  'name'-string,
  'surname'-string,
  'patronymic'-string,
- 'speciality_id'-string,
  'avatar_path'-string,
  'photo_path'-string,} все поля необязательны.
  возвращает:
