@@ -9,7 +9,11 @@ use App\Mail\SendMail;
 
 class MailController extends Controller
 {
-    //
+    /**
+     * @lrd:start
+     * {Для работы с SEND необходимо добавить api/ в начало заапроса!}
+     * @lrd:end
+     */
     public function send(Request $request) {
 
         if ($request->has('email')) {

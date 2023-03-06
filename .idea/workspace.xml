@@ -2,14 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fc64272b-3153-40ac-bf1c-3a799c7bbd72" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/back/config/laravel-erd.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back/resources/views/vendor/erd/index.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/docs/erd/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/app/Actions/FindDateAction.php" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/Actions/FindDateAction.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/back/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/back/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/database/seeders/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/back/database/seeders/DatabaseSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/back/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/Http/Controllers/API/DepartmentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/Http/Controllers/API/DepartmentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/Http/Controllers/API/DoctorController.php" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/Http/Controllers/API/DoctorController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/Http/Controllers/API/EmployeeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/Http/Controllers/API/EmployeeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/Http/Controllers/API/MailController.php" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/Http/Controllers/API/MailController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/Http/Controllers/API/PatientController.php" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/Http/Controllers/API/PatientController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/Http/Controllers/API/PatientRelativeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/Http/Controllers/API/PatientRelativeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/Http/Controllers/API/PhotoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/Http/Controllers/API/PhotoController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/Http/Controllers/API/RecordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/Http/Controllers/API/RecordController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/Http/Controllers/API/ScheduleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/Http/Controllers/API/ScheduleController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/Http/Controllers/API/SpecialityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/Http/Controllers/API/SpecialityController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/Models/Department.php" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/Models/Department.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/Models/DoctorDepartment.php" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/Models/DoctorDepartment.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/config/request-docs.php" beforeDir="false" afterPath="$PROJECT_DIR$/back/config/request-docs.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/back/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -159,14 +168,16 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/OpenServer/OSPanel/domains/project_blessyou/blessyou&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/OpenServer/OSPanel/domains/project_blessyou/blessyou/back&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
     &quot;ts.external.directory.path&quot;: &quot;D:\\Program Files\\PhpStorm 2022.1\\plugins\\JavaScriptLanguage\\jsLanguageServicesImpl\\external&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\OpenServer\OSPanel\domains\project_blessyou\blessyou\back" />
       <recent name="D:\OpenServer\OSPanel\domains\project_blessyou\blessyou" />
     </key>
   </component>
@@ -198,7 +209,9 @@
       <workItem from="1677664015689" duration="11355000" />
       <workItem from="1677742252920" duration="35675000" />
       <workItem from="1677832989207" duration="4471000" />
-      <workItem from="1677914631467" duration="9783000" />
+      <workItem from="1677914631467" duration="11990000" />
+      <workItem from="1677998293376" duration="13677000" />
+      <workItem from="1678087606630" duration="11466000" />
     </task>
     <servers />
   </component>

@@ -22,6 +22,16 @@ class PatientController extends Controller
             ->join('patients', 'patients.user_id', '=', 'users.id');
     }
 
+    /**
+     * @lrd:start
+     * {Для работы с SEND необходимо добавить api/ в начало заапроса!}
+     *
+     * Возвращает всех пациентов все поля таблицы patients и поля из связаной таблицы user
+     * ['data' => $patients, 'status' => 200]
+     * @lrd:end
+     *
+     * @LRDresponses responses 200
+     */
     public function index(): JsonResponse
     {
         $patients = $this->model->get();
@@ -30,6 +40,29 @@ class PatientController extends Controller
     }
 
     /**
+     * @LRDparam email required|string
+     * @LRDparam password string|nullable
+     * @LRDparam name string|nullable
+     * @LRDparam surname string|nullable
+     * @LRDparam patronymic string|nullable
+     *
+     * @LRDresponses responses 201,422
+     *
+     * @lrd:start
+     * {Для работы с SEND необходимо добавить api/ в начало заапроса!}
+     *
+     * Регистрирует и авторизует user, в db сохраняет:
+     * users: 'email', 'password',
+     * patients: 'name', 'surname', 'patronymic',
+     *
+     * Возвращает: { "message": "Пациент успашно добавлен", "id": зарегестрированого юзера, status: 201 }
+     *
+     * Возможные ошибки:
+     * -Ошибка валидации : 422, возможный ответ:("Значение поля email должно быть действительным электронным адресом.")
+     *
+     * -Сбой : ['message' => 'Произошла ошибка при регистрации или авторизации пользователя','status' => 422]
+     * @lrd:end
+     *
      * @throws \Illuminate\Validation\ValidationException
      */
     public function register(
@@ -61,6 +94,24 @@ class PatientController extends Controller
             'status' => 422], 422);
     }
 
+     /**
+      * @LRDparam email required|string
+      * @LRDparam phone string|nullable
+      * @LRDparam name string|nullable
+      * @LRDparam surname string|nullable
+      * @LRDparam patronymic string|nullable
+      * @LRDparam birthday string|nullable
+      *
+      * @LRDresponses responses 201
+      *
+      * @lrd:start
+      * {Для работы с SEND необходимо добавить api/ в начало заапроса!}
+      *
+      * Создает запись в таблице users и таблице patients
+      *
+      * Возвращает: 'message' => 'Успешно сохранено', 'status' => 201.
+      * @lrd:end
+      */
     public function store(Request $request): JsonResponse
     {
         $user = User::create([
@@ -78,6 +129,18 @@ class PatientController extends Controller
             'status' => 201], 201 );
     }
 
+    /**
+     * @lrd:start
+     * {Для работы с SEND необходимо добавить api/ в начало заапроса!}
+     *
+     * Принимает id связанного с пациентом зарегистрированного(залогиненного) юзера
+     *
+     * Возвращает пациента все поля таблицы patients и поля из связаной таблицы users
+     * ['data' => $patient, 'status' => 200]
+     * @lrd:end
+     *
+     * @LRDresponses responses 200
+     */
     public function show($id): JsonResponse
     {
 //        if (Auth::check()) {
@@ -93,6 +156,18 @@ class PatientController extends Controller
 //            'status' => 401], 401);
     }
 
+    /**
+     * @LRDresponses responses 200
+     *
+     * @lrd:start
+     * {Для работы с SEND необходимо добавить api/ в начало заапроса!}
+     *
+     * Принимает {id} - id пациента
+     *
+     * Возвращает: данные пациента и связаного юзера(для редактированаия):
+     * patients: {id,name,surname,patronymic,email,phone,birthday}
+     * @lrd:end
+     */
     public function edit($id): JsonResponse
     {
         $patient = $this->model->get()->find($id);
@@ -100,6 +175,21 @@ class PatientController extends Controller
         return response()->json(['data' => $patient, 'status' => 200]);
     }
 
+    /**
+     * @LRDresponses responses 200
+     *
+     * @lrd:start
+     * {Для работы с SEND необходимо добавить api/ в начало заапроса!}
+     *
+     * Принимает {id} - id пациента и измененные/неизмененные данные
+     * data :
+     * {'email'-string, 'phone'-string, 'name'-string, 'surname'-string,
+     * 'patronymic'-string, 'birthday'-date}
+     *
+     * Обновляет данные в таблице patients и users:
+     * {name,surname,patronymic,email,phone,birthday}
+     * @lrd:end
+     */
     public function update(Request $request, Patient $patient): JsonResponse
     {
         $patient->update($request->all());
@@ -110,6 +200,18 @@ class PatientController extends Controller
             'status' => 200]);
     }
 
+    /**
+     * @LRDresponses responses 204
+     *
+     * @lrd:start
+     * {Для работы с SEND необходимо добавить api/ в начало заапроса!}
+     *
+     * Принимает {id} - id пациента
+     *
+     * Удаляет данные в таблице patients и users:
+     * {name,surname,patronymic,email,phone,birthday}
+     * @lrd:end
+     */
     public function destroy(Patient $patient): JsonResponse
     {
         $patient->delete();

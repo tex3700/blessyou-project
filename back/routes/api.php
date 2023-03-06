@@ -56,7 +56,7 @@ Route::controller(EmployeeController::class)->group(function () {
 
 Route::controller(DoctorController::class)->group(function () {
     Route::get('/doctors', 'index');
-    Route::post('/add-doctor', 'store')->middleware('validated:Doctor');
+    Route::post('/add-doctor', 'store');
     Route::get('/edit-doctor/{id}', 'edit');
     Route::put('/update-doctor/{doctor}', 'update')->middleware('validated:Doctor');
     Route::delete('/delete-doctor/{doctor}', 'destroy');
