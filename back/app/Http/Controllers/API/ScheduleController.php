@@ -13,11 +13,6 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Validation\ValidationException;
 //use App\Models\Day;
 
-/**
- * Description of ScheduleController
- *
- * @author sysad
- */
 class ScheduleController extends Controller {
 
     private Builder $model;
@@ -27,7 +22,24 @@ class ScheduleController extends Controller {
             ->join('days', 'schedules.day_id', '=', 'days.id');
     }
 
-    //put your code here
+    /**
+     * @LRDparam doctor_id required|int
+     * @LRDparam day_id required|int
+     * @LRDparam start_time required|date_format:H:i:s
+     * @LRDparam end_time required|date_format:H:i:s
+     *
+     * @LRDresponses responses 201,422
+     *
+     * @lrd:start
+     * {Для работы с SEND необходимо добавить api/ в начало заапроса!}
+     *
+     * Создает запись в таблице schedules(распиисание врачей)
+     *
+     * Возвращает: 'message' => 'Успешно сохранено', 'status' => 201.
+     *
+     * Ошибка валидации - 422
+     * @lrd:end
+     */
     public function store(Request $request): JsonResponse {
         try {
             $validatedFields = $request->validate([
@@ -44,11 +56,34 @@ class ScheduleController extends Controller {
         return response()->json('Успешно сохранено', 201);
     }
 
+    /**
+     * @lrd:start
+     * {Для работы с SEND необходимо добавить api/ в начало заапроса!}
+     *
+     * Возвращает данные из таблицы schedules:
+     * {id,doctor_id,day_id,start_time,end_time
+     * | из таблицы days : name}
+     * @lrd:end
+     *
+     * @LRDresponses responses 200
+     */
     public function index() {
         $schedules = $this->model->get();
         return response()->json($schedules);
     }
 
+    /**
+     * @lrd:start
+     * {Для работы с SEND необходимо добавить api/ в начало заапроса!}
+     *
+     * Возвращает данные из таблицы schedules:
+     * {id,doctor_id,day_id,start_time,end_time
+     * | из таблицы days : id,name}
+     * и все поля из таблицы doctors:{...}
+     * @lrd:end
+     *
+     * @LRDresponses responses 200
+     */
     public function getShedulebyDoctor($id) {
         $schedules = Doctor::find($id)->schedule;
         foreach ($schedules as $item) {
