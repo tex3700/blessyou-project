@@ -6,16 +6,17 @@ import { Button } from "@material-ui/core";
 
 export const MedicalCard = ({ props }) => {
   const classes = useStyles();
+
+  // удаляем карточку доктора из рендера и базы
   const [visible, setVisible] = useState(true);
 
-  // console.log("props", props);
-
   const deleteCardDate = () => {
-    setVisible((props.i = !visible));
-    apiRequest(`delete-record/${props.id_record}`, "DELETE").then((data) => {
-      console.log("result", data);
+    setVisible(props.index === !visible);
+    apiRequest(`delete-record/${props.id_record}`, "DELETE").then((result) => {
+      console.log("result", result);
     });
   };
+  // console.log("props", props);
 
   if (visible) {
     return (
