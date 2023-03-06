@@ -9,7 +9,11 @@ use Illuminate\Support\Facades\Storage;
 class PhotoController extends Controller
  {
 
-    //
+    /**
+     * @lrd:start
+     * {Для работы с SEND необходимо добавить api/ в начало заапроса!}
+     * @lrd:end
+     */
     public function add(Request $request) {
         $validatedRequest = $request->validate([
             'image' => 'image|nullable|max:1999',
@@ -22,7 +26,7 @@ class PhotoController extends Controller
 
             // Расширение
             $extention = $request->file('image')->getClientOriginalExtension();
-            
+
             $fileNameToStore = $request->path . "/" . $filename . "." . $extention;
             // Сохраняем файл
             $path = 'public/' . $fileNameToStore;

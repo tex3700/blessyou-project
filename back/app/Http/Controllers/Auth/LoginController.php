@@ -9,6 +9,21 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
+    /**
+     * @LRDresponses responses 200,204,401
+     * @lrd:start
+     * {Для работы с SEND необходимо добавить api/ в начало заапроса!}
+     *
+     * Деавторизация юзера
+     *
+     * Перезаписывает сессию, удуаляет запись авторизованного юзера из сессии
+     *
+     * Успешно: ['message' => 'logout successful', 'status' => 200];
+     * Ошибки:
+     * -['message' => 'logout fall for any reason', 'status' => 204],
+     * -['message' => 'Пользователь не авторизован', 'status' => 401]
+     * @lrd:end
+     */
     public function logout(
         AuthenticatedSessionController $authSession,
         Request $request
@@ -31,6 +46,30 @@ class LoginController extends Controller
     }
 
     /**
+     * @LRDresponses responses 200,401,422,403
+     *
+     * @lrd:start
+     * {Для работы с SEND необходимо добавить api/ в начало заапроса!}
+     *
+     * Авторизация юзера, создает запись авторизации в сессию
+     *
+     * Если авторизуется пациент в форме авторизации пациента:
+     * Возвращает: id юзера, 'status' => 200.
+     *
+     * Если авторизуется сотрудник, доктор, администратор в форме авторизации персонала:
+     * Возвращает:
+     * все поля авторизованого юзера из таблицы users:
+     * {id,email,phone,is_patient,is_admin,is_employee,is_doctor,email_verified_at}, 'status' => 200.
+     *
+     * Ошибки:
+     * -Неудачная авторизация: ['message' => 'Пользователь не авторизован','status' => 401];
+     * -Неверно введен email: ['message' => 'Пользователь с таким логином не существует','status' => 422];
+     * -Неверно введен пароль: ['Неверное имя пользователя или пароль']-422;
+     * -Попытка входа через форму не соответствующую роли пользователя:
+     * ['message' => 'Вам необходи войти через форму входа для персонала','status' => 403],
+     * ['message' => 'Вам необходи войти через форму входа для пациентов','status' => 403]
+     * @lrd:end
+     *
      * @throws \Illuminate\Validation\ValidationException
      */
     public function login(

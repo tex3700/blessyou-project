@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User;
+use Kevincobain2000\LaravelERD\Controllers\LaravelERDController;
 
 /*
   |--------------------------------------------------------------------------
@@ -15,7 +16,11 @@ use App\Http\Controllers\User;
  */
 
 Route::get('/', function () {
-    return "";
+    return ['Laravel' => app()->version()];
 });
 
 require __DIR__ . '/auth.php';
+
+Route::get(config('laravel-erd.url'), [LaravelERDController::class, 'index'])
+    ->name('laravel-erd.index')
+    ->middleware(config('laravel-erd.middlewares'));

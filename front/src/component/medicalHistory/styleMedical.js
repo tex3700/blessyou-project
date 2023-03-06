@@ -41,4 +41,32 @@ export const useStyles = makeStyles(() => ({
     marginLeft: "7px",
     flexGrow: 1,
   },
+  notesTextActive: {
+    display: "none",
+    fontWeight: "500",
+    fontSize: "20px",
+    lineHeight: "30px",
+    color: "#76BF35",
+  },
+  notesText: {
+    display: "inline",
+    fontWeight: "300",
+    fontSize: "20px",
+    lineHeight: "30px",
+    color: "#676767",
+  },
+  myNotes: {
+    margin: "50px",
+    minHeight: "65px",
+    width: "100%",
+    borderRadius: "30px",
+    top: "50px",
+    boxShadow: "5px 10px 50px rgba(16, 112, 177, 0.2)",
+    "&:hover $notesText": {
+      display: "none",
+    },
+    "&:hover $notesTextActive": {
+      display: "inline",
+    },
+  },
 }));
