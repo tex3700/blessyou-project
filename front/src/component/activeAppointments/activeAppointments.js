@@ -18,7 +18,7 @@ export const ActiveAppointments = ({ activePatientId }) => {
     });
   }, [activePatientId]);
 
-  console.log("patientSelection", patientSelection);
+  // console.log("patientSelection", patientSelection);
 
   const arreyRecordDoctors = patientSelection.map((item) => {
     // создаем "костыль" для вывода даты и времени приема
@@ -42,26 +42,23 @@ export const ActiveAppointments = ({ activePatientId }) => {
   });
 
   // console.log("arreyRecordDoctors", arreyRecordDoctors);
-
-  if (arreyRecordDoctors.length >= 1) {
-    return (
-      <>
-        <Container fixed>
-          <Box className={classes.medicalTitlleBox}>
-            <Typography className={classes.medicalTitlle}>
-              Дата и специалист
-            </Typography>
-          </Box>
-
-          {arreyRecordDoctors.map((item, i) => (
-            <MedicalCard key={i} index={i} props={item} />
-          ))}
-        </Container>
-        <Box style={{ minHeight: "400px" }}></Box>
-      </>
-    );
-  }
   if (arreyRecordDoctors.length <= 0) {
     return <ActiveRecords />;
   }
+  return (
+    <>
+      <Container fixed>
+        <Box className={classes.medicalTitlleBox}>
+          <Typography className={classes.medicalTitlle}>
+            Дата и специалист
+          </Typography>
+        </Box>
+
+        {arreyRecordDoctors.map((item, i) => (
+          <MedicalCard key={i} index={i} props={item} />
+        ))}
+      </Container>
+      <Box style={{ minHeight: "400px" }}></Box>
+    </>
+  );
 };
