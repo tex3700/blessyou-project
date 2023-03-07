@@ -6,7 +6,7 @@ export function PrivateRoute({ isAuth, to = "/", children }) {
 
 export function PublicRoute({
   isAuth,
-  to = "/patientAccount/appointment",
+  to = "/patientAccount/activeAppointments",
   children,
 }) {
   return !isAuth ? children : <Navigate to={to} replace />;

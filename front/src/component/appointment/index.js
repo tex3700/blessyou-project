@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { Container, Box, Link as MuiLink, Typography } from '@material-ui/core';
-import { Route, NavLink as ReactRouterLink, Routes } from 'react-router-dom';
+import { Route, NavLink as ReactRouterLink, Routes, useLocation } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { SpecialistTypeList } from './specialistTypeList';
@@ -10,6 +10,7 @@ import { DoctorScheduler } from './doctorScheduler';
 import { apiRequest } from '../../api';
 import { DataContext } from '../../DataContext';
 import { dateKeyToStr } from './dateUtils';
+import { greyColor } from '../../styleConst';
 
 const useStyles = makeStyles((theme) => ({
     menu: {
@@ -40,6 +41,19 @@ const useStyles = makeStyles((theme) => ({
         }
     },
 
+    disabledStepLink: {
+        pointerEvents: 'none',
+        cursor: 'default',
+        '& > p': {
+            color: greyColor,
+            opacity: '0.3'
+        },
+        '& > div': {
+            background: greyColor,
+            opacity: '0.3'
+        }
+    },
+
     numberStepLink: {
         background: '#4493B9',
         fontWeight: '600',
@@ -61,6 +75,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
+
 export const Appointment = () => {
 
     const { doctorArray } = useContext(DataContext);
@@ -75,10 +90,18 @@ export const Appointment = () => {
     const refLink2 = useRef(null);
     const refLink3 = useRef(null);
 
+    const location = useLocation();
+
+    const menu = [
+        { id: 1, caption: 'Выбор специализации', innerRef: refLink1, link: 'specialistTypeList' },
+        { id: 2, caption: 'Выбор врача', innerRef: refLink2, link: 'doctorList' },
+        { id: 3, caption: 'Просмотр расписания', innerRef: refLink3, link: 'doctorScheduler' }
+    ];
+
     useEffect(() => {
 
         apiRequest('doctors/next-records', 'GET').then(data => {
-            console.log('next-record data = ', data);
+            //console.log('next-record data = ', data);
 
             setApiData(data);
         })
@@ -148,33 +171,32 @@ export const Appointment = () => {
     }
     const classes = useStyles();
 
+    const getDisabledClassName = (id) => {
+        const pathname = location.pathname.replace('/patientAccount/appointment/', '');
+        const m = menu.find(item => item.link === pathname);
+        if (m)
+            return `${classes.stepLink} ${m.id < id ? classes.disabledStepLink : ''}`;
+        else
+            return '';
+    }
+
     return (
         <Container fixed>
             <Box className={classes.menu}>
-                <MuiLink innerRef={refLink1} component={ReactRouterLink} to="specialistTypeList" className={classes.stepLink} >
-                    <Box className={classes.numberStepLink}>
-                        1
-                    </Box>
-                    <Typography className={classes.nameStepLink}>
-                        Выбор специализации
-                    </Typography>
-                </MuiLink>
-                <MuiLink innerRef={refLink2} component={ReactRouterLink} to="doctorList" className={classes.stepLink}>
-                    <Box className={classes.numberStepLink}>
-                        2
-                    </Box>
-                    <Typography className={classes.nameStepLink}>
-                        Выбор врача
-                    </Typography>
-                </MuiLink>
-                <MuiLink innerRef={refLink3} component={ReactRouterLink} to="doctorScheduler" className={classes.stepLink}>
-                    <Box className={classes.numberStepLink}>
-                        3
-                    </Box>
-                    <Typography className={classes.nameStepLink}>
-                        Просмотр расписания
-                    </Typography>
-                </MuiLink>
+                {
+                    menu.map((item) => (
+                        <MuiLink key={item.id} innerRef={item.innerRef} component={ReactRouterLink}
+                            to={item.link}
+                            className={`${classes.stepLink} ${getDisabledClassName(item.id)}`} >
+                            <Box className={classes.numberStepLink}>
+                                {item.id}
+                            </Box>
+                            <Typography className={classes.nameStepLink}>
+                                {item.caption}
+                            </Typography>
+                        </MuiLink>
+                    ))
+                }
             </Box>
             <Box>
                 <Routes>
