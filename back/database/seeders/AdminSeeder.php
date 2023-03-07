@@ -27,13 +27,8 @@ class AdminSeeder extends Seeder
 
         DB::table('employees')->insert([
             'user_id' => $userId,
-<<<<<<< HEAD
             'name' => 'Админ',
             'surname' => 'Админов',
-=======
-            'firstname' => 'Админ',
-            'lastname' => 'Админов',
->>>>>>> 82f34c2e54299dfc9da2dab14aa31790ee6a1c64
         ]);
     }
 }

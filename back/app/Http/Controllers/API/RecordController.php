@@ -28,6 +28,20 @@ class RecordController extends Controller {
             ->join('patients', 'records.patient_id', '=', 'patients.id');
     }
 
+    /**
+     * @lrd:start
+     * {Для работы с SEND необходимо добавить api/ в начало заапроса!}
+     *
+     * Возвращает данные из таблицы records:
+     * {id,doctor_id,patient_id,record_time,end_time,receipt_time
+     * | из таблицы patients:
+     * user_id,name,patronymic,surname,birthday
+     * | из таблицы doctors:
+     * info,avatar_path,photo_path,}
+     * @lrd:end
+     *
+     * @LRDresponses responses 200
+     */
     public function index() {
         $records = $this->model->get();
         return response()->json($records);
@@ -38,6 +52,24 @@ class RecordController extends Controller {
         $findDateAction = new FindDateAction;
         return $findDateAction($doctorWorkShecdule, $daysAmount);
     }
+
+    /**
+     * @LRDparam doctor_id required|int
+     * @LRDparam days_amount required|int
+     *
+     * @LRDresponses responses 200
+     *
+     * @lrd:start
+     * {Для работы с SEND необходимо добавить api/ в начало заапроса!}
+     *
+     * Принимает doctor_id,days_amount(период дней)
+     *
+     * Возвращает: дату и время доступные для записи к врачу(doctor_id) за период дней(days_amount)
+     * {"Дата": ["дата время","дата время",...]}
+     *
+     * Ошибка - ['message' => 'Нет доступных записей для выбранного врача']
+     * @lrd:end
+     */
     public function getPossibleDate(Request $request, ScheduleController $scheduleController) {
         $findDateAction = new AllPossibleReportForDateAction;
         $checkDateReportAbility = new CheckDateReportAbility;
@@ -57,6 +89,25 @@ class RecordController extends Controller {
         return response()->json(['message' => 'Нет доступных записей для выбранного врача']);
     }
 
+    /**
+     * @LRDparam doctor_id required|int
+     * @LRDparam patient_id required|int
+     * @LRDparam record_time required|date_format:Y-m-d H:i:s
+     * @LRDparam receipt_time required|date_format:H:i:s
+     *
+     * @LRDresponses responses 201,422,402
+     *
+     * @lrd:start
+     * {Для работы с SEND необходимо добавить api/ в начало заапроса!}
+     *
+     * Создает запись в таблице records(запись на прием к врачу)
+     *
+     * Возвращает: 'message' => 'Успешно сохранено', 'status' => 201.
+     *
+     * Ошибка валидации - 422
+     * Ошибка 'Не сохранено' - 402
+     * @lrd:end
+     */
     public function store(Request $request, ScheduleController $scheduleController): JsonResponse {
         try {
             $validatedFields = $request->validate([
@@ -84,6 +135,11 @@ class RecordController extends Controller {
 
     }
 
+    /**
+     * @lrd:start
+     * {Для работы с SEND необходимо добавить api/ в начало заапроса!}
+     * @lrd:end
+     */
     public function getRecordsByPatientId($id){
         $model = Record::where([
             ['patient_id', '=', $id],
@@ -92,6 +148,17 @@ class RecordController extends Controller {
         return response()->json($model, 201);
     }
 
+    /**
+     * @LRDresponses responses 204
+     *
+     * @lrd:start
+     * {Для работы с SEND необходимо добавить api/ в начало заапроса!}
+     *
+     * Принимает {id} - id записи на прием (records)
+     *
+     * Удаляет данные записи на прием с id в таблице records:
+     * @lrd:end
+     */
     public function destroy(Record $record): JsonResponse
     {
         $record->delete();

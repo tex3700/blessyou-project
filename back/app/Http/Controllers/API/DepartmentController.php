@@ -11,6 +11,9 @@ use Illuminate\Http\JsonResponse;
 class DepartmentController extends Controller {
 
     /**
+     * @lrd:start
+     * {Для работы с SEND необходимо добавить api/ в начало заапроса!}
+     * @lrd:end
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -20,6 +23,9 @@ class DepartmentController extends Controller {
     }
 
     /**
+     * @lrd:start
+     * {Для работы с SEND необходимо добавить api/ в начало заапроса!}
+     * @lrd:end
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -31,6 +37,9 @@ class DepartmentController extends Controller {
     }
 
     /**
+     * @lrd:start
+     * {Для работы с SEND необходимо добавить api/ в начало заапроса!}
+     * @lrd:end
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -41,6 +50,9 @@ class DepartmentController extends Controller {
     }
 
     /**
+     * @lrd:start
+     * {Для работы с SEND необходимо добавить api/ в начало заапроса!}
+     * @lrd:end
      * Display the specified resource.
      *
      * @param  \App\Models\Department  $department
@@ -51,6 +63,9 @@ class DepartmentController extends Controller {
     }
 
     /**
+     * @lrd:start
+     * {Для работы с SEND необходимо добавить api/ в начало заапроса!}
+     * @lrd:end
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Department  $department
@@ -61,6 +76,9 @@ class DepartmentController extends Controller {
     }
 
     /**
+     * @lrd:start
+     * {Для работы с SEND необходимо добавить api/ в начало заапроса!}
+     * @lrd:end
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -79,6 +97,9 @@ class DepartmentController extends Controller {
     }
 
     /**
+     * @lrd:start
+     * {Для работы с SEND необходимо добавить api/ в начало заапроса!}
+     * @lrd:end
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Department  $department
@@ -88,6 +109,11 @@ class DepartmentController extends Controller {
         //
     }
 
+    /**
+     * @lrd:start
+     * {Для работы с SEND необходимо добавить api/ в начало заапроса!}
+     * @lrd:end
+     */
     public function getDoctorDepartment(Request $request): JsonResponse {
         if ($request->has('id')) {
             $doctors = Department::find($request->id)->doctors;
@@ -95,6 +121,11 @@ class DepartmentController extends Controller {
         }
         return "id not found";
     }
+    /**
+     * @lrd:start
+     * {Для работы с SEND необходимо добавить api/ в начало заапроса!}
+     * @lrd:end
+     */
     public function addDoctorToDepartment(Request $request) {
         if($request->has('doctor_id') && $request->has('department_id')){
              $doctor = Doctor::find($request->doctor_id);
@@ -104,8 +135,13 @@ class DepartmentController extends Controller {
         }
          return false;
     }
+    /**
+     * @lrd:start
+     * {Для работы с SEND необходимо добавить api/ в начало заапроса!}
+     * @lrd:end
+     */
         public function deleteDoctorToDepartment(Request $request) {
-            
+
         if($request->has('doctor_id') && $request->has('department_id')){
              $doctor = Doctor::find($request->doctor_id);
              $department = Department::find($request->department_id);

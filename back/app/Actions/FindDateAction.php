@@ -14,8 +14,8 @@ class FindDateAction{
     3=>'wednesday',
     4=>'thursday',
     5=>'friday',
-    6=>'sunday',
-    7=>'saturday'
+    6=>'saturday',
+    7=>'sunday'
      ];
       public function __invoke($doctorWorkShecdule, $numOfDays): ?array
       {
