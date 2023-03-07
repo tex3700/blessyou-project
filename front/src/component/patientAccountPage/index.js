@@ -1,5 +1,5 @@
 import { Container, Box, Link as MuiLink, Typography, Button, IconButton } from "@material-ui/core";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { SS_ACTIVEPATIENT, SS_ACTIVEPATIENTNAME, getName } from "../../patientUtils";
@@ -129,7 +129,6 @@ export const PatientAccountPage = ({ isAuth, setIsAuth }) => {
     },
   ];
 
-  const refAppointment = useRef(null);
   const location = useLocation();
 
   const navigate = useNavigate();
@@ -141,8 +140,6 @@ export const PatientAccountPage = ({ isAuth, setIsAuth }) => {
 
       sessionStorage.setItem(SS_ACTIVEPATIENT, result.data.id);
       sessionStorage.setItem(SS_ACTIVEPATIENTNAME, getName(result.data));
-
-      refAppointment.current?.click();
     })
   }, [isAuth]);
 
@@ -153,10 +150,9 @@ export const PatientAccountPage = ({ isAuth, setIsAuth }) => {
     return activeMenu ? activeMenu.caption : '';
   };
 
-  // пока так
   const getPatientName = (id) => {
-    console.log('getPatientName ', userData.data, id)
-    if (id == userData.data.id)
+    //console.log('getPatientName ', userData.data, id)
+    if (id === userData.data.id)
       return getName(userData.data);
     else {
       const name = sessionStorage.getItem(SS_ACTIVEPATIENTNAME);
@@ -205,11 +201,7 @@ export const PatientAccountPage = ({ isAuth, setIsAuth }) => {
                 key={index}
                 component={ReactRouterLink}
                 to={item.link}
-                className={classes.menuLink}
-                innerRef={
-                  item.link === "activeAppointments" ? refAppointment : null
-                }
-              >
+                className={classes.menuLink}>
                 {item.caption}
               </MuiLink>
             ))}
